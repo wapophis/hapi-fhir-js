@@ -1,0 +1,85 @@
+import {isUndefined,isValid} from '../../../spi/utils/ValidationRules.js';
+import * as FHIREnums from '../../../spi/valueSets/FhirDSTUEnums.js';
+import PeriodDt from './PeriodDt.js';
+
+export class ContactPointDt extends Object{
+    constructor(root){
+        super();
+
+        if(isValid(root)){
+            this.system=root.system;
+            this.value=root.value;
+            this.use=root.use;
+            this.rank=root.rank;
+            this.period=root.period;
+        }
+
+    }
+
+    get system(){
+        if(!isValid(this.mySystem)){
+            this.mySystem=new String();
+        }
+        return this.mySystem;
+    }
+
+    set system(newValue){
+        this.mySystem=newValue;
+        return this;
+    }
+
+    get value(){
+        if(!isValid(this.myValue)){
+            this.myValue=new String();
+        }
+        return this.myValue;
+    }
+
+    set value(newValue){
+        this.myValue=newValue;
+        return this;
+    }
+
+    get use(){
+        if(!isValid(this.myUse)){
+            this.myUse=new String();
+        }
+
+        if(typeof this.myUse==='object'){
+            return this.myUse;
+        }
+        if(typeof this.myUse==='string'){
+            return FHIREnums.ContactPointUse.getByValue(this.myUse);
+        }
+        //return this.myUse;
+    }
+
+    set use(newValue){
+        this.myUse=newValue;
+        return this;
+    }
+
+    get rank(){
+        if(!isValid(this.myRank)){
+            this.myRank=new String();
+        }
+        return this.myRank;
+    }
+
+    set rank(newValue){
+        this.myRank=newValue;
+        return this;
+    }
+
+    get period(){
+        if(!isValid(this.myPeriod)){
+            this.myPeriod=new PeriodDt();
+        }
+        return this.myPeriod;
+    }
+
+    set period(newValue){
+        this.myPeriod=newValue;
+        return this;
+    }
+}
