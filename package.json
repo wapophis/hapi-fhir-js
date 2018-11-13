@@ -1,0 +1,25 @@
+{
+    "name": "hapi-fhir",
+    "version": "1.0.0",
+    "description": "ECMA MODULE LIBRARY FOR FHIR IN THE CLIENT",
+    "keywords":["fhir","hapi","health","interoperability"],
+    "author": "Luis Martinez (@Wapophis)",
+    "homepage":"https://github.com/wapophis/hapi-fhir-js", 
+    "license": "MIT",
+    "repository": {"type":"git","url":"https://github.com/wapophis/hapi-fhir-js"},
+    "scripts": {
+      "test": "jest"
+    },
+    "dependencies": {
+    },
+    "devDependencies": {
+      "jest": "^23.6.0",
+      "webpack": "^4.25.0",
+      "webpack-cli": "^3.1.2"
+    },
+    "engines": {
+      "node": ">=8.0"
+    },
+    "private":true
+  }
+  
