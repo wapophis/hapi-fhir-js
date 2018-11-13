@@ -1,5 +1,6 @@
 import {isUndefined,isValid} from '../utils/ValidationRules.js';
 import {FHIResource} from './Resource.js';
+import {NarrativeDt} from './dataTypes/NarrativeDt.js';
 
 export const DomainResource= class DomainResource extends FHIResource{
  
@@ -69,50 +70,4 @@ export const DomainResource= class DomainResource extends FHIResource{
         return this;
     }
 }
-
-
-export const Narrative= class Narrative extends Object{
-    
-       constructor(rootObject){
-           super();
-           
-           this.myDiv=new String();
-           this.myStatus=new String();
-           if(isValid(rootObject)){
-           this.div=rootObject.div;
-           this.status=rootObject.status;
-           }
-       
-    }
-
-
-       get div(){
-            if(!isValid(this.myDiv)){
-                this.myDiv=new String();
-            }
-            return this.myDiv;
-       }
-       
-       set div(newDiv){
-            if(isValid(this.myDiv) && isValid(newDiv)){
-                this.myDiv=newDiv;
-            }
-            return this;
-       }
-
-       set status(newStatus){
-        if(isValid(this.myStatus) && isValid(newStatus)){
-            this.myStatus=newStatus;
-        }
-        return this;
-       }
-
-       get status(){
-        if(!isValid(this.myStatus)){
-            this.myStatus=new String();
-        }
-        return this.myStatus;
-       }
-        
-    }
    
