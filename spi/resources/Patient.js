@@ -41,7 +41,16 @@ export class Patient extends DomainResource{
         if(!isValid(this.myIdentifer)){
             this.myIdentifer=new Array();
         }
-        return this.myIdentifer;
+
+        let oVal=new Array();
+        for(let i=0;i<this.myIdentifer.length;i++){
+            if(typeof this.myIdentifer[i]!=='identifierdt'){
+                oVal.push(new IdentifierDt(this.myIdentifer[i]));
+            }else{
+                oVal.push(this.myIdentifer[i]);
+            }
+        }
+        return oVal;
     }
 
     set identifier(newValue){
@@ -49,23 +58,18 @@ export class Patient extends DomainResource{
         return this;
     }
 
-    _addIdentifier(newValue){
-        if(isValid(newValue)){
-            this.identifier.push(newValue);
-        }else{
-            this.identifier.push(new IdentifierDt());
+    addIdentifier(newValue){
+        if(isUndefined(newValue)){
+            let oVal=new IdentifierDt();
+            this.name.push(oVal);
+            return oVal;
         }
 
+        this.push(newValue);
         return this;
     }
 
-    _getIdentifierFirstRep(){
-        if(this.identifier.length<=0){
-            this._addIdentifier();
-        }
-        if(typeof this.identifier[0]!=='identifierdt'){
-            this.identifier[0]=new IdentifierDt(this.identifier[0]);
-        }
+    getIdentifierFirstRep(){
         return this.identifier[0];
     }
 
@@ -97,13 +101,8 @@ export class Patient extends DomainResource{
         return this;
     }
 
-    _addName(newValue){
-        if(isValid(newValue)){
-            this.name.push(new HumanNameDt(newValue));
-        }else{
-            this.name.push(new HumanNameDt());
-        }
-        return this;
+    addName(newValue){
+      this.name.push(newValue);
     }
 
     getNameFirstRep(){
