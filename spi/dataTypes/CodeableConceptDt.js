@@ -1,4 +1,4 @@
-import {isUndefined,isValid} from '../../../spi/utils/ValidationRules.js';
+import {isUndefined,isValid} from '../utils/ValidationRules.js';
 import {CodingDt} from './CodingDt.js';
 
 export default class CodeableConceptDt extends Object{

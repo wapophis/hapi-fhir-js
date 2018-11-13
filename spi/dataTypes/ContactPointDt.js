@@ -1,5 +1,5 @@
-import {isUndefined,isValid} from '../../../spi/utils/ValidationRules.js';
-import * as FHIREnums from '../../../spi/valueSets/FhirDSTUEnums.js';
+import {isUndefined,isValid} from '../utils/ValidationRules.js';
+import * as FHIREnums from '../valueSets/FhirDSTUEnums.js';
 import PeriodDt from './PeriodDt.js';
 
 export class ContactPointDt extends Object{

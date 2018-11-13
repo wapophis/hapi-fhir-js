@@ -1,4 +1,4 @@
-import {isUndefined,isValid} from '../../spi/utils/ValidationRules.js';
+import {isUndefined,isValid} from '../utils/ValidationRules.js';
 import {FHIResource} from './Resource.js';
 
 export const DomainResource= class DomainResource extends FHIResource{

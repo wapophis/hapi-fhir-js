@@ -1,4 +1,4 @@
-import {isValid,isEmpty,isEmptyArray} from '../../spi/utils/ValidationRules.js';
+import {isValid,isEmpty,isEmptyArray} from '../utils/ValidationRules.js';
 
 export const FHIResource= class FHIResource extends Object{
  
