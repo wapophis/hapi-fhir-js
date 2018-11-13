@@ -1,5 +1,5 @@
 import {isUndefined,isValid} from '../utils/ValidationRules.js';
-import * as FHIREnums from '../valueSets/FhirDSTUEnums.js';
+import ContactPointUseEnum from '../valueSets/ContactPointUseEnum.js';
 import PeriodDt from './PeriodDt.js';
 
 export class ContactPointDt extends Object{
@@ -49,7 +49,7 @@ export class ContactPointDt extends Object{
             return this.myUse;
         }
         if(typeof this.myUse==='string'){
-            return FHIREnums.ContactPointUse.getByValue(this.myUse);
+            return ContactPointUseEnum.getByValue(this.myUse);
         }
         //return this.myUse;
     }

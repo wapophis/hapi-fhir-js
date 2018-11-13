@@ -1,11 +1,10 @@
-import {isUndefined,isValid,isEmptyArray,isEmpty} from '../../../spi/utils/ValidationRules.js';
+import {isUndefined,isValid,isEmptyArray,isEmpty} from '../utils/ValidationRules.js';
 import PeriodDt from './PeriodDt.js';
 import NameUseEnum from '../valueSets/NameUseEnum.js';
 
 export const HumanNameDt= class HumanNameDt extends Object{
     constructor(root){
         super();
-
         if(isValid(root)){
             this.use=root.use;
             this.text=root.text;
@@ -15,8 +14,8 @@ export const HumanNameDt= class HumanNameDt extends Object{
             this.suffix=root.suffix;
             this.period=root.period;
         }
-
     }
+    
     get use(){
         if(!isValid(this.myUse)){
             this.myUse=new String();
