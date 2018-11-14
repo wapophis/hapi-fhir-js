@@ -1,4 +1,4 @@
-import {isUndefined,isValid} from '../utils/ValidationRules.js';
+import {isUndefined,isValid} from '../../utils/ValidationRules.js';
 
 /**
  * Created by lucho 12-11-2018

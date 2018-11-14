@@ -1,4 +1,4 @@
-import {isUndefined,isValid,isEmptyArray,isEmpty} from '../utils/ValidationRules.js';
+import {isUndefined,isValid,isEmptyArray,isEmpty} from '../../utils/ValidationRules.js';
 import PeriodDt from './PeriodDt.js';
 import NameUseEnum from '../valueSets/NameUseEnum.js';
 

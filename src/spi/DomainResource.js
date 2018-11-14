@@ -7,7 +7,7 @@ export const DomainResource= class DomainResource extends FHIResource{
     constructor(rootObject){
         super(rootObject);
 
-        this.myText=new Narrative();
+        this.myText=new NarrativeDt();
 
         if(isValid(rootObject)){
             this.text=rootObject.text;
@@ -65,7 +65,7 @@ export const DomainResource= class DomainResource extends FHIResource{
 
     set text(newText){
         if(isValid(this.myText) && isValid(newText)){
-            this.myText=new Narrative(newText);    
+            this.myText=new NarrativeDt(newText);    
         }
         return this;
     }

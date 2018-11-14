@@ -1,4 +1,4 @@
-import {isUndefined,isValid} from '../utils/ValidationRules.js';
+import {isUndefined,isValid} from '../../utils/ValidationRules.js';
 
 export default class PeriodDt extends Object{
 

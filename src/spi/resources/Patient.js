@@ -4,10 +4,12 @@ import {HumanNameDt} from '../dataTypes/HumanDt.js';
 import {IdentifierDt} from '../dataTypes/IdentifierDt.js';
 import {ContactPointDt} from '../dataTypes/ContactPointDt.js';
 import {AddressDt} from '../dataTypes/AddressDt.js';
+
 import {AdministrativeGenderEnum} from '../valueSets/AdministrativeGenderEnum.js';
 
 
-export class Patient extends DomainResource{
+
+export default class Patient extends DomainResource{
     constructor(root){
         super(root);
 
@@ -44,10 +46,11 @@ export class Patient extends DomainResource{
 
         let oVal=new Array();
         for(let i=0;i<this.myIdentifer.length;i++){
-            if(typeof this.myIdentifer[i]!=='identifierdt'){
-                oVal.push(new IdentifierDt(this.myIdentifer[i]));
-            }else{
+            if(this.myIdentifer[i] instanceof IdentifierDt){
                 oVal.push(this.myIdentifer[i]);
+                
+            }else{
+                oVal.push(new IdentifierDt(this.myIdentifer[i]));
             }
         }
         return oVal;
@@ -91,7 +94,11 @@ export class Patient extends DomainResource{
         }
         let oVal=new Array();
         for(let i=0;i<this.myName.length;i++){
-            oVal.push(new HumanNameDt(this.myName[i]));
+            if(this.myName[i] instanceof HumanNameDt){
+                oVal.push(this.myName[i]);
+            }else{
+                oVal.push(new HumanNameDt(this.myName[i]));
+            }
         }
         return oVal;
     }
@@ -102,7 +109,13 @@ export class Patient extends DomainResource{
     }
 
     addName(newValue){
-      this.name.push(newValue);
+        if(isUndefined(newValue)){
+            let oVal=new HumanNameDt();
+            this.name.push(oVal);
+            return oVal;
+        }
+          this.name.push(newValue);
+          return this;
     }
 
     getNameFirstRep(){
@@ -116,29 +129,22 @@ export class Patient extends DomainResource{
     }
 
     get telecom(){
-        try{
+        
         if(!isValid(this.myTelecom))
         {
             this.myTelecom=new Array();
         }
 
-        // Datatype transform
-        if(this.myTelecom.length>0){
-            let oVal=new Array();
-            for(let i=0;i<this.myTelecom.length;i++){
-                if(typeof this.myTelecom[i]!=='contactpointdt'){
-                    oVal.push(new ContactPointDt(this.myTelecom[i]));
-                }else{
-                    oVal.push(this.myTelecom[i]);
-                }
+        let oVal=new Array();
+        for(let i=0;i<this.myTelecom.length;i++){
+            if(this.myTelecom[i] instanceof ContactPointDt){
+                oVal.push(this.myTelecom[i]);
+            }else{
+                oVal.push(new ContactPointDt(this.myTelecom[i]));
             }
-            this.myTelecom=oVal;
         }
-    }catch(error){console.error(error);}
-        return this.myTelecom;
+        return oVal;
     }
-
-
 
     set gender(newValue){
         this.myGender=newValue;

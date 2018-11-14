@@ -1,4 +1,4 @@
-import {isUndefined,isValid} from '../utils/ValidationRules.js';
+import {isUndefined,isValid} from '../../utils/ValidationRules.js';
 import ContactPointUseEnum from '../valueSets/ContactPointUseEnum.js';
 import PeriodDt from './PeriodDt.js';
 

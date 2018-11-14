@@ -1,5 +1,5 @@
-import {isUndefined,isValid} from '../utils/ValidationRules.js';
-import {IdentifierUse} from '../../../spi/valueSets/FhirDSTUEnums.js';
+import {isUndefined,isValid} from '../../utils/ValidationRules.js';
+import {IdentifierUseEnum} from '../valueSets/IdentifierUseEnum.js';
 import PeriodDt from './PeriodDt.js';
 import CodeableConceptDt from './CodeableConceptDt.js';
 
