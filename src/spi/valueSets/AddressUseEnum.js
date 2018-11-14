@@ -11,6 +11,7 @@ export const AddressUseEnum = Object.freeze(
                    return this[propName];
                 }
              }
+             return new String();
         }
 });
 

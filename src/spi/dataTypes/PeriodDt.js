@@ -14,7 +14,7 @@ export default class PeriodDt extends Object{
         if(!isValid(this.myStart)){
             this.myStart=new Date(0,0,0);
         }
-        return new Date(this.myStart);
+        return this.myStart;
     }
 
     set start(newValue){
@@ -35,7 +35,7 @@ export default class PeriodDt extends Object{
     }
 
     isEmpty(){
-        return this.start===new Date(0,0,0) && this.end===new Date(0,0,0);
+        return this.start.getTime()===new Date(0,0,0) && this.end.getTime()===new Date(0,0,0);
     }
 
 };

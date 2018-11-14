@@ -3,8 +3,9 @@ import PeriodDt from './PeriodDt.js';
 import AddressTypeEnum from '../valueSets/AddressTypeEnum.js';
 import AddressUseEnum from '../valueSets/AddressUseEnum.js';
 
-export class AddressDt extends Object{
+export default class AddressDt extends Object{
     constructor(root){
+        
         super();
 
         if(isValid(root)){
@@ -86,7 +87,7 @@ export class AddressDt extends Object{
         if(!isValid(this.myDistrict)){
             this.myDistrict=new String();
         }
-        return this.myDistrictmyUse;
+        return this.myDistrict;
     }
     set district(newValue){
         this.myDistrict=newValue;

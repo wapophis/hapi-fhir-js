@@ -338,7 +338,6 @@ export default class Patient extends DomainResource{
     }
 
     isEmpty(){
-        debugger;
         let oVal=super.isEmpty();
         oVal=oVal && isEmptyDate(this.deceasedDateTime);
         oVal=oVal && isEmptyArray(this.address)

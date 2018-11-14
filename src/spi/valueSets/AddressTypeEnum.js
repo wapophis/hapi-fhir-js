@@ -9,6 +9,8 @@ export const AddressTypeEnum = Object.freeze(
                    return this[propName];
                 }
              }
+
+             return new String();
         }
 });
 
