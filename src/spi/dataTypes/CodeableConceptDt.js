@@ -1,4 +1,4 @@
-import {isUndefined,isValid} from '../../utils/ValidationRules.js';
+import {isUndefined,isValid,isEmpty,isEmptyArray} from '../../utils/ValidationRules.js';
 import {CodingDt} from './CodingDt.js';
 
 export default class CodeableConceptDt extends Object{
@@ -55,5 +55,9 @@ export default class CodeableConceptDt extends Object{
     set text(newVal){
         this.myText=newVal;
         return this;
+    }
+
+    isEmpty(){
+        return isEmptyArray(this.coding) && isEmpty(this.text);
     }
 }

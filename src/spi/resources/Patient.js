@@ -1,9 +1,11 @@
 import {DomainResource} from '../DomainResource.js';
-import {isUndefined,isValid,isEmpty,isEmptyArray} from '../../utils/ValidationRules.js';
+import {isUndefined,isValid,isEmpty,isEmptyArray,isEmptyDate} from '../../utils/ValidationRules.js';
 import {HumanNameDt} from '../dataTypes/HumanDt.js';
 import {IdentifierDt} from '../dataTypes/IdentifierDt.js';
 import {ContactPointDt} from '../dataTypes/ContactPointDt.js';
 import {AddressDt} from '../dataTypes/AddressDt.js';
+import {CodeableConceptDt} from '../dataTypes/CodeableConceptDt.js';
+import {ReferenceDt} from '../dataTypes/ReferenceDt.js';
 
 import {AdministrativeGenderEnum} from '../valueSets/AdministrativeGenderEnum.js';
 
@@ -171,16 +173,28 @@ export default class Patient extends DomainResource{
 
     }
 
-    set deceased(newValue){
-        this.myDeceased=newValue;
+    set deceasedBoolean(newValue){
+        this.myDeceasedBoolean=newValue;
         return this;
     }
 
-    get deceased(){
-        if(!isValid(this.myDeceased)){
-            this.myDeceased=new Object();
+    get deceasedBoolean(){
+        if(!isValid(this.myDeceasedBoolean)){
+            this.myDeceased=new Boolean();
         }
         return this.myDeceased;
+    }
+
+    set deceasedDateTime(newValue){
+        this.myDeceasedDateTime=newValue;
+        return this;
+    }
+
+    get deceasedDateTime(){
+        if(!isValid(this.myDecasedDateTime)){
+            this.myDeceasedDateTime=new Date(0,0,0);
+        }
+        return this.myDeceasedDateTime;
     }
 
     get address(){
@@ -208,20 +222,34 @@ export default class Patient extends DomainResource{
 
     get maritalStatus(){
         if(!isValid(this.myMaritalStatus)){
-            this.myMaritalStatus=new Object();
+            this.myMaritalStatus=new CodeableConceptDt();
         }
         return this.myMaritalStatus;
     }
 
-    get multipleBirth(){
-        if(!isValid(this.myMultipleBirth)){
-            this.myMultipleBirth=new Object();
+    get multipleBirthBoolean(){
+        if(!isValid(this.myMultipleBirthBoolean)){
+            this.myMultipleBirthBoolean=new Boolean();
         }
-        return this.myMultipleBirth;
+        return this.myMultipleBirthBoolean;
     }
 
-    set multipleBirth(newValue){
-        this.myMultipleBirth=newValue;
+    set multipleBirthBoolean(newValue){
+        this.myMultipleBirthBoolean=newValue;
+        return this;
+    }
+
+
+
+    get multipleBirthDateTime(){
+        if(!isValid(this.myMultipleBirthDateTime)){
+            this.myMultipleBirthDateTime=new Date(0,0,0);
+        }
+        return this.myMultipleBirthDateTime;
+    }
+
+    set multipleBirthDateTime(newValue){
+        this.myMultipleBirthDateTime=newValue;
         return this;
     }
 
@@ -256,7 +284,7 @@ export default class Patient extends DomainResource{
 
     get animal(){
         if(!isValid(this.myAnimal)){
-            this.myAnimal=new Object();
+            this.myAnimal=new AnimalElement();
         }
         return this.myAnimal;
     }
@@ -268,7 +296,7 @@ export default class Patient extends DomainResource{
 
     get communication(){
         if(!isValid(this.myCommunication)){
-            this.myCommunication=new Object();
+            this.myCommunication=new ComunicationElement();
         }
         return this.myCommunication;
     }
@@ -299,7 +327,7 @@ export default class Patient extends DomainResource{
 
     get link(){
         if(!isValid(this.myLink)){
-            this.myLink=new Object();
+            this.myLink=new LinkElement();
         }
         return this.myLink;
     }
@@ -310,25 +338,141 @@ export default class Patient extends DomainResource{
     }
 
     isEmpty(){
+        debugger;
+        let oVal=super.isEmpty();
+        oVal=oVal && isEmptyDate(this.deceasedDateTime);
+        oVal=oVal && isEmptyArray(this.address)
+        oVal=oVal && this.animal.isEmpty();
+        oVal=oVal && isEmptyDate(this.birthDate)
+        oVal=oVal && this.communication.isEmpty();
+        oVal=oVal && isEmpty(this.gender)
+        oVal=oVal && isEmpty(this.generalPractitioner)
+        oVal=oVal && isEmptyArray(this.identifier)
+        oVal=oVal && this.link.isEmpty();
+        oVal=oVal && this.maritalStatus.isEmpty();
+        oVal=oVal && isEmptyDate(this.multipleBirthDateTime)
+        oVal=oVal && isEmpty(this.managingOrganization)
+        oVal=oVal && isEmpty(this.name)
+        oVal=oVal && isEmpty(this.photo)
+        oVal=oVal  && isEmptyArray(this.telecom);
+
         return super.isEmpty()
-        && isEmpty(this.active)
+        && isEmptyDate(this.deceasedDateTime)
         && isEmptyArray(this.address)
         && isEmpty(this.animal)
-        && isEmpty(this.birthDate)
-        && isEmpty(this.communication)
-        && isEmpty(this.deceased)
+        && isEmptyDate(this.birthDate)
+        && this.communication.isEmpty()
         && isEmpty(this.gender)
         && isEmpty(this.generalPractitioner)
         && isEmptyArray(this.identifier)
         && isEmpty(this.link)
         && isEmpty(this.maritalStatus)
-        && isEmpty(this.multipleBirth)
+        && isEmptyDate(this.multipleBirthDateTime)
         && isEmpty(this.managingOrganization)
         && isEmpty(this.name)
         && isEmpty(this.photo)
-        && isEmptyArray(this.telecom)
-        && isEmpty(this.text);
+        && isEmptyArray(this.telecom);
+    }
+}
+
+
+class AnimalElement extends Object{
+    constructor(){
+        super();
     }
 
 
+    get species(){
+
+    }
+
+    set species(newValue){
+
+    }
+
+    get breed(){
+
+    }
+
+    set breed(newValue){
+
+    }
+
+    get genderStatus(){
+
+
+    }
+
+    set genderStatus(newValue){
+
+    }
+
+    isEmpty(){
+        return true;
+    }
+}
+
+class LinkElement extends Object{
+    constructor(root){
+        super();
+
+        if(isValid(root)){
+            this.type=root.type;
+            this.other=root.other;
+        }
+    }
+
+    get other(){
+        if(!isValid(this.myOther)){
+            this.myOther=new ReferenceDt();
+        }
+        return this.myOther;
+    }
+
+    set other(newValue){
+        this.myOther=newValue;
+        return this;
+    }
+
+    get type(){
+        if(!isValid(this.myType)){
+            this.myType=new String();
+        }
+        return this.myType;
+    }
+
+    set type(newValue){
+        this.myType=newValue;
+        return this;
+    }
+
+    isEmpty(){
+        return this.myOther.isEmpty() && isEmpty(this.myType);
+    }
+}
+
+class ComunicationElement extends Object{
+    constructor(){
+        super();
+    }
+
+    get language(){
+
+    }
+
+    set language(newValue){
+
+    }
+
+    get preferred(){
+
+    }
+
+    set preferred(newValue){
+
+    }
+
+    isEmpty(){
+        return true;
+    }
 }

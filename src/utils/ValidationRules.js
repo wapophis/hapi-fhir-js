@@ -21,3 +21,17 @@ export function isEmptyArray(object){
     }
     return true;
 }
+
+export function isEmptyDate(object){
+
+    if(!isValid(object)){
+        return true;
+    }
+    
+    if(object instanceof Date){
+        return new Date(0,0,0).getTime()===object.getTime();
+    }
+
+    throw new TypeError("Object to check empty is not a date");
+
+}

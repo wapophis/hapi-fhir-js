@@ -1,9 +1,9 @@
-export const AdministrativeGenderEnum = Object.freeze(
+export const AnimalSpeciesEnum = Object.freeze(
     {
-        "MALE":{value:'male',display:"Masculino"},
-        "FEMALE":{value:'female',display:"Femenino"},
-        "OTHER":{value:'other', display:"Otro"},
-        "UNKNOWN":{value:'unknown',display:"Desconocido"},
+        "CANISLF":{value:'canislf',display:"Perro doméstico"},
+        "SHEEP":{value:'Sheep',display:"Oveja"},
+        "SERINUSCD":{value:'serinuscd', display:"Canario Doméstico"},
+        
 
         getByValue(code){
             for(let propName in this) {
@@ -11,8 +11,6 @@ export const AdministrativeGenderEnum = Object.freeze(
                    return this[propName];
                 }
              }
-
-             return code;
         }
 });
 

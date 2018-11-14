@@ -1,4 +1,4 @@
-import {isUndefined,isValid} from '../utils/ValidationRules.js';
+import {isUndefined,isValid,isEmpty,isEmptyArray} from '../utils/ValidationRules.js';
 import {FHIResource} from './Resource.js';
 import {NarrativeDt} from './dataTypes/NarrativeDt.js';
 
@@ -52,8 +52,7 @@ export const DomainResource= class DomainResource extends FHIResource{
     }
 
     isEmpty(){
-        return this.hasText() 
-        &&  super.isEmpty();
+        return super.isEmpty() && this.text.isEmpty(); 
     }
 
     get text(){
