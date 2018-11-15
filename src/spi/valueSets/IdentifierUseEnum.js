@@ -9,6 +9,8 @@ export const IdentifierUseEnum = Object.freeze({
                return this[propName];
             }
          }
+
+         return new String();
     }
 
 });

@@ -1,13 +1,15 @@
-import {isUndefined,isValid} from '../../utils/ValidationRules.js';
-import {IdentifierUseEnum} from '../valueSets/IdentifierUseEnum.js';
+import {isUndefined,isValid,isEmpty} from '../../utils/ValidationRules.js';
+import IdentifierUseEnum from '../valueSets/IdentifierUseEnum.js';
 import PeriodDt from './PeriodDt.js';
 import CodeableConceptDt from './CodeableConceptDt.js';
+import ReferenceDt from './ReferenceDt.js';
+
 
 /**
  * Created by lucho
  * @param {*} root 
  */
-export class IdentifierDt extends Object{
+export default class IdentifierDt extends Object{
     constructor(root){
         super();
 
@@ -22,12 +24,19 @@ export class IdentifierDt extends Object{
 
     }
 
+    isEmpty(){
+        return isEmpty(this.use)
+        && this.type.isEmpty()
+        && isEmpty(this.system)
+        && isEmpty(this.value)
+        && this.period.isEmpty()
+    }
 
     get use(){
         if(!isValid(this.myUse)){
             this.myUse=new String();
         }
-        return this.myUse;
+        return IdentifierUseEnum.getByValue(this.myUse);
     }
 
 
@@ -86,7 +95,7 @@ export class IdentifierDt extends Object{
 
     get assigner(){
         if(!isValid(this.myAssigner)){
-            this.myAssigner=new String();
+            this.myAssigner=new ReferenceDt();
         }
         return this.myAssigner;
     }

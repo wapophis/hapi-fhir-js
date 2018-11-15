@@ -1,5 +1,5 @@
 import {isUndefined,isValid,isEmpty} from '../../utils/ValidationRules.js';
-import {IdentifierDt} from './IdentifierDt.js';
+import IdentifierDt from './IdentifierDt.js';
 
 export default class PeriodDt extends Object{
 
@@ -10,6 +10,13 @@ export default class PeriodDt extends Object{
             this.display=root.display;
             this.identifier=root.identifier;
         }
+    }
+
+
+    isEmpty(){
+        return isEmpty(this.reference)
+        && this.identifier.isEmpty()
+        && isEmpty(this.display); 
     }
 
     get reference(){
@@ -46,10 +53,5 @@ export default class PeriodDt extends Object{
         return this;
     }
 
-    isEmpty(){
-        return isEmpty(this.reference)
-        && this.identifier.isEmpty()
-        && isEmpty(this.display); 
-    }
 
 }
