@@ -1,5 +1,5 @@
 import { expect } from "chai"
-import Patient from '../src/spi/resources/Patient';
+import Patient from '../src/spi/resources/Patient.js';
 
 describe("FHIR Patient test",()=>{
     describe("Constructor",()=>{     

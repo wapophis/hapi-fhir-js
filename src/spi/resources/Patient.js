@@ -1,11 +1,11 @@
-import {DomainResource} from '../DomainResource.js';
+import DomainResource from '../DomainResource.js';
 import {isUndefined,isValid,isEmpty,isEmptyArray,isEmptyDate} from '../../utils/ValidationRules.js';
-import {HumanNameDt} from '../dataTypes/HumanNameDt.js';
-import {IdentifierDt} from '../dataTypes/IdentifierDt.js';
-import {ContactPointDt} from '../dataTypes/ContactPointDt.js';
-import {AddressDt} from '../dataTypes/AddressDt.js';
-import {CodeableConceptDt} from '../dataTypes/CodeableConceptDt.js';
-import {ReferenceDt} from '../dataTypes/ReferenceDt.js';
+import HumanNameDt from '../dataTypes/HumanNameDt.js';
+import IdentifierDt from '../dataTypes/IdentifierDt.js';
+import ContactPointDt from '../dataTypes/ContactPointDt.js';
+import AddressDt from '../dataTypes/AddressDt.js';
+import CodeableConceptDt from '../dataTypes/CodeableConceptDt.js';
+import ReferenceDt from '../dataTypes/ReferenceDt.js';
 
 import {AdministrativeGenderEnum} from '../valueSets/AdministrativeGenderEnum.js';
 
@@ -354,23 +354,7 @@ export default class Patient extends DomainResource{
         oVal=oVal && isEmpty(this.name)
         oVal=oVal && isEmpty(this.photo)
         oVal=oVal  && isEmptyArray(this.telecom);
-
-        return super.isEmpty()
-        && isEmptyDate(this.deceasedDateTime)
-        && isEmptyArray(this.address)
-        && isEmpty(this.animal)
-        && isEmptyDate(this.birthDate)
-        && this.communication.isEmpty()
-        && isEmpty(this.gender)
-        && isEmpty(this.generalPractitioner)
-        && isEmptyArray(this.identifier)
-        && isEmpty(this.link)
-        && isEmpty(this.maritalStatus)
-        && isEmptyDate(this.multipleBirthDateTime)
-        && isEmpty(this.managingOrganization)
-        && isEmpty(this.name)
-        && isEmpty(this.photo)
-        && isEmptyArray(this.telecom);
+        return oVal;
     }
 }
 
@@ -446,7 +430,7 @@ class LinkElement extends Object{
     }
 
     isEmpty(){
-        return this.myOther.isEmpty() && isEmpty(this.myType);
+        return this.other.isEmpty() && isEmpty(this.type);
     }
 }
 

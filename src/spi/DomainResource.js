@@ -2,7 +2,7 @@ import {isUndefined,isValid,isEmpty,isEmptyArray} from '../utils/ValidationRules
 import {FHIResource} from './Resource.js';
 import NarrativeDt from './dataTypes/NarrativeDt.js';
 
-export const DomainResource= class DomainResource extends FHIResource{
+export default class DomainResource extends FHIResource{
  
     constructor(rootObject){
         super(rootObject);

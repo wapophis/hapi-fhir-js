@@ -5,9 +5,7 @@ import NarrativeStatusEnum from '../valueSets/NarrativeStatusEnum.js';
 export default class Narrative extends Object{
     
        constructor(rootObject){
-           debugger;
            super();
-           
            if(isValid(rootObject)){
            this.div=rootObject.div;
            this.status=rootObject.status;
@@ -17,7 +15,7 @@ export default class Narrative extends Object{
 
 
     isEmpty(){
-        debugger;
+
         return isEmpty(this.status)
         && isEmpty(this.div);
     }

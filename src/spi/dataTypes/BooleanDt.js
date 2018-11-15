@@ -11,6 +11,13 @@ export default class BooleanDt extends Boolean{
         this.isUndefined=isUndefined(value);
     }
 
+    valueOf(){
+        if(this.isUndefined===false){
+            return super.valueOf();
+        }
+        debugger;
+    }
+
     isEmpty(){
         return this.isUndefined;
     }
