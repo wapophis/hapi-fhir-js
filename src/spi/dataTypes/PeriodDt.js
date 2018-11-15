@@ -35,7 +35,12 @@ export default class PeriodDt extends Object{
     }
 
     isEmpty(){
-        return this.start.getTime()===new Date(0,0,0) && this.end.getTime()===new Date(0,0,0);
+        return this.start.getTime()===new Date(0,0,0).getTime() && this.end.getTime()===new Date(0,0,0).getTime();
+    }
+
+    equals(other){
+        return (other instanceof PeriodDt) && this.start.getTime()===other.start.getTime()
+        && this.end.getTime()===other.end.getTime();
     }
 
 };
