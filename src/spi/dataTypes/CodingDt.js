@@ -1,10 +1,11 @@
-import {isUndefined,isValid} from '../../utils/ValidationRules.js';
+import {isUndefined,isValid,isEmpty} from '../../utils/ValidationRules.js';
+import {BooleanDt} from './BooleanDt.js';
 
 /**
  * Created by lucho 12-11-2018
  * @param {*} root 
  */
-export const CodingDt= class CodingDt extends Object{
+export default class CodingDt extends Object{
     constructor(root){
         super();
 
@@ -28,7 +29,7 @@ export const CodingDt= class CodingDt extends Object{
     }
 
     set system(newValue){
-        this.mySystem=newValue();
+        this.mySystem=newValue;
         return this;
     }
 
@@ -73,14 +74,21 @@ export const CodingDt= class CodingDt extends Object{
 
     get userSelected(){
         if(!isValid(this.myUserSelected)){
-            this.myUserSelected=new Boolean();
+            this.myUserSelected=new BooleanDt();
         }
-
         return this.myUserSelected;
     }
 
     set userSelected(newValue){
         this.myUserSelected=newValue;
         return this;
+    }
+
+    isEmpty(){
+        return isEmpty(this.code) &&
+        isEmpty(this.display) &&
+        isEmpty(this.system) &&
+        isEmpty(this.version) &&
+        this.userSelected.isEmpty();
     }
 }
