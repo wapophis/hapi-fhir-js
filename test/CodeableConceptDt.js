@@ -22,7 +22,6 @@ describe("CodeableConceptDt DataType test",()=>{
          */
         it("should generate a non empty object",()=>{
             let myInstance=new CodeableConceptDt({text:"text"});
-            debugger;
             expect(myInstance.isEmpty()).to.equal(false);
         });
 

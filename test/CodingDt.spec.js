@@ -23,7 +23,6 @@ describe("CodingDt DataType test",()=>{
          */
         it("should generate a non empty object",()=>{
             let myInstance=new CodingDt({display:"text"});
-            debugger;
             expect(myInstance.isEmpty()).to.equal(false);
         });
 

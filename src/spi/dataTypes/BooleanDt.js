@@ -6,13 +6,13 @@ import {isUndefined} from '../../utils/ValidationRules.js';
  */
 export default class BooleanDt extends Boolean{
 
-    constructor(){
-        super();
+    constructor(value){
+        super(value);
         this.isUndefined=isUndefined(value);
     }
 
     isEmpty(){
-        return this.isUndefined && !this.valueOf();
+        return this.isUndefined;
     }
 
 }

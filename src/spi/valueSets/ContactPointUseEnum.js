@@ -11,6 +11,10 @@ export const ContactPointUseEnum = Object.freeze({
                return this[propName];
             }
          }
+
+         return new String();
     }
 
 });
+
+export default ContactPointUseEnum;

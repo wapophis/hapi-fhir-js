@@ -1,8 +1,8 @@
-import {isUndefined,isValid} from '../../utils/ValidationRules.js';
+import {isUndefined,isValid,isEmpty} from '../../utils/ValidationRules.js';
 import ContactPointUseEnum from '../valueSets/ContactPointUseEnum.js';
 import PeriodDt from './PeriodDt.js';
 
-export class ContactPointDt extends Object{
+export default class ContactPointDt extends Object{
     constructor(root){
         super();
 
@@ -14,6 +14,14 @@ export class ContactPointDt extends Object{
             this.period=root.period;
         }
 
+    }
+
+    isEmpty(){
+        return isEmpty(this.system)
+        && isEmpty(this.value)
+        && isEmpty(this.use)
+        && isEmpty(this.rank)
+        && this.period.isEmpty();
     }
 
     get system(){
@@ -44,14 +52,7 @@ export class ContactPointDt extends Object{
         if(!isValid(this.myUse)){
             this.myUse=new String();
         }
-
-        if(typeof this.myUse==='object'){
-            return this.myUse;
-        }
-        if(typeof this.myUse==='string'){
-            return ContactPointUseEnum.getByValue(this.myUse);
-        }
-        //return this.myUse;
+        return ContactPointUseEnum.getByValue(this.myUse);
     }
 
     set use(newValue){

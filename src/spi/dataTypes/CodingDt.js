@@ -1,5 +1,5 @@
 import {isUndefined,isValid,isEmpty} from '../../utils/ValidationRules.js';
-import {BooleanDt} from './BooleanDt.js';
+import BooleanDt from './BooleanDt.js';
 
 /**
  * Created by lucho 12-11-2018
