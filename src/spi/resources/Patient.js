@@ -6,6 +6,8 @@ import ContactPointDt from '../dataTypes/ContactPointDt.js';
 import AddressDt from '../dataTypes/AddressDt.js';
 import CodeableConceptDt from '../dataTypes/CodeableConceptDt.js';
 import ReferenceDt from '../dataTypes/ReferenceDt.js';
+import BooleanDt from '../dataTypes/BooleanDt.js';
+
 
 import {AdministrativeGenderEnum} from '../valueSets/AdministrativeGenderEnum.js';
 
@@ -16,7 +18,6 @@ export default class Patient extends DomainResource{
         super(root);
 
         if(isValid(root)){
-            try{
             this.identifier=root.identifier;
             this.active=root.active;
             this.name=root.name;
@@ -34,11 +35,34 @@ export default class Patient extends DomainResource{
             this.generalPractitioner=root.generalPractitioner;
             this.managingOrganization=root.managingOrganization;
             this.link=root.link;
-            }catch(error){
-                console.error(error);
-            }
         }
+    }
 
+    static get modifiers(){
+        return{
+            active:{type:Boolean},
+            deceasedBoolean:{type:Boolean},
+            deceasedDateTime:{type:Date},
+            animal:{type:Object},
+            link:{type:Object}
+        }
+    }
+
+    static get summarized(){
+        return{
+            identifier:{type:Object},
+            active:{type:Boolean},
+            name:{type:Object},
+            telecom:{type:Object},
+            gender:{type:Object},
+            birthDate:{type:Date},
+            deceasedBoolean:{type:Boolean},
+            deceasedDateTime:{type:Date},
+            address:{type:Object},
+            animal:{type:Object},
+            managingOrganization:{type:Object},
+            link:{type:Object}
+        }
     }
 
     get identifier(){
@@ -85,7 +109,7 @@ export default class Patient extends DomainResource{
 
     get active(){
         if(!isValid(this.myActive)){
-            this.myActive=new Boolean();
+            this.myActive=new BooleanDt();
         }
         return this.myActive;
     }
@@ -339,6 +363,7 @@ export default class Patient extends DomainResource{
 
     isEmpty(){
         let oVal=super.isEmpty();
+        oVal=oVal && this.active.isEmpty();
         oVal=oVal && isEmptyDate(this.deceasedDateTime);
         oVal=oVal && isEmptyArray(this.address)
         oVal=oVal && this.animal.isEmpty();

@@ -6,12 +6,19 @@ export default class DomainResource extends FHIResource{
  
     constructor(rootObject){
         super(rootObject);
-
         this.myText=new NarrativeDt();
-
         if(isValid(rootObject)){
             this.text=rootObject.text;
         }
+    }
+
+    /** Subclass this method for every resource to get info from modifiers */
+    static get modifiers(){
+        throw new Error("Must be subclassed");
+    }
+    /** Subclass this method for every resource to get info from summarizabled fields */
+    static get summarized(){
+        throw new Error("Must be subclassed");
     }
 
     addContained(resource){
