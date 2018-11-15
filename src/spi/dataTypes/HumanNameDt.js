@@ -2,7 +2,7 @@ import {isUndefined,isValid,isEmptyArray,isEmpty} from '../../utils/ValidationRu
 import PeriodDt from './PeriodDt.js';
 import NameUseEnum from '../valueSets/NameUseEnum.js';
 
-export const HumanNameDt= class HumanNameDt extends Object{
+export default class HumanNameDt extends Object{
     constructor(root){
         super();
         if(isValid(root)){
@@ -57,7 +57,7 @@ export const HumanNameDt= class HumanNameDt extends Object{
     }
 
     get given(){
-        if(!isValid(this.myGiven) && Array.isArray(this.myGiven)){
+        if(!isValid(this.myGiven)){
             this.myGiven=new Array();
         }
         return this.myGiven;
@@ -119,20 +119,20 @@ export const HumanNameDt= class HumanNameDt extends Object{
     }
 
 
-    /**
-     * Adds an returns a new value for family if newVal undefined,
-     * Adds an returns this if newValue is defined
-     */
-    addFamily(newVal){
-        if(isValid(newVal)){
-            this.family.push(newVal);
-            return this;
-        }else{
-            let oVal=new String();
-            this.family.push(oVal);
-            return oVal;
-        }
-    }
+    // /**
+    //  * Adds an returns a new value for family if newVal undefined,
+    //  * Adds an returns this if newValue is defined
+    //  */
+    // addFamily(newVal){
+    //     if(isValid(newVal)){
+    //         this.family.push(newVal);
+    //         return this;
+    //     }else{
+    //         let oVal=new String();
+    //         this.family.push(oVal);
+    //         return oVal;
+    //     }
+    // }
 
     /**
      * Adds a given new value for family.
@@ -182,12 +182,12 @@ export const HumanNameDt= class HumanNameDt extends Object{
         }
     }
 
-    /**
-     * Return first element for family array;
-     */
-    getFamilyFirstRep(){
-        return this.family[0];
-    }
+    // /**
+    //  * Return first element for family array;
+    //  */
+    // getFamilyFirstRep(){
+    //     return this.family[0];
+    // }
 
     /**
      * Return first element for given array.

@@ -14,6 +14,7 @@ export const NameUseEnum = Object.freeze({
                return this[propName];
             }
          }
+         return new String();
     }
 
 });

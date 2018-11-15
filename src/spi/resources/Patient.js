@@ -1,6 +1,6 @@
 import {DomainResource} from '../DomainResource.js';
 import {isUndefined,isValid,isEmpty,isEmptyArray,isEmptyDate} from '../../utils/ValidationRules.js';
-import {HumanNameDt} from '../dataTypes/HumanDt.js';
+import {HumanNameDt} from '../dataTypes/HumanNameDt.js';
 import {IdentifierDt} from '../dataTypes/IdentifierDt.js';
 import {ContactPointDt} from '../dataTypes/ContactPointDt.js';
 import {AddressDt} from '../dataTypes/AddressDt.js';
