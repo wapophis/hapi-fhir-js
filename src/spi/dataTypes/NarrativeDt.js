@@ -1,9 +1,11 @@
 
 import {isValid,isEmpty} from '../../utils/ValidationRules.js';
+import NarrativeStatusEnum from '../valueSets/NarrativeStatusEnum.js';
 
-export const NarrativeDt= class Narrative extends Object{
+export default class Narrative extends Object{
     
        constructor(rootObject){
+           debugger;
            super();
            
            if(isValid(rootObject)){
@@ -14,6 +16,12 @@ export const NarrativeDt= class Narrative extends Object{
     }
 
 
+    isEmpty(){
+        debugger;
+        return isEmpty(this.status)
+        && isEmpty(this.div);
+    }
+
        get div(){
             if(!isValid(this.myDiv)){
                 this.myDiv=new String();
@@ -22,16 +30,12 @@ export const NarrativeDt= class Narrative extends Object{
        }
        
        set div(newDiv){
-            if(isValid(this.myDiv) && isValid(newDiv)){
-                this.myDiv=newDiv;
-            }
+            this.myDiv=newDiv;
             return this;
        }
 
        set status(newStatus){
-        if(isValid(this.myStatus) && isValid(newStatus)){
-            this.myStatus=newStatus;
-        }
+        this.myStatus=newStatus;
         return this;
        }
 
@@ -39,13 +43,8 @@ export const NarrativeDt= class Narrative extends Object{
         if(!isValid(this.myStatus)){
             this.myStatus=new String();
         }
-        return this.myStatus;
+        return NarrativeStatusEnum.getByValue(this.myStatus);
        }
 
-
-       isEmpty(){
-           return isEmpty(this.status)
-           && isEmpty(this.div);
-       }
         
     }

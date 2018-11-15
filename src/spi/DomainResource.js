@@ -1,6 +1,6 @@
 import {isUndefined,isValid,isEmpty,isEmptyArray} from '../utils/ValidationRules.js';
 import {FHIResource} from './Resource.js';
-import {NarrativeDt} from './dataTypes/NarrativeDt.js';
+import NarrativeDt from './dataTypes/NarrativeDt.js';
 
 export const DomainResource= class DomainResource extends FHIResource{
  
