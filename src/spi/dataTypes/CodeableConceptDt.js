@@ -1,5 +1,5 @@
 import {isUndefined,isValid,isEmpty,isEmptyArray} from '../../utils/ValidationRules.js';
-import {CodingDt} from './CodingDt.js';
+import CodingDt from './CodingDt.js';
 
 export default class CodeableConceptDt extends Object{
     constructor(root){

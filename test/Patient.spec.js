@@ -1,5 +1,6 @@
-import { expect } from "chai"
-import Patient from '../src/spi/resources/Patient.js';
+import { expect } from "chai";
+import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../src/utils/ValidationRules.js';
+import {Patient} from '../src/spi/resources/Patient.js';
 
 describe("FHIR Patient test",()=>{
     describe("Constructor",()=>{     
@@ -24,5 +25,27 @@ describe("FHIR Patient test",()=>{
             expect(myPatient.isEmpty()).to.equal(false);
         });
 
-    })
+    });
+
+
+    describe("Summarized fields checking",()=>{     
+        it("Every modifier field must exists in the model resource",()=>{
+            let myPatient=new Patient();
+
+            for(let propName in Patient.modifiers){
+                expect(isValid(myPatient[propName]));
+                expect(myPatient[propName] instanceof Patient.modifiers[propName].type,"bad type assert at "+propName+" field").to.equal(true);
+            }    
+           
+        });
+
+        it("Every summarized type must be correct in the model resource",()=>{
+            let myPatient=new Patient();
+            for(let propName in Patient.summarized){
+                expect(isValid(myPatient[propName]));
+                expect(myPatient[propName] instanceof Patient.summarized[propName].type,"bad type assert at "+propName+" field").to.equal(true);
+            }                
+        });
+
+    });
 });

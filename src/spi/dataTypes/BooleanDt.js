@@ -22,4 +22,6 @@ export default class BooleanDt extends Boolean{
         return this.isUndefined;
     }
 
-}
+};
+
+
