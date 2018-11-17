@@ -8,7 +8,7 @@ export default [
 		input: './src/fhir-dstu-3-0.js',
 		output: {
 			name: 'fhir-structures-dstu-3-0',
-			file: "./dist/"+"fhir-structures-dstu-3-0"+pkg.browser,
+			file: "./lib/"+"fhir-structures-dstu-3-0"+pkg.browser,
 			format: 'umd'
 		},
 		plugins: [
@@ -27,8 +27,8 @@ export default [
 		input: './src/fhir-dstu-3-0.js',
 		//external: ['ms'],
 		output: [
-			{ file: "./dist/"+'fhir-structures-dstu-3-0'+pkg.main, format: 'cjs' },
-			{ file: "./dist/"+'fhir-structures-dstu-3-0'+pkg.module, format: 'es' }
+			{ file: "./lib/"+'fhir-structures-dstu-3-0'+pkg.main, format: 'cjs' },
+			{ file: "./lib/"+'fhir-structures-dstu-3-0'+pkg.module, format: 'es' }
 		]
 	}
 ];
