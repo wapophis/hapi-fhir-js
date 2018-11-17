@@ -1,8 +1,8 @@
 import {isUndefined,isValid,isEmpty} from '../../utils/ValidationRules.js';
 import ContactPointUseEnum from '../valueSets/ContactPointUseEnum.js';
-import PeriodDt from './PeriodDt.js';
+import _PeriodDt from './PeriodDt.js';
 
-export default class ContactPointDt extends Object{
+export default class _ContactPointDt extends Object{
     constructor(root){
         super();
 

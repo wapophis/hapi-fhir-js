@@ -2,7 +2,7 @@
 import {isValid,isEmpty} from '../../utils/ValidationRules.js';
 import NarrativeStatusEnum from '../valueSets/NarrativeStatusEnum.js';
 
-export default class Narrative extends Object{
+export default class _NarrativeDt extends Object{
     
        constructor(rootObject){
            super();

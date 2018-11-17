@@ -12,7 +12,7 @@ import BooleanDt from '../dataTypes/BooleanDt.js';
 import {AdministrativeGenderEnum} from '../valueSets/AdministrativeGenderEnum.js';
 
 
-
+   
 export default class Patient extends DomainResource{
     constructor(root){
         super(root);

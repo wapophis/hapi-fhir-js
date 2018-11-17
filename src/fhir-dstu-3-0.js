@@ -1,25 +1,25 @@
-import AddressDt from './spi/dataTypes/AddressDt.js';
-import BooleanDt from './spi/dataTypes/BooleanDt.js';
-import CodeableConceptDt from './spi/dataTypes/CodeableConceptDt.js';
-import CodingDt from './spi/dataTypes/CodingDt.js';
-import ContactPointDt from './spi/dataTypes/ContactPointDt.js';
-import HumanNameDt from './spi/dataTypes/HumanNameDt.js';
-import IdentifierDt from './spi/dataTypes/IdentifierDt.js';
-import NarrativeDt from './spi/dataTypes/NarrativeDt.js';
-import PeriodDt from './spi/dataTypes/PeriodDt.js';
-import ReferenceDt from './spi/dataTypes/ReferenceDt.js';
+import _AddressDt from './spi/dataTypes/AddressDt.js';
+import _BooleanDt from './spi/dataTypes/BooleanDt.js';
+import _CodeableConceptDt from './spi/dataTypes/CodeableConceptDt.js';
+import _CodingDt from './spi/dataTypes/CodingDt.js';
+import _ContactPointDt from './spi/dataTypes/ContactPointDt.js';
+import _HumanNameDt from './spi/dataTypes/HumanNameDt.js';
+import _IdentifierDt from './spi/dataTypes/IdentifierDt.js';
+import _NarrativeDt from './spi/dataTypes/NarrativeDt.js';
+import _PeriodDt from './spi/dataTypes/PeriodDt.js';
+import _ReferenceDt from './spi/dataTypes/ReferenceDt.js';
 
 
-export const AddressDt_=AddressDt;
-export const BooleanDt_=BooleanDt;
-export const CodeableConceptDt_=CodeableConceptDt;
-export const CodingDt_=CodingDt;
-export const ContactPointDt_=ContactPointDt;
-export const HumanNameDt_=HumanNameDt;
-export const IdentifierDt_=IdentifierDt;
-export const NarrativeDt_=NarrativeDt;
-export const PeriodDt_=PeriodDt;
-export const ReferenceDt_=ReferenceDt;
+export const AddressDt=_AddressDt;
+export const BooleanDt=_BooleanDt;
+export const CodeableConceptDt=_CodeableConceptDt;
+export const CodingDt=_CodingDt;
+export const ContactPointDt=_ContactPointDt;
+export const HumanNameDt=_HumanNameDt;
+export const IdentifierDt=_IdentifierDt;
+export const NarrativeDt=_NarrativeDt;
+export const PeriodDt=_PeriodDt;
+export const ReferenceDt=_ReferenceDt;
 
 
 

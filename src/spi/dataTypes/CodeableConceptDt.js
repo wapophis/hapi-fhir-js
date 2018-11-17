@@ -1,7 +1,7 @@
 import {isUndefined,isValid,isEmpty,isEmptyArray} from '../../utils/ValidationRules.js';
-import CodingDt from './CodingDt.js';
+import _CodingDt from './CodingDt.js';
 
-export default class CodeableConceptDt extends Object{
+export default class _CodeableConceptDt extends Object{
     constructor(root){
         super();
 
@@ -28,7 +28,7 @@ export default class CodeableConceptDt extends Object{
         if(isValid(newValue)){
             this.coding.push(newValue);
         }else{
-            this.coding.push(new CodingDt());
+            this.coding.push(new _CodingDt());
         }
         return this;
     }
@@ -38,7 +38,7 @@ export default class CodeableConceptDt extends Object{
             this.addCoding();
         }
         if(typeof this.coding[0]!=='codingdt'){
-            this.coding[0]=new CodingDt(this.coding[0]);
+            this.coding[0]=new _CodingDt(this.coding[0]);
         }
         return this.coding[0];
     }

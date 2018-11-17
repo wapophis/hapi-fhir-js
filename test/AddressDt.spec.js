@@ -1,20 +1,20 @@
 import { expect } from "chai"
-import AddressDt from '../src/spi/dataTypes/AddressDt.js';
-import PeriodDt from '../src/spi/dataTypes/PeriodDt.js';
+import _AddressDt from '../src/spi/dataTypes/AddressDt.js';
+import _PeriodDt from '../src/spi/dataTypes/PeriodDt.js';
 import {isValid,isEmpty,isEmptyArray} from '../src/utils/ValidationRules.js';
 
 describe("Address DataType test",()=>{
     describe("Constructor",()=>{     
         it("should generate an instance object",()=>{
-            let myInstance=new AddressDt();
-            expect(myInstance instanceof AddressDt,true);                    
+            let myInstance=new _AddressDt();
+            expect(myInstance instanceof _AddressDt,true);                    
         });
 
         /**
          * 
          */
         it("should generate an empty object",()=>{
-            let myInstance=new AddressDt();
+            let myInstance=new _AddressDt();
             expect(myInstance.isEmpty()).to.equal(true);
         });
 
@@ -22,7 +22,7 @@ describe("Address DataType test",()=>{
          * 
          */
         it("should generate a non empty object",()=>{
-            let myInstance=new AddressDt({use:"home"});
+            let myInstance=new _AddressDt({use:"home"});
             expect(myInstance.isEmpty()).to.equal(false);
         });
 
@@ -30,7 +30,7 @@ describe("Address DataType test",()=>{
 
     describe("Getters",()=>{     
         it("should return a safe object",()=>{
-            let myInstance=new AddressDt();
+            let myInstance=new _AddressDt();
             
             expect(isValid(myInstance.use)
             &&isValid(myInstance.type)
@@ -46,7 +46,7 @@ describe("Address DataType test",()=>{
         });
 
         it("should return an empty object",()=>{
-            let myInstance=new AddressDt();
+            let myInstance=new _AddressDt();
             
             expect(isEmpty(myInstance.use)
             &&isEmpty(myInstance.type)
@@ -65,7 +65,7 @@ describe("Address DataType test",()=>{
 
     describe("Setters",()=>{     
         it("should set valid values",()=>{
-            let myInstance=new AddressDt();
+            let myInstance=new _AddressDt();
             
             expect(isValid(myInstance.use="home")
             &&isValid(myInstance.type="both")
@@ -76,7 +76,7 @@ describe("Address DataType test",()=>{
             &&isValid(myInstance.state="Andalucia")
             &&isValid(myInstance.postalCode=41930)
             &&isValid(myInstance.country="España")
-            &&isValid(myInstance.period=new PeriodDt())
+            &&isValid(myInstance.period=new _PeriodDt())
             );
             
             expect(myInstance.use.value).to.equal("home");
@@ -88,13 +88,13 @@ describe("Address DataType test",()=>{
             expect(myInstance.state).to.equal("Andalucia");
             expect(myInstance.postalCode).to.equal(41930);
             expect(myInstance.country).to.equal("España");
-            expect(myInstance.period.start.getTime()).to.equal(new PeriodDt().start.getTime());
-            expect(myInstance.period.end.getTime()).to.equal(new PeriodDt().end.getTime());
+            expect(myInstance.period.start.getTime()).to.equal(new _PeriodDt().start.getTime());
+            expect(myInstance.period.end.getTime()).to.equal(new _PeriodDt().end.getTime());
             
         });
 
         it("should not fail with invalid values",()=>{
-            let myInstance=new AddressDt();
+            let myInstance=new _AddressDt();
 
             expect(isValid(myInstance.use={use:"home"})
             &&isValid(myInstance.type={use:"home"})

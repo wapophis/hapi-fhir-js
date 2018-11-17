@@ -1,8 +1,8 @@
 import {isUndefined,isValid,isEmptyArray,isEmpty} from '../../utils/ValidationRules.js';
-import PeriodDt from './PeriodDt.js';
+import _PeriodDt from './PeriodDt.js';
 import NameUseEnum from '../valueSets/NameUseEnum.js';
 
-export default class HumanNameDt extends Object{
+export default class _HumanNameDt extends Object{
     constructor(root){
         super();
         if(isValid(root)){
@@ -98,7 +98,7 @@ export default class HumanNameDt extends Object{
 
     get period(){
         if(!isValid(this.myPeriod)){
-            this.myPeriod=new PeriodDt();
+            this.myPeriod=new _PeriodDt();
         }
 
         return this.myPeriod;

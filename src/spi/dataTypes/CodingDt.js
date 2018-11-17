@@ -1,11 +1,11 @@
 import {isUndefined,isValid,isEmpty} from '../../utils/ValidationRules.js';
-import BooleanDt from './BooleanDt.js';
+import _BooleanDt from './BooleanDt.js';
 
 /**
  * Created by lucho 12-11-2018
  * @param {*} root 
  */
-export default class CodingDt extends Object{
+export default class _CodingDt extends Object{
     constructor(root){
         super();
 
@@ -74,7 +74,7 @@ export default class CodingDt extends Object{
 
     get userSelected(){
         if(!isValid(this.myUserSelected)){
-            this.myUserSelected=new BooleanDt();
+            this.myUserSelected=new _BooleanDt();
         }
         return this.myUserSelected;
     }

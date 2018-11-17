@@ -1,9 +1,9 @@
 import {isUndefined,isValid,isEmptyArray,isEmpty} from '../../utils/ValidationRules.js';
-import PeriodDt from './PeriodDt.js';
+import _PeriodDt from './PeriodDt.js';
 import AddressTypeEnum from '../valueSets/AddressTypeEnum.js';
 import AddressUseEnum from '../valueSets/AddressUseEnum.js';
 
-export default class AddressDt extends Object{
+export default class _AddressDt extends Object{
     constructor(root){
         
         super();
@@ -130,9 +130,9 @@ export default class AddressDt extends Object{
 
     get period(){
         if(!isValid(this.myPeriod)){
-            this.myPeriod=new PeriodDt();
+            this.myPeriod=new _PeriodDt();
         }
-        return new PeriodDt(this.myPeriod);
+        return new _PeriodDt(this.myPeriod);
     }
 
     set period(newValue){

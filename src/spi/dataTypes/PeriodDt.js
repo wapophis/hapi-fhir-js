@@ -1,6 +1,6 @@
 import {isUndefined,isValid} from '../../utils/ValidationRules.js';
 
-export default class PeriodDt extends Object{
+export default class _PeriodDt extends Object{
 
     constructor(root){
         super();

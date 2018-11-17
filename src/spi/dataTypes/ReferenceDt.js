@@ -1,7 +1,7 @@
 import {isUndefined,isValid,isEmpty} from '../../utils/ValidationRules.js';
-import IdentifierDt from './IdentifierDt.js';
+import _IdentifierDt from './IdentifierDt.js';
 
-export default class PeriodDt extends Object{
+export default class _ReferenceDt extends Object{
 
     constructor(root){
         super();
@@ -32,7 +32,7 @@ export default class PeriodDt extends Object{
 
     get identifier(){
         if(!isValid(this.myIdentifier)){
-            this.myIdentifier=new IdentifierDt();
+            this.myIdentifier=new _IdentifierDt();
         }
         return this.myIdentifier;
     }
