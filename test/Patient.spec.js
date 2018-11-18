@@ -2,6 +2,7 @@ import { expect } from "chai";
 import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../src/utils/ValidationRules.js';
 import Patient from '../src/spi/resources/Patient.js';
 import IdentifierDt from '../src/spi/dataTypes/IdentifierDt.js';
+import HumanNameDt from '../src/spi/dataTypes/HumanNameDt.js';
 
 describe("FHIR Patient test",()=>{
     describe("Constructor",()=>{     
@@ -51,7 +52,9 @@ describe("FHIR Patient test",()=>{
         });
 
     });
-    describe("Patient.identifier FHIR BEHAVIOURS",()=>{
+
+
+describe("Patient.identifier FHIR BEHAVIOURS",()=>{
 
     describe("Default Object type is an array",()=>{
         it("Identifier field must return a valid array on empty constructor",()=>{
@@ -60,8 +63,9 @@ describe("FHIR Patient test",()=>{
         });
 
         it("Identifier field must return a valid array on non empty constructor",()=>{
-            let myPatient=new Patient({name:[{given:"Luis"}]});
-            expect(Array.isArray(myPatient.getIdentifier())).to.equal(true);                
+            let myPatient=new Patient({identifier:[{value:"testValue"}]});
+            expect(Array.isArray(myPatient.getIdentifier())).to.equal(true);
+            expect(myPatient.getIdentifierFirstRep().value,"Validty checking").to.equal("testValue");                
         });
     });
 
@@ -88,9 +92,49 @@ describe("FHIR Patient test",()=>{
         });
 
     });
+});
+
+describe("Patient.name FHIR BEHAVIOURS",()=>{
+    describe("Default Object type is an array",()=>{
+        it("Name field must return a valid array on empty constructor",()=>{
+            let myPatient=new Patient();
+            expect(Array.isArray(myPatient.getName())).to.equal(true);                
+        });
+
+        it("Identifier field must return a valid array on non empty constructor",()=>{
+            let myPatient=new Patient({name:[{given:"Luis"}]});
+            expect(Array.isArray(myPatient.getName())).to.equal(true);                
+        });
+    });
+
+    describe("Adding name instance works..",()=>{
+        it("Add empty name should return an HumanNameDt instance",()=>{
+            let myPatient=new Patient();
+            myPatient.addIdentifier(new IdentifierDt({value:"idTest"}));
+            expect(myPatient.getIdentifier()[0].value,"checking asignation of value").to.equal("idTest");
+            myPatient.getIdentifier()[0].value="newIdTest";
+            expect(myPatient.getIdentifier()[0].value,"checking modification of value").to.equal("newIdTest");
+            expect(myPatient.getIdentifierFirstRep() instanceof IdentifierDt,"checking type ").to.equal(true);
+        });
+
+        it("Checking valid non empty name existence",()=>{
+            let myPatient=new Patient();            
+            myPatient.addName(new HumanNameDt());
+            expect(myPatient.hasName(),"Expect that this object has no names").to.equal(false);
+            myPatient.name=new Array();
+            expect(myPatient.hasName(),"Expect that a new object has no names").to.equal(false);
+            myPatient.name=new Array(new HumanNameDt({given:["testName"]}));
+            expect(myPatient.hasName(),"Expect that a new object has names").to.equal(true);
+            expect(myPatient.getNameFirstRep().getGivenFirstRep()).to.equal("testName","Validity check..");
+
+        });
+
+    });
+
+});
 
    
 
 //// /////
-    });
+    
 });

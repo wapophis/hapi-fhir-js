@@ -160,10 +160,14 @@ export default class Patient extends DomainResource{
         return this;
     }
 
+    getName(){
+        return this.name;
+    }
+
     hasName(){
         
-        for(name in this.name){
-            if(!name.isEmpty()){
+        for(let i=0;i<this.name.length;i++){
+            if(!this.name[i].isEmpty()){
                 return true;
             }
         }
