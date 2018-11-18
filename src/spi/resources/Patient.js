@@ -66,40 +66,52 @@ export default class Patient extends DomainResource{
     }
 
     get identifier(){
-        if(!isValid(this.myIdentifer)){
-            this.myIdentifer=new Array();
-        }
 
-        let oVal=new Array();
-        for(let i=0;i<this.myIdentifer.length;i++){
-            if(this.myIdentifer[i] instanceof IdentifierDt){
-                oVal.push(this.myIdentifer[i]);
-                
-            }else{
-                oVal.push(new IdentifierDt(this.myIdentifer[i]));
+        if(!isValid(this.myIdentifier)){
+            this.myIdentifier=new Array();
+        }else{
+         
+            for(let i=0;i<this.myIdentifier.length;i++){
+                if(!this.myIdentifier[i] instanceof IdentifierDt){
+                    this.myIdentifier[i]=new IdentifierDt(this.myIdentifier[i]);
+                }
             }
+        
         }
-        return oVal;
+        return this.myIdentifier;
     }
 
     set identifier(newValue){
-        this.myIdentifer=newValue;
+        this.myIdentifier=newValue;
         return this;
     }
 
+    getIdentifier(){
+        return this.identifier;
+    }
+
     addIdentifier(newValue){
-        if(isUndefined(newValue)){
+        if(!isValid(newValue)){
             let oVal=new IdentifierDt();
-            this.name.push(oVal);
+            this.identifier.push(oVal);
             return oVal;
         }
-
-        this.push(newValue);
+        this.identifier.push(newValue);
         return this;
     }
 
     getIdentifierFirstRep(){
         return this.identifier[0];
+    }
+
+    hasIdentifier(){
+        for(let i=0;i<this.identifier.length;i++){
+            
+            if(!this.identifier[i].isEmpty()){
+                return true;
+            }
+        }
+        return false;
     }
 
     set active(newValue){
@@ -114,24 +126,49 @@ export default class Patient extends DomainResource{
         return this.myActive;
     }
 
+    getActiveElement(){
+        return this.active;
+    }
+
+    hasActiveElement(){
+        return !this.active.isEmpty();
+    }
+
+    hasActive(){
+        return this.active;
+    }
+
     get name(){
-        if(!Array.isArray(this.myName) || !isValid(this.myName)){
+
+        if(!isValid(this.myName)){
             this.myName=new Array();
-        }
-        let oVal=new Array();
-        for(let i=0;i<this.myName.length;i++){
-            if(this.myName[i] instanceof HumanNameDt){
-                oVal.push(this.myName[i]);
-            }else{
-                oVal.push(new HumanNameDt(this.myName[i]));
+        }else{
+            
+            for(let i=0;i<this.myName.length;i++){
+                if(!this.myName[i] instanceof IdentifierDt){
+                    //oVal.push(new IdentifierDt(this.myIdentifier[i]));
+                    this.myName[i]=new HumanNameDt(this.myName[i]);
+                }
             }
+        
         }
-        return oVal;
+        return this.myName;
     }
 
     set name(newValue){
         this.myName=newValue;
         return this;
+    }
+
+    hasName(){
+        
+        for(name in this.name){
+            if(!name.isEmpty()){
+                return true;
+            }
+        }
+        return false;
+        
     }
 
     addName(newValue){
@@ -308,7 +345,7 @@ export default class Patient extends DomainResource{
 
     get animal(){
         if(!isValid(this.myAnimal)){
-            this.myAnimal=new AnimalElement();
+            this.myAnimal=new _AnimalElement();
         }
         return this.myAnimal;
     }
@@ -384,43 +421,64 @@ export default class Patient extends DomainResource{
 }
 
 
-class AnimalElement extends Object{
-    constructor(){
+export const _AnimalElement=class AnimalElement extends Object{
+    constructor(root){
         super();
+
+        if(isValid(root)){
+            this.species=root.species;
+            this.breed=root.breed;
+            this.genderStatus=root.genderStatus;
+        }
     }
 
 
     get species(){
+        if(!isValid(this.mySpecies)){
+            this.mySpecies=new CodeableConceptDt();
+        }
 
+        return this.mySpecies;
     }
 
     set species(newValue){
-
+        this.mySpecies=newValue;
+        return this;
     }
 
     get breed(){
+        if(!isValid(this.myBreed)){
+            this.myBreed=new CodeableConceptDt();
+        }
 
+        return this.myBreed;
     }
 
     set breed(newValue){
-
+        this.myBreed=newValue;
+        return this;
     }
 
     get genderStatus(){
+        if(!isValid(this.myGenderStatus)){
+            this.myGenderStatus=new CodeableConceptDt();
+        }
 
+        return this.myGenderStatus;
 
     }
 
     set genderStatus(newValue){
-
+        this.myGenderStatus=newValue;
+        return this;
     }
 
     isEmpty(){
-        return true;
+        return this.species.isEmpty() && this.genderStatus.isEmpty() && this.breed.isEmpty();
     }
 }
 
-class LinkElement extends Object{
+export const _LinkElement=class LinkElement extends Object{
     constructor(root){
         super();
 
@@ -459,7 +517,7 @@ class LinkElement extends Object{
     }
 }
 
-class ComunicationElement extends Object{
+export const _ComunicationElement=class ComunicationElement extends Object{
     constructor(){
         super();
     }

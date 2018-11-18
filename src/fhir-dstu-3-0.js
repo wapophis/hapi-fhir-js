@@ -25,6 +25,10 @@ export const ReferenceDt=_ReferenceDt;
 
 // SPEC DSTU-3.0 
 import Patient from './spi/resources/Patient.js';
+import {_AnimalElement,_LinkElement,_ComunicationElement} from './spi/resources/Patient.js';
 
 export const PatientResource=Patient;
+export const PatientResource_AnimalElement=_AnimalElement;
+export const PatientResource_LinkElement=_LinkElement;
+export const PatientResource_ComunicationElement=_ComunicationElement;
 
