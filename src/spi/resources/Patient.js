@@ -218,15 +218,13 @@ export default class Patient extends DomainResource{
             this.myTelecom=new Array();
         }
 
-        let oVal=new Array();
+        
         for(let i=0;i<this.myTelecom.length;i++){
-            if(this.myTelecom[i] instanceof ContactPointDt){
-                oVal.push(this.myTelecom[i]);
-            }else{
-                oVal.push(new ContactPointDt(this.myTelecom[i]));
+            if(!this.myTelecom[i] instanceof ContactPointDt){
+                this.myTelecom[i]=new ContactPointDt(this.myTelecom[i]);
             }
         }
-        return oVal;
+        return this.myTelecom;
     }
 
 
@@ -235,18 +233,39 @@ export default class Patient extends DomainResource{
     }
 
     hasTelecom(){
+        for(let i=0;i<this.telecom.length;i++){
+            if(!this.telecom[i].isEmpty())
+                return true;
+        }
 
+        return false;
     }
 
-    addTelecom(){
+    /**
+     * 
+     * @param {*} newValue 
+     * @return {ContactPointDt,Patient} return new ContactPointAdded if no argument. Return this for chaining if argument is not empty.
+     */
+    addTelecom(newValue){
 
+        if(!isValid(newValue)){
+            this.telecom.push(new ContactPointDt());
+            return this.myTelecom[0];
+        }else{
+            this.telecom.push(newValue);
+            return this;
+        }
     }
 
     /**
      * @return: The first repetition of repeating field telecom, creating it if it does not already exist
      */
     getTelecomFirstRep(){
-
+        if(isValid(this.myTelecom[0])){
+            return this.telecom[0];
+        }else{
+            return this.addTelecom();
+        }
     }
 
 
@@ -263,6 +282,16 @@ export default class Patient extends DomainResource{
         return AdministrativeGenderEnum.getByValue(this.myGender);
     }
 
+    getGender(){
+        return this.gender;
+    }
+
+    hasGenderElement(){
+        return isValid(this.gender) && !isEmpty(this.gender);
+    }
+
+
+
     set birthDate(newValue){
         this.myBirthDate=newValue;
         return this;
@@ -275,6 +304,8 @@ export default class Patient extends DomainResource{
         return this.myBirthDate;
 
     }
+
+    
 
     set deceasedBoolean(newValue){
         this.myDeceasedBoolean=newValue;

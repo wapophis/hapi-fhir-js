@@ -3,6 +3,7 @@ import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../src/utils/ValidationR
 import Patient from '../src/spi/resources/Patient.js';
 import IdentifierDt from '../src/spi/dataTypes/IdentifierDt.js';
 import HumanNameDt from '../src/spi/dataTypes/HumanNameDt.js';
+import ContactPointDt from '../src/spi/dataTypes/ContactPointDt.js';
 
 describe("FHIR Patient test",()=>{
     describe("Constructor",()=>{     
@@ -126,6 +127,49 @@ describe("Patient.name FHIR BEHAVIOURS",()=>{
             myPatient.name=new Array(new HumanNameDt({given:["testName"]}));
             expect(myPatient.hasName(),"Expect that a new object has names").to.equal(true);
             expect(myPatient.getNameFirstRep().getGivenFirstRep()).to.equal("testName","Validity check..");
+
+        });
+
+    });
+
+});
+
+
+
+describe("Patient.telecom FHIR BEHAVIOURS",()=>{
+    describe("Default Object type is an array",()=>{
+        it("Telecom field must return a valid array on empty constructor",()=>{
+            let myPatient=new Patient();
+            expect(Array.isArray(myPatient.getTelecom())).to.equal(true);                
+        });
+
+        it("Identifier field must return a valid array on non empty constructor",()=>{
+            let myPatient=new Patient({telecom:[{value:"testTelecom"}]});
+            expect(Array.isArray(myPatient.getTelecom())).to.equal(true);                
+            expect(myPatient.getTelecomFirstRep().value,"Validity checking").to.equal("testTelecom");
+        });
+    });
+
+    describe("Adding telecom instance works..",()=>{
+        it("Add empty telecom should return an ContactPointDt instance",()=>{
+            let myPatient=new Patient();
+            myPatient.addTelecom(new ContactPointDt({value:"testTelecom"}));
+            expect(myPatient.getTelecom()[0].value,"checking asignation of value").to.equal("testTelecom");
+            myPatient.getTelecomFirstRep().value="newTestTelecom";
+            expect(myPatient.getTelecom()[0].value,"checking modification of value").to.equal("newTestTelecom");
+            expect(myPatient.getTelecomFirstRep() instanceof ContactPointDt,"checking type ").to.equal(true);
+        });
+
+        it("Checking valid non empty telecom existence",()=>{
+            let myPatient=new Patient();            
+            myPatient.addTelecom(new ContactPointDt());
+            expect(myPatient.hasTelecom(),"Expect that this object has no names").to.equal(false);
+            myPatient.telecom=new Array();
+            expect(myPatient.hasTelecom(),"Expect that a new object has no names").to.equal(false);
+            myPatient.getTelecomFirstRep().value="testTelecom";
+            debugger;
+            expect(myPatient.hasTelecom(),"Expect that a new object has names").to.equal(true);
+            expect(myPatient.getTelecomFirstRep().value).to.equal("testTelecom","Validity check..");
 
         });
 
