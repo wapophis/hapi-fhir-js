@@ -100,8 +100,15 @@ export default class Patient extends DomainResource{
         return this;
     }
 
+    /**
+     * @return:The first repetition of repeating field identifier, creating it if it does not already exist
+     */
     getIdentifierFirstRep(){
-        return this.identifier[0];
+        if(isValid(this.myIdentifier[0])){
+            return this.identifier[0];
+        }else{
+            return this.addIdentifier();
+        }
     }
 
     hasIdentifier(){
@@ -185,8 +192,17 @@ export default class Patient extends DomainResource{
           return this;
     }
 
+    /**
+     * @return: The first repetition of repeating field name, creating it if it does not already exist
+     */
     getNameFirstRep(){
-        return this.name[0];
+        if(isValid(this.myName[0])){
+            return this.name[0];
+        }
+        else{
+            return this.addName();
+        }
+   
     }
 
 
@@ -212,6 +228,28 @@ export default class Patient extends DomainResource{
         }
         return oVal;
     }
+
+
+    getTelecom(){
+        return this.telecom;
+    }
+
+    hasTelecom(){
+
+    }
+
+    addTelecom(){
+
+    }
+
+    /**
+     * @return: The first repetition of repeating field telecom, creating it if it does not already exist
+     */
+    getTelecomFirstRep(){
+
+    }
+
+
 
     set gender(newValue){
         this.myGender=newValue;
