@@ -5,6 +5,8 @@ import IdentifierDt from '../src/spi/dataTypes/IdentifierDt.js';
 import HumanNameDt from '../src/spi/dataTypes/HumanNameDt.js';
 import ContactPointDt from '../src/spi/dataTypes/ContactPointDt.js';
 
+import AdministrativeGenderEnum from '../src/spi/valueSets/AdministrativeGenderEnum.js';
+
 describe("FHIR Patient test",()=>{
     describe("Constructor",()=>{     
         it("should generate an instance object",()=>{
@@ -177,8 +179,46 @@ describe("Patient.telecom FHIR BEHAVIOURS",()=>{
 
 });
 
-   
 
-//// /////
-    
+
+describe("Patient.gender FHIR BEHAVIOURS",()=>{
+        it("Empty gender after empty constructor",()=>{
+            let myPatient=new Patient();
+            expect(isEmpty(myPatient.getGender())).to.equal(true);                
+        });
+
+        it("Non Empty gender after proper constructor",()=>{
+            let myPatient=new Patient({gender:"male"});
+            expect(myPatient.getGender().value).to.equal("male");                
+        });
+
+
+        it("Proper male mapping for enum values..",()=>{
+            let myPatient=new Patient({gender:"male"});
+            expect(myPatient.getGender()).to.equal(AdministrativeGenderEnum.MALE);                
+        });
+
+        it("Proper female mapping for enum values..",()=>{
+            let myPatient=new Patient({gender:"female"});
+            expect(myPatient.getGender()).to.equal(AdministrativeGenderEnum.FEMALE);                
+        });
+        it("Proper other mapping for enum values..",()=>{
+            let myPatient=new Patient({gender:"other"});
+            expect(myPatient.getGender()).to.equal(AdministrativeGenderEnum.OTHER);                
+        });
+        it("Proper unknown mapping for enum values..",()=>{
+            let myPatient=new Patient({gender:"unknown"});
+            expect(myPatient.getGender()).to.equal(AdministrativeGenderEnum.UNKNOWN);                
+        });
+        
+
+
+
+
+
+    });
+
+
+
+//// /////    
 });
