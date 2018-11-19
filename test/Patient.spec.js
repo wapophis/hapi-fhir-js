@@ -335,5 +335,56 @@ describe("Patient.gender FHIR BEHAVIOURS",()=>{
         });
     });
 
+
+    describe("Patient.maritalStatus FHIR BEHAVIOURS",()=>{
+        
+                it("Empty maritalStatus after empty constructor...",()=>{
+                    let myPatient=new Patient();
+                    expect(myPatient.hasMaritalStatus()).to.equal(false);
+                });
+        
+                it("Non Empty maritalStatus after proper constructor...",()=>{
+                    debugger;
+                    let myPatient=new Patient({maritalStatus:{coding:[
+                        {code:"M"}
+                    ]}});
+                    expect(myPatient.hasMaritalStatus()).to.equal(true);
+                    
+                    
+                    myPatient.deceasedBoolean=undefined;
+                    myPatient.deceasedDateTime=new Date();
+                    expect(myPatient.hasDeceasedBooleanType()).to.equal(false);
+                    expect(myPatient.hasDeceasedDateTimeType()).to.equal(true);
+                    expect(myPatient.getDeceased()).to.equal(true);
+        
+                });
+        
+        
+                it("Checking getDeceased existence flags...",()=>{
+                    let myPatient=new Patient({deceasedBoolean:false});
+                    expect(myPatient.hasDeceasedBooleanType()).to.equal(true);
+                    expect(myPatient.hasDeceasedDateTimeType()).to.equal(false);
+                    expect(myPatient.getDeceased()).to.equal(false);
+        
+                    myPatient=new Patient({deceasedBoolean:true});
+                    expect(myPatient.hasDeceasedBooleanType()).to.equal(true);
+                    expect(myPatient.hasDeceasedDateTimeType()).to.equal(false);
+                    expect(myPatient.getDeceased()).to.equal(true);
+                    
+                    myPatient.deceasedBoolean=undefined;
+                    myPatient.deceasedDateTime=new Date();
+                    expect(myPatient.hasDeceasedBooleanType()).to.equal(false);
+                    expect(myPatient.hasDeceasedDateTimeType()).to.equal(true);
+                    expect(myPatient.getDeceased()).to.equal(true);
+        
+        
+                    myPatient.deceasedDateTime=new Date("2020-12-02");
+                    expect(myPatient.hasDeceasedBooleanType()).to.equal(false);
+                    expect(myPatient.hasDeceasedDateTimeType()).to.equal(true);
+                    expect(myPatient.getDeceased()).to.equal(false);
+        
+                });
+            });
+
 //// /////    
 });

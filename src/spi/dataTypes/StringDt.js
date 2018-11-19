@@ -34,10 +34,14 @@ export default class StringDt extends Object{
 
     toString(){
         if(this.isEmpty()){
-            return new String();
+            return null;
         }else{
             return this.myCoercedValue;
         }
+    }
+
+    equals(object){
+        return this.myCoercedValue===object.toString();
     }
 
 }

@@ -25,11 +25,17 @@ export default class _CodeableConceptDt extends Object{
     }
 
     addCoding(newValue){
-        if(isValid(newValue)){
-            this.coding.push(newValue);
-        }else{
-            this.coding.push(new _CodingDt());
+        if(!isValid(newValue)){
+            let oVal=new _CodingDt();
+            this.coding.push(oVal);
+            return oVal;
         }
+
+        if(newValue instanceof _CodingDt===false){
+            throw new TypeError("AddCoding requires a CodingDt object");
+        }
+
+        this.coding.push(newValue);
         return this;
     }
 

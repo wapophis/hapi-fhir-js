@@ -7,6 +7,8 @@ import AddressDt from '../dataTypes/AddressDt.js';
 import CodeableConceptDt from '../dataTypes/CodeableConceptDt.js';
 import ReferenceDt from '../dataTypes/ReferenceDt.js';
 import BooleanDt from '../dataTypes/BooleanDt.js';
+import MaritalStatusEnum from '../valueSets/MaritalStatusEnum.js';
+import BoundCodeableConcept from '../dataTypes/BoundCodeableConceptDt.js';
 
 
 import {AdministrativeGenderEnum} from '../valueSets/AdministrativeGenderEnum.js';
@@ -27,7 +29,7 @@ export default class Patient extends DomainResource{
             this.deceasedBoolean=root.deceasedBoolean;
             this.deceasedDateTime=root.deceasedDateTime;
             this.address=root.address;
-            this.maritalStatus=root.maritalStatus;
+            this.maritalStatus=new CodeableConceptDt(root.maritalStatus);
             this.multipleBirth=root.multipleBirth;
             this.photo=root.photo;
             this.contact=root.contact;
@@ -442,9 +444,14 @@ export default class Patient extends DomainResource{
     }
 
 
+    
 
     set maritalStatus(newValue){
-        this.myMaritalStatus=newValue;
+        if( (newValue instanceof CodeableConceptDt)===false && isValid(newValue)){
+            throw new TypeError("This method requires a CodeableConceptDt");
+        }
+
+        this.myMaritalStatus=new BoundCodeableConcept(MaritalStatusEnum).forCodes(newValue.coding);
         return this;
     }
 
@@ -454,6 +461,20 @@ export default class Patient extends DomainResource{
             this.myMaritalStatus=new CodeableConceptDt();
         }
         return this.myMaritalStatus;
+    }
+
+
+    getMaritalStatus(){
+       return this.maritalStatus;
+    }
+
+    setMaritalStatus(newValue){
+        return this.maritalStatus=newValue;
+    }
+
+    hasMaritalStatus(){
+        
+        return !this.maritalStatus.isEmpty();
     }
 
     get multipleBirthBoolean(){

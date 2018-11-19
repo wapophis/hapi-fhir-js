@@ -59,6 +59,10 @@ export default class _CodingDt extends Object{
         return this;
     }
 
+    setCode(newValue){
+        return this.code=newValue;
+    }
+
     get display(){
         if(!isValid(this.myDisplay)){
             this.myDisplay=new String();
