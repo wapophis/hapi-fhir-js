@@ -24,7 +24,8 @@ export default class Patient extends DomainResource{
             this.telecom=root.telecom;
             this.gender=root.gender;
             this.birthDate=root.birthDate;
-            this.deceased=root.deceased;
+            this.deceasedBoolean=root.deceasedBoolean;
+            this.deceasedDateTime=root.deceasedDateTime;
             this.address=root.address;
             this.maritalStatus=root.maritalStatus;
             this.multipleBirth=root.multipleBirth;
@@ -330,17 +331,46 @@ export default class Patient extends DomainResource{
         return !isEmptyDate(this.birthDate);
     }
 
+    getDeceased(){
+      if(this.hasDeceasedBooleanType()){
+          return this.deceasedBoolean.valueOf();
+      }
+
+      if(this.hasDeceasedDateTimeType()){
+          return this.deceasedDateTime.getTime()<=new Date().getTime();
+      }
+
+      return false;
+    }
+
+
     set deceasedBoolean(newValue){
         this.myDeceasedBoolean=newValue;
         return this;
     }
 
     get deceasedBoolean(){
+        debugger;
         if(!isValid(this.myDeceasedBoolean)){
-            this.myDeceased=new Boolean();
+            this.myDeceasedBoolean=new BooleanDt();
         }
-        return this.myDeceased;
+        
+        if((this.myDeceasedBoolean instanceof BooleanDt)===false){
+            this.myDeceasedBoolean=new BooleanDt(this.myDeceasedBoolean);
+        }
+        
+        return this.myDeceasedBoolean;
     }
+
+    hasDeceasedBooleanType(){
+        return !this.deceasedBoolean.isEmpty();
+    }
+
+    hasDeceasedDateTimeType(){
+        return !isEmptyDate(this.deceasedDateTime);
+    }
+
+
 
     set deceasedDateTime(newValue){
         this.myDeceasedDateTime=newValue;
@@ -348,7 +378,7 @@ export default class Patient extends DomainResource{
     }
 
     get deceasedDateTime(){
-        if(!isValid(this.myDecasedDateTime)){
+        if(!isValid(this.myDeceasedDateTime)){
             this.myDeceasedDateTime=new Date(0,0,0);
         }
         return this.myDeceasedDateTime;
