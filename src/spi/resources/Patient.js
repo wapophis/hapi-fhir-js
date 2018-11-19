@@ -350,7 +350,6 @@ export default class Patient extends DomainResource{
     }
 
     get deceasedBoolean(){
-        debugger;
         if(!isValid(this.myDeceasedBoolean)){
             this.myDeceasedBoolean=new BooleanDt();
         }
@@ -389,17 +388,60 @@ export default class Patient extends DomainResource{
             this.myAddress=new Array();
         }
 
-        let oVal=new Array();
         for(let i=0;i<this.myAddress.length;i++){
-            oVal.push(new AddressDt(this.myAddress[i]));
+            if(this.myAddress[i] instanceof AddressDt===false){
+                this.myAddress[i]=new AddressDt(this.myAddress[i]);
+            }
         }
-        return oVal;
+        return this.myAddress;
     }
 
     set address(newValue){
         this.myAddress=newValue;
         return this;
     }
+
+    getAddress(){
+        return this.address;
+    }
+
+    setAddress(newValue){
+        return this.address=newValue;
+    }
+
+    hasAddress(){
+        for(let i=0;i<this.address.length;i++){
+            if(!this.address[i].isEmpty()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    addAddress(newValue){
+        if(!isValid(newValue)){
+            let oVal=new AddressDt();
+            this.myAddress.push(oVal);
+            return oVal;
+        }
+        this.address.push(newValue);
+        return this;
+    }
+
+
+    /**
+     * @return: The first repetition of repeating field address, creating it if it does not already exist
+     */
+    getAddressFirstRep(){
+
+        if(isValid(this.myAddress[0])){
+            return this.address[0];
+        }else{
+            return this.addAddress();
+        }
+    }
+
+
 
     set maritalStatus(newValue){
         this.myMaritalStatus=newValue;

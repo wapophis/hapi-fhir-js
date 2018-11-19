@@ -4,6 +4,7 @@ import Patient from '../src/spi/resources/Patient.js';
 import IdentifierDt from '../src/spi/dataTypes/IdentifierDt.js';
 import HumanNameDt from '../src/spi/dataTypes/HumanNameDt.js';
 import ContactPointDt from '../src/spi/dataTypes/ContactPointDt.js';
+import AddressDt from '../src/spi/dataTypes/AddressDt.js';
 
 import AdministrativeGenderEnum from '../src/spi/valueSets/AdministrativeGenderEnum.js';
 
@@ -171,6 +172,49 @@ describe("Patient.telecom FHIR BEHAVIOURS",()=>{
             myPatient.getTelecomFirstRep().value="testTelecom";
             expect(myPatient.hasTelecom(),"Expect that a new object has names").to.equal(true);
             expect(myPatient.getTelecomFirstRep().value).to.equal("testTelecom","Validity check..");
+
+        });
+
+    });
+
+});
+
+
+
+describe("Patient.address FHIR BEHAVIOURS",()=>{
+    describe("Default Object type is an array",()=>{
+        it("Telecom field must return a valid array on empty constructor",()=>{
+            let myPatient=new Patient();
+            expect(Array.isArray(myPatient.getAddress())).to.equal(true);                
+        });
+
+        it("Identifier field must return a valid array on non empty constructor",()=>{
+            let myPatient=new Patient({address:[{line:["testAddress"]}]});
+            expect(Array.isArray(myPatient.getAddress())).to.equal(true);                
+            expect(myPatient.getAddressFirstRep().getLineFirstRep().value,"testAddress").to.equal("testAddress");
+        });
+    });
+
+    describe("Adding address instance works..",()=>{
+        it("Add empty address should return an AddressDt instance",()=>{
+            let myPatient=new Patient();
+            myPatient.addAddress(new AddressDt({line:["testAddress"]}));
+            expect(myPatient.getAddressFirstRep().getLineFirstRep().value,"checking asignation of value").to.equal("testAddress");
+            myPatient.getAddressFirstRep().line[0]="newTestAddress";
+            expect(myPatient.getAddress()[0].line[0].value,"checking modification of value").to.equal("newTestAddress");
+            expect(myPatient.getAddressFirstRep() instanceof AddressDt,"checking type ").to.equal(true);
+        });
+
+        it("Checking valid non empty address existence",()=>{
+            let myPatient=new Patient();            
+            myPatient.addAddress(new AddressDt());
+            expect(myPatient.hasAddress(),"Expect that this object has no names").to.equal(false);
+            myPatient.address=new Array();
+            expect(myPatient.hasAddress(),"Expect that a new object has no names").to.equal(false);
+            debugger;
+            myPatient.getAddressFirstRep().getLineFirstRep().value="newValue";
+            expect(myPatient.hasAddress(),"Expect that a new object has names").to.equal(true);
+            expect(myPatient.getAddressFirstRep().getLineFirstRep().value).to.equal("newValue","Validity check..");
 
         });
 

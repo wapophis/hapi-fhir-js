@@ -39,7 +39,7 @@ export default class _PeriodDt extends Object{
     }
 
     equals(other){
-        return (other instanceof PeriodDt) && this.start.getTime()===other.start.getTime()
+        return (other instanceof _PeriodDt) && this.start.getTime()===other.start.getTime()
         && this.end.getTime()===other.end.getTime();
     }
 

@@ -1,5 +1,7 @@
 import {isUndefined,isValid,isEmptyArray,isEmpty} from '../../utils/ValidationRules.js';
 import _PeriodDt from './PeriodDt.js';
+import StringDt from './StringDt.js';
+
 import AddressTypeEnum from '../valueSets/AddressTypeEnum.js';
 import AddressUseEnum from '../valueSets/AddressUseEnum.js';
 
@@ -60,8 +62,14 @@ export default class _AddressDt extends Object{
     }
 
     get line(){
-        if(!isValid(this.myLine) || !Array.isArray(this.myLine)){
+        if(!isValid(this.myLine)){
             this.myLine=new Array();
+        }
+
+        for(let i=0;i<this.myLine.length;i++){
+            if((this.myLine[i] instanceof StringDt)===false){
+                this.myLine[i]=new StringDt(this.myLine[i]);
+            }
         }
         return this.myLine;
     }
@@ -70,6 +78,25 @@ export default class _AddressDt extends Object{
         this.myLine=newValue;
         return this;
     }
+
+    addLine(newValue){
+        if(!isValid(newValue)){
+            let oVal=new StringDt();
+            this.line.push(oVal)
+            return oVal;
+        }
+        this.line.push(newValue);
+        return this;
+    }
+
+    getLineFirstRep(){
+    
+        if(isValid(this.line[0])){
+            return this.line[0];
+        }
+        return this.addLine();
+    }
+
 
     get city(){
         if(!isValid(this.myCity)){
