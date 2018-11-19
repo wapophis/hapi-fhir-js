@@ -169,7 +169,6 @@ describe("Patient.telecom FHIR BEHAVIOURS",()=>{
             myPatient.telecom=new Array();
             expect(myPatient.hasTelecom(),"Expect that a new object has no names").to.equal(false);
             myPatient.getTelecomFirstRep().value="testTelecom";
-            debugger;
             expect(myPatient.hasTelecom(),"Expect that a new object has names").to.equal(true);
             expect(myPatient.getTelecomFirstRep().value).to.equal("testTelecom","Validity check..");
 
@@ -192,7 +191,10 @@ describe("Patient.gender FHIR BEHAVIOURS",()=>{
             expect(myPatient.getGender().value).to.equal("male");                
         });
 
-
+        it("Checking hasGender flag ...",()=>{
+            let myPatient=new Patient({gender:"male"});
+            expect(myPatient.hasGenderElement()).to.equal(true);                
+        });
         it("Proper male mapping for enum values..",()=>{
             let myPatient=new Patient({gender:"male"});
             expect(myPatient.getGender()).to.equal(AdministrativeGenderEnum.MALE);                
@@ -210,15 +212,34 @@ describe("Patient.gender FHIR BEHAVIOURS",()=>{
             let myPatient=new Patient({gender:"unknown"});
             expect(myPatient.getGender()).to.equal(AdministrativeGenderEnum.UNKNOWN);                
         });
-        
-
-
-
-
-
     });
 
+    describe("Patient.birthDate FHIR BEHAVIOURS",()=>{
+        it("Empty birthDate after empty constructor",()=>{
+            let myPatient=new Patient();
+            expect(myPatient.hasBirthDateElement()).to.equal(false);
+            expect(myPatient.hasBirthDate()).to.equal(false);
+            
+        });
 
+        it("Non Empty birthDate after proper constructor",()=>{
+            let myPatient=new Patient({birthDate:"02-12-1978"});
+            expect(myPatient.hasBirthDateElement()).to.equal(true);
+            expect(myPatient.hasBirthDate()).to.equal(true);
+            expect(myPatient.birthDate.getTime()).to.equal(new Date("02-12-1978").getTime());
+            
+        });
+
+
+        it("Checking birthDate existence flags...",()=>{
+            let myPatient=new Patient({birthDate:"12-02-1978"});
+            expect(myPatient.hasBirthDateElement()).to.equal(true);
+            expect(myPatient.hasBirthDate()).to.equal(true);
+            myPatient.setBirthDate();
+            expect(myPatient.hasBirthDateElement()).to.equal(false);
+            expect(myPatient.hasBirthDate()).to.equal(false);
+        });
+    });
 
 //// /////    
 });
