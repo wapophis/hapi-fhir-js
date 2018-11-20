@@ -1,4 +1,4 @@
-import {isValid} from '../../utils/ValidationRules.js';
+import {isValid,isEmpty} from '../../utils/ValidationRules.js';
 
 export default class StringDt extends Object{
 
@@ -8,13 +8,13 @@ export default class StringDt extends Object{
         this.isUndefined=true;
         
         if(isValid(value)){
-            this.myCoercedValue=value.toString();
+            this.myCoercedValue=new String(value.toString());
             this.isUndefined=false;
         }
     }
 
     set value(newValue){
-        this.myCoercedValue=newValue;
+        this.myCoercedValue=newValue.valueOf();
         if(isValid(this.myCoercedValue)){
             this.isUndefined=false;
         }
@@ -29,14 +29,14 @@ export default class StringDt extends Object{
     }
 
     isEmpty(){
-        return this.isUndefined;
+        return this.isUndefined || (isValid(this.myCoercedValue) && isEmpty(this.myCoercedValue));
     }
 
     toString(){
         if(this.isEmpty()){
             return null;
         }else{
-            return this.myCoercedValue;
+            return this.myCoercedValue.toString();
         }
     }
 
@@ -44,4 +44,21 @@ export default class StringDt extends Object{
         return this.myCoercedValue===object.toString();
     }
 
-}
+    valueOf(){
+        return this.toString();
+    }
+    [Symbol.toPrimitive](hint){
+        switch(hint){
+            case 'string':{
+                return this.toString();
+            }
+
+            case `boolean`:{
+                return this.isEmpty();
+            }
+            default:
+                return this.toString();
+        }
+    }
+
+};

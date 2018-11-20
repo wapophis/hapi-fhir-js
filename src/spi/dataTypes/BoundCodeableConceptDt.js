@@ -16,7 +16,6 @@ export default class BoundCodeableConceptDt extends Object{
      * @param {*} codes Array of CodingDt to load into the codeable concept if match with the enum
      */
     forCodes(codes){
-        debugger;
         let oVal=new CodeableConceptDt();
 
         for(let i=0;i<this.enums.length;i++){

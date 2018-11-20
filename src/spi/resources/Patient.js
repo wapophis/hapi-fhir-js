@@ -450,7 +450,6 @@ export default class Patient extends DomainResource{
         if( (newValue instanceof CodeableConceptDt)===false && isValid(newValue)){
             throw new TypeError("This method requires a CodeableConceptDt");
         }
-
         this.myMaritalStatus=new BoundCodeableConcept(MaritalStatusEnum).forCodes(newValue.coding);
         return this;
     }

@@ -5,8 +5,11 @@ import IdentifierDt from '../src/spi/dataTypes/IdentifierDt.js';
 import HumanNameDt from '../src/spi/dataTypes/HumanNameDt.js';
 import ContactPointDt from '../src/spi/dataTypes/ContactPointDt.js';
 import AddressDt from '../src/spi/dataTypes/AddressDt.js';
+import CodingDt from '../src/spi/dataTypes/CodingDt.js';
+
 
 import AdministrativeGenderEnum from '../src/spi/valueSets/AdministrativeGenderEnum.js';
+import MaritalStatusEnum from '../src/spi/valueSets/MaritalStatusEnum.js';
 
 describe("FHIR Patient test",()=>{
     describe("Constructor",()=>{     
@@ -348,9 +351,8 @@ describe("Patient.gender FHIR BEHAVIOURS",()=>{
                     let myPatient=new Patient({maritalStatus:{coding:[
                         {code:"M"}
                     ]}});
-                    expect(myPatient.hasMaritalStatus()).to.equal(true);
-                    
-                    
+                    expect(myPatient.hasMaritalStatus()).to.equal(true);      
+                    expect(myPatient.maritalStatus.getCodingFirstRep()).to.equal(new CodingDt(MaritalStatusEnum.M));
                     myPatient.deceasedBoolean=undefined;
                     myPatient.deceasedDateTime=new Date();
                     expect(myPatient.hasDeceasedBooleanType()).to.equal(false);

@@ -7,7 +7,11 @@ import {isUndefined} from '../../utils/ValidationRules.js';
 export default class _BooleanDt extends Boolean{
 
     constructor(value){
-        super(value);
+        if(!isUndefined(value)){
+            super(value.valueOf());
+        }else{
+            super();
+        }
         this.isUndefined=isUndefined(value);
     }
 
@@ -15,7 +19,6 @@ export default class _BooleanDt extends Boolean{
         if(this.isUndefined===false){
             return super.valueOf();
         }
-        debugger;
     }
 
     isEmpty(){
