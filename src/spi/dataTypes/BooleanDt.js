@@ -19,6 +19,7 @@ export default class _BooleanDt extends Boolean{
         if(this.isUndefined===false){
             return super.valueOf();
         }
+        return null;
     }
 
     isEmpty(){

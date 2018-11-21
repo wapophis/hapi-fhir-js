@@ -1,6 +1,8 @@
 import {isUndefined,isValid,isEmptyArray,isEmpty} from '../../utils/ValidationRules.js';
 import _PeriodDt from './PeriodDt.js';
 import StringDt from './StringDt.js';
+import CodingDt from './CodingDt.js';
+
 
 import AddressTypeEnum from '../valueSets/AddressTypeEnum.js';
 import AddressUseEnum from '../valueSets/AddressUseEnum.js';
@@ -26,26 +28,46 @@ export default class _AddressDt extends Object{
     }
 
     get use(){
-        if(!isValid(this.myUse)){
-            this.myUse=new String();
-        }
-        return AddressUseEnum.getByValue(this.myUse);
+       return this.getUse().code;
     }
 
     set use(newValue){
-        this.myUse=newValue;
+        let code=AddressUseEnum.getByCode(newValue);
+        if(!code.isEmpty()){
+            this.setUse(code);
+        }else{
+            this.getUse().setCode(newValue);
+        }
+    }
+
+    getUse(){
+        if(!isValid(this.myUse)){
+            this.myUse=new CodingDt();
+        }
         return this.myUse;
+    }
+
+    setUse(newValue){
+        if(!newValue instanceof CodingDt){
+            throw new TypeError("Type invalid. Needs CodingDt")
+        }
+        this.myUse=newValue;
+        return this;
     }
 
     get type(){
         if(!isValid(this.myType)){
-            this.myType=new String();
+            this.myType=new CodingDt();
         }
-        return AddressTypeEnum.getByValue(this.myType);
+        return this.myType;
     }
 
     set type(newValue){
-        this.myType=newValue;
+        if(newValue instanceof CodingDt){
+            this.myType=newValue;
+        }else{
+            this.myType=AddressTypeEnum.getByCode(newValue);
+        }
         return this;
     }
 
@@ -172,7 +194,7 @@ export default class _AddressDt extends Object{
        && isEmpty(this.country) 
        && isEmpty(this.district)
        && isEmptyArray(this.line)
-       && isEmpty(this.use)
+       && this.use.isEmpty()
        && isEmpty(this.postalCode)
        && isEmpty(this.state)
        && isEmpty(this.text);

@@ -52,11 +52,11 @@ describe("CodingDt DataType test",()=>{
         it("should return an empty object",()=>{
             let myInstance=new CodingDt();
             
-            expect(myInstance.system.isEmpty()
-            &&(myInstance.version.isEmpty())
-            &&(myInstance.code.isEmpty())
-            &&(myInstance.display.isEmpty())
-            &&(myInstance.userSelected.isEmpty())
+            expect(myInstance.mySystem.isEmpty()
+            &&(myInstance.myVersion.isEmpty())
+            &&(myInstance.myCode.isEmpty())
+            &&(myInstance.myDisplay.isEmpty())
+            &&(myInstance.myUserSelected.isEmpty())
             );                    
         });
     });
@@ -65,7 +65,7 @@ describe("CodingDt DataType test",()=>{
     describe("Setters",()=>{     
         it("should set valid values",()=>{
             let myInstance=new CodingDt();
-            
+           
             expect(isValid(myInstance.system="test")
             && isValid(myInstance.version="test")
             && isValid(myInstance.code="test")
@@ -73,11 +73,11 @@ describe("CodingDt DataType test",()=>{
             && isValid(myInstance.userSelected=true)
             );
             
-            expect(myInstance.getSystemValue()).to.equal("test");
-            expect(myInstance.getVersionValue()).to.equal("test");
-            expect(myInstance.getCodeValue()).to.equal("test");
-            expect(myInstance.getDisplayValue()).to.equal("test");
-            expect(myInstance.userSelected.valueOf()).to.equal(true);
+            expect(myInstance.system).to.equal("test");
+            expect(myInstance.version).to.equal("test");
+            expect(myInstance.code).to.equal("test");
+            expect(myInstance.display).to.equal("test");
+            expect(myInstance.userSelected).to.equal(true);
         });
 
         it("should not fail with invalid values",()=>{
@@ -89,14 +89,15 @@ describe("CodingDt DataType test",()=>{
             && isValid(myInstance.display=undefined)
             && isValid(myInstance.userSelected=undefined)
             );
-            
-            expect(isEmpty(myInstance.system)
-            &&isEmpty(myInstance.version)
-            &&isEmpty(myInstance.code)
-            &&isEmpty(myInstance.display)
-            &&isEmpty(myInstance.userSelected)
+    
+            expect(myInstance.mySystem.isEmpty()
+            && myInstance.myVersion.isEmpty()
+            && myInstance.myCode.isEmpty()
+            && myInstance.myDisplay.isEmpty()
+            && myInstance.myUserSelected.isEmpty()
             );            
         });
+
     });
     describe("Should return correct coerced values to any StringDt field",()=>{ 
 
@@ -122,16 +123,12 @@ describe("CodingDt DataType test",()=>{
             myInstance.display="testDisplay";
             myInstance.system="testSystem";
             myInstance.userSelected=new BooleanDt(true);
-            expect(myInstance.getCodeValue()).to.equal("testCode");
-            expect(myInstance.getDisplayValue()).to.equal("testDisplay");
-            expect(myInstance.getSystemValue()).to.equal("testSystem");
-            expect(myInstance.userSelected.valueOf()).to.equal(true);
-
-            let code=myInstance.code;
-            code.value="Hola Mundo";
-            expect(myInstance.getCodeValue()).to.equal("Hola Mundo");
-            
-
+            expect(myInstance.code).to.equal("testCode");
+            expect(myInstance.display).to.equal("testDisplay");
+            expect(myInstance.system).to.equal("testSystem");
+            expect(myInstance.userSelected).to.equal(true);
+            myInstance.code="Hola Mundo";
+            expect(myInstance.code).to.equal("Hola Mundo");
         });
     });
 
@@ -151,7 +148,15 @@ describe("CodingDt DataType test",()=>{
             myInstance1.display="testDisplay";
             myInstance1.system="testSystem";
             myInstance1.userSelected=new BooleanDt(true);
-            expect(myInstance.equals(myInstance1)).to.equal(true);
+            debugger;
+            expect(myInstance.equals(myInstance1),"Checking equality between instances...").to.equal(true);
+
+            myInstance1.code=undefined;
+            expect(myInstance.equals(myInstance1),"Checking equality between instances...").to.equal(false);
+
+            myInstance1.code="a";
+            expect(myInstance.equals(myInstance1),"Checking equality between instances...").to.equal(false);
+            
 
         });
 

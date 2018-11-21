@@ -1,17 +1,19 @@
+import CodingDt from '../dataTypes/CodingDt.js';
+
 export const AddressUseEnum = Object.freeze(
     {
-        "HOME":{value:'home',display:"Hogar"},
-        "WORK":{value:'work',display:"Trabajo"},
-        "TEMP":{value:'temp', display:"Temporal"},
-        "OLD":{value:'old',display:"Antiguo/Incorrecto"},
+        "HOME":new CodingDt({code:'home',display:"Hogar"}),
+        "WORK":new CodingDt({code:'work',display:"Trabajo"}),
+        "TEMP":new CodingDt({code:'temp', display:"Temporal"}),
+        "OLD":new CodingDt({code:'old',display:"Antiguo/Incorrecto"}),
 
-        getByValue(code){
+        getByCode(code){
             for(let propName in this) {
-                if((typeof(this[propName]) != "undefined") && this[propName].value===code) {
+                if((typeof(this[propName]) != "undefined") && this[propName].code==code) {
                    return this[propName];
                 }
              }
-             return new String();
+             return new CodingDt();
         }
 });
 

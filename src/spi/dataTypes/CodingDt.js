@@ -12,70 +12,98 @@ export default class _CodingDt extends Object{
 
 
         if(isValid(root)){
-            this.system=new StringDt(root.system);
-            this.version=new StringDt(root.version);
-            this.code=new StringDt(root.code);
-            this.display=new StringDt(root.display);
-            this.userSelected=new StringDt(root.userSelected);
+            this.system=root.system;
+            this.version=root.version;
+            this.code=root.code;
+            this.display=root.display;
+            this.userSelected=root.userSelected;
+        }else{
+            this.system=undefined;
+            this.version=undefined;
+            this.code=undefined;
+            this.display=undefined;
+            this.userSelected=undefined;
         }
     }
 
     get system(){
+        return this.getSystem().valueOf();
+    }
+
+    getSystem(){
         if(!isValid(this.mySystem)){
             this.mySystem=new StringDt();
         }
         return this.mySystem;
     }
 
-    getSystemValue(){
-        return this.system.toString();
-    }
 
     set system(newValue){
-        this.mySystem=new StringDt(newValue);
+        return this.setSystem(new StringDt(newValue));
+    }
+
+
+    setSystem(newValue){
+        if(!newValue instanceof StringDt){
+            throw new TypeError("Type invalid. Specify an StringDt");
+        }
+        this.mySystem=newValue;
         return this;
     }
 
     get version(){
+        return this.getVersion().valueOf();
+    }
+    
+    getVersion(){
         if(!isValid(this.myVersion)){
             this.myVersion=new StringDt();
         }
-
         return this.myVersion;
     }
 
-    getVersionValue(){
-        return this.version.toString();
+    set version(newValue){
+        return this.setVersion(new StringDt(newValue));
     }
 
-    set version(newValue){
-        this.myVersion=new StringDt(newValue);
+    setVersion(newValue){
+        if(!newValue instanceof StringDt){
+            throw new TypeError("Type invalid. Specify an StringDt");
+        }
+        this.myVersion=newValue;
         return this;
     }
 
+
     get code(){
+        return this.getCode().valueOf();
+    }
+
+    getCode(){
         if(!isValid(this.myCode)){
             this.myCode=new StringDt();
         }
         return this.myCode;
     }
 
-    getCodeValue(){
-        debugger;
-        return this.code.toString();
-    }
 
     set code(newValue) {
-        debugger;
-        this.myCode=new StringDt(newValue);
-        return this;
+        return this.setCode(new StringDt(newValue));
     }
 
     setCode(newValue){
-        return this.code=newValue;
+        if(!newValue instanceof StringDt){
+            throw new TypeError("Type invalid. Specify an StringDt");
+        }
+        this.myCode=newValue;
+        return this;
     }
 
     get display(){
+        return this.getDisplay().valueOf();
+    }
+
+    getDisplay(){
         if(!isValid(this.myDisplay)){
             this.myDisplay=new StringDt();
         }
@@ -83,16 +111,25 @@ export default class _CodingDt extends Object{
         return this.myDisplay;
     }
 
-    getDisplayValue(){
-       return this.display.toString();
-    }
 
     set display(newValue){
-        this.myDisplay=new StringDt(newValue);
+        return this.setDisplay(new StringDt(newValue));
+    }
+
+
+    setDisplay(newValue){
+        if(!newValue instanceof StringDt){
+            throw new TypeError("Type invalid. Specify an StringDt");
+        }
+        this.myDisplay=newValue;
         return this;
     }
 
     get userSelected(){
+        return this.getUserSelected().valueOf();
+    }
+
+    getUserSelected(){
         if(!isValid(this.myUserSelected)){
             this.myUserSelected=new BooleanDt();
         }
@@ -100,16 +137,22 @@ export default class _CodingDt extends Object{
     }
 
     set userSelected(newValue){
-        this.myUserSelected=new BooleanDt(newValue);
-        return this;
+        return this.setUserSelected(new BooleanDt(newValue));
+    }
+
+    setUserSelected(newValue){
+        if(!newValue instanceof BooleanDt){
+            throw new TypeError("Type invalid. Specify an BooleanDt");
+        }
+        this.myUserSelected=newValue;
     }
 
     isEmpty(){
-        return this.code.isEmpty() &&
-        this.display.isEmpty() &&
-        this.system.isEmpty() &&
-        this.version.isEmpty() &&
-        this.userSelected.isEmpty();
+        return this.myCode.isEmpty() &&
+        this.myDisplay.isEmpty() &&
+        this.mySystem.isEmpty() &&
+        this.myVersion.isEmpty() &&
+        this.myUserSelected.isEmpty();
     }
 
     toString(){
@@ -123,8 +166,53 @@ export default class _CodingDt extends Object{
       
     }
 
+    valueOf(){
+       let oVal=new Object();
+       
+       if(!this.myCode.isEmpty()){
+        oVal.code=this.code;
+       }
+
+       if(!this.myVersion.isEmpty()){
+        oVal.version=this.version;
+       }
+
+       if(!this.mySystem.isEmpty()){
+        oVal.system=this.system;
+       }
+
+       if(!this.myUserSelected.isEmpty()){
+        oVal.userSelected=this.userSelected;
+       }
+
+       if(!this.myDisplay.isEmpty()){
+        oVal.display=this.display;
+       }
+       
+       return oVal;
+    }
+
     equals(object){
-        return this.toString()==object.toString();
+        if((object instanceof _CodingDt)===false){
+            return false;
+        }
+
+        let t=this.valueOf();
+        let o=object.valueOf();
+         
+        if(Object.keys(t).length===Object.keys(o).length){
+            for(let propName in t){
+                if( (typeof t[propName])!==undefined && (typeof o[propName])===undefined){
+                    return false;
+                }
+                if(t[propName]!==o[propName]){
+                    return false;
+                }
+            }
+        }else{
+            return false;
+        }  
+        return true;
     }
 
     [Symbol.toPrimitive](hint){
