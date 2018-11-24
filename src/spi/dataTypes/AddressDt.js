@@ -9,9 +9,7 @@ import AddressUseEnum from '../valueSets/AddressUseEnum.js';
 
 export default class _AddressDt extends Object{
     constructor(root){
-        
         super();
-
         if(isValid(root)){
             this.use=root.use;
             this.type=root.type;
@@ -36,11 +34,11 @@ export default class _AddressDt extends Object{
         if(!code.isEmpty()){
             this.setUse(code);
         }else{
-            this.getUse().setCode(newValue);
+            this.getUseElement().setCode(newValue);
         }
     }
 
-    getUse(){
+    getUseElement(){
         if(!isValid(this.myUse)){
             this.myUse=new CodingDt();
         }
@@ -55,11 +53,16 @@ export default class _AddressDt extends Object{
         return this;
     }
 
-    get type(){
+    getTypeElement(){
         if(!isValid(this.myType)){
             this.myType=new CodingDt();
         }
         return this.myType;
+    }
+
+
+    get type(){
+      return this.getTypeElement().code;
     }
 
     set type(newValue){

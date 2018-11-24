@@ -32,22 +32,33 @@ describe("Address DataType test",()=>{
     });
 
     describe("Unit tests",()=>{
-        it("testSetUse",()=>{
+        it("testSetUse | Should allow set use field value",()=>{
             let myInstance=new _AddressDt({use:"home"});
-            console.log({use:myInstance.use,myUse:myInstance.getUse()});
-           // expect(myInstance.use===AddressUseEnum.HOME,"Check enum relation for use").to.equal(true);
-            myInstance.setUse(AddressUseEnum.WORK);
-            console.log({use:myInstance.use,myUse:myInstance.getUse()});
+            expect(myInstance.getUseElement()===AddressUseEnum.HOME,"Check enum relation after set use by constructor arguments").to.equal(true);
+            expect(myInstance.use===AddressUseEnum.HOME.code,"Check field value equality after setter in constructor").to.equal(true);
+            myInstance.setUse(AddressUseEnum.WORK);            
+            expect(myInstance.getUseElement()===AddressUseEnum.WORK,"Check enum relation for use after set use by setUse method").to.equal(true);        
+            expect(myInstance.use===AddressUseEnum.WORK.code,"Check field value equality after setter in setUse method").to.equal(true);
+            myInstance.use="old";            
+            expect(myInstance.getUseElement()===AddressUseEnum.OLD,"Check enum relation for use after direct field value ").to.equal(true);
+            expect(myInstance.use===AddressUseEnum.OLD.code,"Check field value equality after set direct field").to.equal(true);
             
-            //expect(myInstance.use===AddressUseEnum.WORK,"Check enum relation for use").to.equal(true);
-            debugger;
-            myInstance.use="old";
-            console.log({use:myInstance.use,myUse:myInstance.getUse()});
-            
-            //expect(myInstance.use===AddressUseEnum.OLD,"Check enum relation for use").to.equal(true);
-           
-            console.log(myInstance);
         });
+
+
+        it("testSetUse | Should allow set use field to an unknown enum value ",()=>{
+            let myInstance=new _AddressDt({use:"a"});
+            expect(myInstance.getUseElement()===new Coding,"Check enum relation after set use by constructor arguments").to.equal(true);
+            expect(myInstance.use===AddressUseEnum.HOME.code,"Check field value equality after setter in constructor").to.equal(true);
+            myInstance.setUse(AddressUseEnum.WORK);            
+            expect(myInstance.getUseElement()===AddressUseEnum.WORK,"Check enum relation for use after set use by setUse method").to.equal(true);        
+            expect(myInstance.use===AddressUseEnum.WORK.code,"Check field value equality after setter in setUse method").to.equal(true);
+            myInstance.use="old";            
+            expect(myInstance.getUseElement()===AddressUseEnum.OLD,"Check enum relation for use after direct field value ").to.equal(true);
+            expect(myInstance.use===AddressUseEnum.OLD.code,"Check field value equality after set direct field").to.equal(true);
+            
+        });
+
 
         it("testSetType",()=>{
             let myInstance=new _AddressDt({type:"both"});
