@@ -26,15 +26,17 @@ export default class _AddressDt extends Object{
     }
 
     get use(){
-       return this.getUse().code;
+       return this.getUseElement().code;
     }
 
     set use(newValue){
-        let code=AddressUseEnum.getByCode(newValue);
-        if(!code.isEmpty()){
-            this.setUse(code);
-        }else{
-            this.getUseElement().setCode(newValue);
+        if(isValid(newValue)){
+            let code=AddressUseEnum.getByCode(newValue);
+            if(!code.isEmpty()){
+                this.setUse(code);
+            }else{
+                this.getUseElement().code=newValue;
+            }
         }
     }
 
@@ -66,56 +68,89 @@ export default class _AddressDt extends Object{
     }
 
     set type(newValue){
-        if(newValue instanceof CodingDt){
-            this.myType=newValue;
-        }else{
-            this.myType=AddressTypeEnum.getByCode(newValue);
+        if(isValid(newValue)){
+            let code=AddressTypeEnum.getByCode(newValue);
+            if(!code.isEmpty()){
+                this.setType(code);
+            }else{
+                this.getTypeElement().code=newValue;
+            }
         }
+    }
+
+    setType(newValue){
+        if(!newValue instanceof CodingDt){
+            throw new TypeError("Type invalid. Needs CodingDt")
+        }
+        this.myType=newValue;
         return this;
     }
 
     get text(){
+       return this.getTextElement().valueOf();
+    }
+
+    getTextElement(){
         if(!isValid(this.myText)){
-            this.myText=new String();
+            this.myText=new StringDt();
         }
         return this.myText;
     }
 
     set text(newValue){
+        this.setTextElement(new StringDt(newValue));
+    }
+    setTextElement(newValue){
+        if(!newValue instanceof StringDt){
+            throw TypeError('Invalid type for field \"text"\"');
+        }
         this.myText=newValue;
         return this;
     }
 
     get line(){
-        if(!isValid(this.myLine)){
-            this.myLine=new Array();
-        }
-
-        for(let i=0;i<this.myLine.length;i++){
-            if((this.myLine[i] instanceof StringDt)===false){
-                this.myLine[i]=new StringDt(this.myLine[i]);
-            }
-        }
         return this.myLine;
     }
 
     set line(newValue){
-        this.myLine=newValue;
+        if(isValid(newValue) && Array.isArray(newValue)){
+            this.setLine(newValue);
+        }else{
+            this.setLine(new Array());
+        }
+        return this;
+    }
+
+    setLine(newValueArray){
+        for(let i=0;i<newValueArray.length;i++){
+            if(newValueArray[i] instanceof StringDt===false)
+            {
+                throw new TypeError("Line array only contains StringDt types");
+            }
+        }
+        this.myLine=newValueArray;
         return this;
     }
 
     addLine(newValue){
+        debugger;
+        let oVal=new StringDt();
         if(!isValid(newValue)){
-            let oVal=new StringDt();
             this.line.push(oVal)
             return oVal;
         }
-        this.line.push(newValue);
+        if(newValue instanceof StringDt===true){
+            oVal=newValue;
+        }
+        if(newValue instanceof String===true || typeof newValue==="string"){
+            oVal=new StringDt(newValue);
+        }
+
+        this.line.push(oVal);
         return this;
     }
 
     getLineFirstRep(){
-    
         if(isValid(this.line[0])){
             return this.line[0];
         }
@@ -197,10 +232,10 @@ export default class _AddressDt extends Object{
        && isEmpty(this.country) 
        && isEmpty(this.district)
        && isEmptyArray(this.line)
-       && this.use.isEmpty()
+       && this.getUseElement().isEmpty()
        && isEmpty(this.postalCode)
        && isEmpty(this.state)
-       && isEmpty(this.text);
+       && this.getTextElement().isEmpty();
     }
 
 

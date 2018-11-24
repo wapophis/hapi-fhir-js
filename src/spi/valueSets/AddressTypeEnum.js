@@ -12,7 +12,7 @@ export const AddressTypeEnum = Object.freeze(
                 }
              }
 
-             return code;
+             return new CodingDt({code:code});
         }
 });
 

@@ -92,7 +92,7 @@ export default class _CodingDt extends Object{
     }
 
     setCode(newValue){
-        if(!newValue instanceof StringDt){
+        if(newValue instanceof StringDt===false){
             throw new TypeError("Type invalid. Specify an StringDt");
         }
         this.myCode=newValue;
@@ -167,25 +167,26 @@ export default class _CodingDt extends Object{
     }
 
     valueOf(){
+        debugger;
        let oVal=new Object();
        
-       if(!this.myCode.isEmpty()){
+       if(!this.getCode().isEmpty()){
         oVal.code=this.code;
        }
 
-       if(!this.myVersion.isEmpty()){
+       if(!this.getVersion().isEmpty()){
         oVal.version=this.version;
        }
 
-       if(!this.mySystem.isEmpty()){
+       if(!this.getSystem().isEmpty()){
         oVal.system=this.system;
        }
 
-       if(!this.myUserSelected.isEmpty()){
+       if(!this.getUserSelected().isEmpty()){
         oVal.userSelected=this.userSelected;
        }
 
-       if(!this.myDisplay.isEmpty()){
+       if(!this.getDisplay().isEmpty()){
         oVal.display=this.display;
        }
        
@@ -216,7 +217,6 @@ export default class _CodingDt extends Object{
     }
 
     [Symbol.toPrimitive](hint){
-            console.log("TOPRIMITIVE CALLED");
             switch(hint){
                 case 'string':{
                     return this.toString();
