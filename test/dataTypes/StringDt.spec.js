@@ -2,7 +2,7 @@ import { expect } from "chai"
 import StringDt from '../src/spi/dataTypes/StringDt.js';
 
 import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../src/utils/ValidationRules.js';
-
+describe("StringDT spec tests ",()=>{
 describe("Constructor",()=>{     
     it("Should generate an instance object | testConstructor(void:value)",()=>{
         let myInstance=new StringDt();
@@ -56,5 +56,7 @@ describe("Setting value",()=>{
         expect(myInstance.isEmpty(),"Testing value isEmpty").to.equal(true);
         expect(isEmpty(myInstance.value),"Testing direct field access should return a reference to an empty object.").to.equal(true);
     });
+
+});
 
 });
