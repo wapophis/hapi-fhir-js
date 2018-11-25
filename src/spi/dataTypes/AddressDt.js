@@ -98,8 +98,9 @@ export default class _AddressDt extends Object{
     }
 
     set text(newValue){
-        this.setTextElement(new StringDt(newValue));
+        this.getTextElement().value=newValue;
     }
+
     setTextElement(newValue){
         if(!newValue instanceof StringDt){
             throw TypeError('Invalid type for field \"text"\"');
@@ -159,63 +160,132 @@ export default class _AddressDt extends Object{
 
 
     get city(){
+      this.getCityElement().valueOf();
+    }
+
+    getCityElement(){
         if(!isValid(this.myCity)){
-            this.myCity=new String();
+            this.myCity=new StringDt();
         }
         return this.myCity;
     }
 
+
     set city(newValue){
+       this.getCityElement().value=newValue; 
+    }
+
+    setCity(newValue){
+        if(newValue instanceof StringDt===false){
+            throw new TypeError("City field must be StringDt");
+        }
+
         this.myCity=newValue;
         return this;
     }
 
     get district(){
+        return this.getDistrictElement().valueOf();
+    }
+
+    getDistrictElement(){
         if(!isValid(this.myDistrict)){
-            this.myDistrict=new String();
+            this.myDistrict=new StringDt();
         }
         return this.myDistrict;
     }
+
     set district(newValue){
-        this.myDistrict=newValue;
+        this.getDistrictElement().value=newValue;
+    }
+
+    setDistrictElement(newValue){
+        if(newValue instanceof StringDt===false){
+            throw new TypeError("City field must be StringDt");
+        }
+
+        this.myCity=newValue;
         return this;
     }
+
+
     get state(){
+      return this.getStateElement().valueOf();
+    }
+
+    getStateElement(){
         if(!isValid(this.myState)){
-            this.myState=new String();
+            this.myState=new StringDt();
         }
         return this.myState;
     }
+
     set state(newValue){
+       this.getStateElement().value=newValue;
+    }
+
+    setStateElement(newValue){
+        if(newValue instanceof StringDt===false){
+            throw new TypeError("State field must be StringDt");
+        }
+
         this.myState=newValue;
         return this;
     }
 
     get postalCode(){
+        return this.getPostalCodeElement().valueOf();
+    }
+
+    getPostalCodeElement(){
         if(!isValid(this.myPostalCode)){
-            this.myPostalCode=new String();
+            this.myPostalCode=new StringDt();
         }
         return this.myPostalCode;
     }
 
     set postalCode(newValue){
+        this.getPostalCodeElement().value=newValue;
+    }
+
+    setPostalCodeElement(newValue){
+        if(newValue instanceof StringDt===false){
+            throw new TypeError("PostalCode field must be StringDt");
+        }
+
         this.myPostalCode=newValue;
         return this;
     }
 
+
     get country(){
+        return this.getCountryElement().valueOf();
+    }
+
+    getCountryElement(){
         if(!isValid(this.myCountry)){
-            this.myCountry=new String();
+            this.myCountry=new StringDt();
         }
         return this.myCountry;
     }
 
     set country(newValue){
+        this.getCountryElement().value=newValue;
+    }
+
+    setCountryElement(newValue){
+        if(newValue instanceof StringDt===false){
+            throw new TypeError("Country field must be StringDt");
+        }
         this.myCountry=newValue;
         return this;
     }
 
     get period(){
+        return this.getPeriodElement().valueOf();
+    }
+
+    getPeriodElement(){
         if(!isValid(this.myPeriod)){
             this.myPeriod=new _PeriodDt();
         }
@@ -223,18 +293,31 @@ export default class _AddressDt extends Object{
     }
 
     set period(newValue){
+        if(newValue instanceof _PeriodDt===true){
+            this.setPeriodElement(newValue);
+        }else{
+            this.setPeriodElement(new _PeriodDt(newValue));
+        }
+        return this;
+    }
+
+    setPeriodElement(newValue){
+        if(newValue instanceof _PeriodDt===false){
+            throw new TypeError("Period field must be PeriodDt");
+        }
         this.myPeriod=newValue;
         return this;
     }
 
     isEmpty(){
-       return isEmpty(this.city) 
-       && isEmpty(this.country) 
-       && isEmpty(this.district)
+       return this.getCityElement().isEmpty()
+       && this.getCountryElement().isEmpty()
+       && this.getDistrictElement().isEmpty()
        && isEmptyArray(this.line)
+       && this.getPeriodElement().isEmpty()
        && this.getUseElement().isEmpty()
-       && isEmpty(this.postalCode)
-       && isEmpty(this.state)
+       && this.getPostalCodeElement().isEmpty()
+       && this.getStateElement().isEmpty()
        && this.getTextElement().isEmpty();
     }
 

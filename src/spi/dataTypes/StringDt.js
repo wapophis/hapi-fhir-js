@@ -14,11 +14,16 @@ export default class StringDt extends Object{
     }
 
     set value(newValue){
-        this.myCoercedValue=newValue.valueOf();
-        if(isValid(this.myCoercedValue)){
-            this.isUndefined=false;
+        if(isValid(newValue)){
+            this.myCoercedValue=newValue.valueOf();
+            if(isValid(this.myCoercedValue)){
+                this.isUndefined=false;
+            }
+            return this;
+        }else{
+            this.isUndefined=true;
+            this.myCoercedValue=null;
         }
-        return this;
     }
 
     get value(){

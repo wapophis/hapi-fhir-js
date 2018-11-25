@@ -1,4 +1,4 @@
-import {isUndefined,isValid} from '../../utils/ValidationRules.js';
+import {isUndefined,isValid,isEmptyDate} from '../../utils/ValidationRules.js';
 
 export default class _PeriodDt extends Object{
 
@@ -18,7 +18,19 @@ export default class _PeriodDt extends Object{
     }
 
     set start(newValue){
-        this.myStart=newValue;
+        if(newValue instanceof Date===true){
+            this.setStartDate(newValue);
+        }else{
+            this.setStartDate(new Date(newValue));
+        }
+    }
+
+    setStartDate(newValue){
+        if(newValue instanceof Date===false){
+            throw new TypeError("StartDate must be a Date object");
+        }else{
+            this.myStart=newValue;
+        }
         return this;
     }
 
@@ -42,5 +54,20 @@ export default class _PeriodDt extends Object{
         return (other instanceof _PeriodDt) && this.start.getTime()===other.start.getTime()
         && this.end.getTime()===other.end.getTime();
     }
+
+
+    valueOf(){
+        let oVal=new Object();
+        
+        if(!isEmptyDate(this.start)){
+         oVal.start=this.start;
+        }
+
+        if(!isEmptyDate(this.end)){
+            oVal.end=this.end;
+           }
+
+        return oVal;
+     }
 
 };
