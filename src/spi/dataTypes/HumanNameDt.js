@@ -77,21 +77,41 @@ export default class _HumanNameDt extends Object{
         return this;
     }
 
-    
+
 
     get family(){
         if(!isValid(this.myFamily)){
-            this.myFamily=new String();
+            this.myFamily=new Array();
         }
-
         return this.myFamily;
-
     }
+
 
     set family(newValue){
-        this.myFamily=newValue;
+        if(isValid(newValue)){
+            this._setFamilyList(newValue);
+        }
         return this;
     }
+
+    /**
+     * 
+     * @param {*} newValue StringDt array containing the family names
+     * @private 
+     * @return this object
+     */
+    _setFamilyList(newValue){
+        if(!Array.isArray(newValue)){
+            throw new TypeError("Family field expect an Array");
+        }
+        for(let i=0;i<newValue.length;i++){
+            if(newValue[i] instanceof StringDt===false){
+                throw new TypeError("Family items in array must be StringDt objects");
+            }
+        }
+        this.myFamily=newValue;
+    }
+
 
     get given(){
         if(!isValid(this.myGiven)){
@@ -155,21 +175,21 @@ export default class _HumanNameDt extends Object{
                 && this.period.isEmpty();
     }
 
-
-    // /**
-    //  * Adds an returns a new value for family if newVal undefined,
-    //  * Adds an returns this if newValue is defined
-    //  */
-    // addFamily(newVal){
-    //     if(isValid(newVal)){
-    //         this.family.push(newVal);
-    //         return this;
-    //     }else{
-    //         let oVal=new String();
-    //         this.family.push(oVal);
-    //         return oVal;
-    //     }
-    // }
+    /**
+     * 
+     * @param {*} newVal Object to store in an StringDt. Internally this method use newVal.valueOf() to flat
+     * the object value.
+     */
+    addFamily(newVal){
+        if(isValid(newVal)){
+            this.family.push(new StringDt(newVal.valueOf()));
+            return this;
+        }else{
+            let oVal=new StringDt();
+            this.family.push(oVal);
+            return oVal;
+        }
+    }
 
     /**
      * Adds a given new value for family.
@@ -219,12 +239,12 @@ export default class _HumanNameDt extends Object{
         }
     }
 
-    // /**
-    //  * Return first element for family array;
-    //  */
-    // getFamilyFirstRep(){
-    //     return this.family[0];
-    // }
+    /**
+     * Return first element for family array;
+     */
+    getFamilyFirstRep(){
+        return this.family[0];
+    }
 
     /**
      * Return first element for given array.
