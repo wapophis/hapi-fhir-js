@@ -1,5 +1,6 @@
 import {isUndefined,isValid,isEmptyArray,isEmpty} from '../../utils/ValidationRules.js';
 import _PeriodDt from './PeriodDt.js';
+import StringDt from './StringDt.js';
 import CodingDt from './CodingDt.js';
 import NameUseEnum from '../valueSets/NameUseEnum.js';
 
@@ -49,18 +50,34 @@ export default class _HumanNameDt extends Object{
     }
 
     get text(){
+        return this.getTextElement().valueOf();
+    }
+
+    getTextElement(){
         if(!isValid(this.myText)){
-            this.myText=new String();
+            this.myText=new StringDt();
         }
-
         return this.myText;
-
     }
 
     set text(newValue){
+        this.getTextElement().value=newValue;
+        return this;
+    }
+
+    /**
+     * 
+     * @param {*} newValue StringDt with the value for text
+     */
+    setTextElement(newValue){
+        if(newValue  instanceof StringDt===false){
+            throw new TypeError("Cannot set text field to a non StringDt object");
+        }
         this.myText=newValue;
         return this;
     }
+
+    
 
     get family(){
         if(!isValid(this.myFamily)){

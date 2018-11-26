@@ -133,7 +133,7 @@ describe("HumanNameDt DataType test",()=>{
         
         describe("Field setters ",()=>{
             it('Testing field "text"...',()=>{
-                let myInstance=new _AddressDt({text:"Testing text"});
+                let myInstance=new HumanNameDt({text:"Testing text"});
                 expect(myInstance.getTextElement().valueOf(),'Bad field "text"').to.equals("Testing text") ;
                 expect(myInstance.getTextElement().valueOf(),'Bad field "text"').to.not.equals("Testin text") ;
                 myInstance.text="Hola Mundo";
