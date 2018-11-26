@@ -1,11 +1,11 @@
 import CodingDt from '../dataTypes/CodingDt.js';
 
 export const ContactPointUseEnum = Object.freeze({
-    "HOME":new CodingDt({value:'home',display:"Hogar"}),
-    "WORK":new CodingDt({value:'work',display:"Trabajo"}),
-    "TEMP":new CodingDt({value:'temp',display:"Temporal"}),
-    "OLD":new CodingDt({value:'old',display:"Antiguo"}),
-    "MOBILE":new CodingDt({value:'mobile',display:"Móvil"}),
+    "HOME":new CodingDt({code:'home',display:"Hogar"}),
+    "WORK":new CodingDt({code:'work',display:"Trabajo"}),
+    "TEMP":new CodingDt({code:'temp',display:"Temporal"}),
+    "OLD":new CodingDt({code:'old',display:"Antiguo"}),
+    "MOBILE":new CodingDt({code:'mobile',display:"Móvil"}),
     getByCode(code){
         for(let propName in this) {
             if((typeof(this[propName]) != "undefined") && this[propName].code==code) {

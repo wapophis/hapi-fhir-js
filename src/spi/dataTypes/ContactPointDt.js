@@ -1,10 +1,16 @@
 import {isUndefined,isValid,isEmpty} from '../../utils/ValidationRules.js';
 import ContactPointUseEnum from '../valueSets/ContactPointUseEnum.js';
+import ContactPointSystemEnum from '../valueSets/ContactPointSystemEnum.js';
 import PeriodDt from './PeriodDt.js';
 import CodingDt from './CodingDt.js';
 import StringDt from  './StringDt.js';
 
 export default class _ContactPointDt extends Object{
+
+    /**
+     * @constructor
+     * @param {*} root  roob object to decorate
+     */
     constructor(root){
         super();
 
@@ -18,6 +24,9 @@ export default class _ContactPointDt extends Object{
 
     }
 
+    /**
+     * @return Boolean indicating if the dataType is empty
+     */
     isEmpty(){
         return this.getSystemElement().isEmpty()
         && this.getValueElement().isEmpty()
@@ -26,24 +35,41 @@ export default class _ContactPointDt extends Object{
         && this.getPeriodElement().isEmpty();
     }
 
+    /**
+     * @return the value of the system
+     */
     get system(){
         return this.getSystemElement.valueOf();
     }
+    /**
+     * @return {StringDt} with the element of the system.
+     */
     getSystemElement(){
         if(!isValid(this.mySystem)){
-            this.mySystem=new StringDt();
+            this.mySystem=new CodingDt();
         }
         return this.mySystem;
     }
 
+    /**
+     * @param {*} newValue with the de value to the system.
+     *  It's replaces the current value element.
+     */
     set system(newValue){
-        this.getSystemElement().value=newValue;
-        return this;
+        if(isValid(newValue)){
+            let code=ContactPointSystemEnum.getByCode(newValue);
+            if(!code.isEmpty()){
+                this.setSystemElement(code);
+            }else{
+                this.getSystemElement().code=newValue;
+            }
+        }
     }
 
+
     setSystemElement(newValue){
-        if(newValue instanceof StringDt===false){
-            throw new TypeError("System field must be a StringDt object");
+        if(newValue instanceof CodingDt===false){
+            throw new TypeError("System field must be a CodingDt object");
         }
 
         this.mySystem=newValue;
