@@ -170,8 +170,8 @@ export default class _HumanNameDt extends Object{
         return isEmptyArray(this.given) 
                 && isEmptyArray(this.prefix) 
                 && isEmptyArray(this.suffix)
-                && isEmpty(this.family)
-                && isEmpty(this.text)
+                && isEmptyArray(this.family)
+                && this.getTextElement().isEmpty()
                 && this.period.isEmpty();
     }
 
