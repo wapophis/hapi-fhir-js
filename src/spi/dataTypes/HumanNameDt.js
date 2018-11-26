@@ -1,6 +1,8 @@
 import {isUndefined,isValid,isEmptyArray,isEmpty} from '../../utils/ValidationRules.js';
 import _PeriodDt from './PeriodDt.js';
+import CodingDt from './CodingDt.js';
 import NameUseEnum from '../valueSets/NameUseEnum.js';
+
 
 export default class _HumanNameDt extends Object{
     constructor(root){
@@ -17,13 +19,31 @@ export default class _HumanNameDt extends Object{
     }
     
     get use(){
+        return this.getUseElement().valueOf();
+    }
+
+    getUseElement(){
         if(!isValid(this.myUse)){
-            this.myUse=new String();
+            this.myUse=new CodingDt();
         }
-        return NameUseEnum.getByValue(this.myUse);
+        return this.myUse;
     }
 
     set use(newValue){
+        if(isValid(newValue)){
+            let code=NameUseEnum.getByCode(newValue);
+            if(!code.isEmpty()){
+                this.setUseElement(code);
+            }else{
+                this.getUseElement().code=newValue;
+            }
+        }
+    }
+
+    setUseElement(newValue){
+        if(newValue instanceof CodingDt===false){
+            throw new TypeError("Use field must be a CodingDt object");
+        }
         this.myUse=newValue;
         return this;
     }
