@@ -1,5 +1,8 @@
 import { expect } from "chai"
 import NarrativeDt from '../src/spi/dataTypes/NarrativeDt.js';
+import CodingDt from '../src/spi/dataTypes/CodingDt.js';
+import StringDt from '../src/spi/dataTypes/StringDt.js';
+import NarrativeStatusEnum from '../src/spi/valueSets/NarrativeStatusEnum.js';
 
 
 import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../src/utils/ValidationRules.js';
@@ -29,49 +32,28 @@ describe("NarrativeDt DataType test",()=>{
 
     });
 
-    describe("Getters",()=>{     
-        it("should return a safe object",()=>{
-            let myInstance=new NarrativeDt();
-            
-            expect(isValid(myInstance.status)
-            &&isValid(myInstance.div)
-            );                    
-        });
+    describe("Unit tests",()=>{
+        
+                describe("ValueSet setters ",()=>{
+                    it('Testing field "status"...',()=>{
+                        let myInstance=new NarrativeDt({status:"a"});
+                        expect(myInstance.getStatusElement().code,'Bad field "type"').to.equals("a") ;
+                        myInstance=new NarrativeDt({status:"empty"});
+                        expect(myInstance.getStatusElement(),"Check enum relation for use").to.deep.equal(NarrativeStatusEnum.EMPTY);
+                        myInstance.status=NarrativeStatusEnum.GENERATED.code;
+                        expect(NarrativeStatusEnum.getByCode(myInstance.status).valueOf(),"Check enum relation for use").to.deep.equal(NarrativeStatusEnum.GENERATED.valueOf());
+                        });
 
-        it("should return an empty object",()=>{
-            let myInstance=new NarrativeDt();
-            
-            expect(isEmpty(myInstance.status)
-            &&isEmpty(myInstance.div)
-            );                    
-        });
-    });
-
-
-    describe("Setters",()=>{     
-        it("should set valid values",()=>{
-            let myInstance=new NarrativeDt();
-            
-            expect(isValid(myInstance.status="generated")
-            &&isValid(myInstance.div="test")
-            );     
-            
-            expect(myInstance.status.value).to.equal("generated");
-            expect(myInstance.div).to.equal("test");
-            
-        });
-
-        it("should not fail with invalid values",()=>{
-            let myInstance=new NarrativeDt();
-
-            expect(isValid(myInstance.status=undefined)
-            &&isValid(myInstance.div=undefined)
-            );     
-            
-            expect(isEmpty(myInstance.status)
-            &&isEmpty(myInstance.div)
-            );             
-        });
-    });
+                });
+                        
+                describe("Composite types setters ",()=>{
+                    it('Testing composite "div" ...',()=>{
+                        let myInstance=new NarrativeDt({div:"<span>Hola Mundo</span>"});
+                        expect(myInstance.div).to.deep.equal(new StringDt(myInstance.getDivElement().valueOf()).valueOf());
+                    });
+                });
+        
+           
     
+    });
 });

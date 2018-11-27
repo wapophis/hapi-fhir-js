@@ -1,19 +1,21 @@
 
+import CodingDt from '../dataTypes/CodingDt.js';
+
 export const NarrativeStatusEnum = Object.freeze({
-    "GENERATED":{value:'generated',display:"Generated"},
-    "EXTENSIONS":{value:'extensions',display:"Extensions"},
-    "ADDITIONAL":{value:'additional',display:"Additional"},
-    "EMPTY":{value:'empty',display:"Empty"},
+    "GENERATED":new CodingDt({code:'generated',display:"Generated"}),
+    "EXTENSIONS":new CodingDt({code:'extensions',display:"Extensions"}),
+    "ADDITIONAL":new CodingDt({code:'additional',display:"Additional"}),
+    "EMPTY":new CodingDt({code:'empty',display:"Empty"}),
   
 
-    getByValue(code){
+    getByCode(code){
         for(let propName in this) {
-            if((typeof(this[propName]) != "undefined") && this[propName].value===code) {
+            if((typeof(this[propName]) != "undefined") && this[propName].code===code) {
                return this[propName];
             }
          }
          
-         return new String();
+         return new CodingDt({code:code});
     }
 
 });
