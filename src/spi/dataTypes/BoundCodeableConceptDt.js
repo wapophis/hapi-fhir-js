@@ -17,10 +17,9 @@ export default class BoundCodeableConceptDt extends Object{
      */
     forCodes(codes){
         let oVal=new CodeableConceptDt();
-
         for(let i=0;i<this.enums.length;i++){
             for(let j=0;j<codes.length;j++){
-               oVal.addCoding(new CodingDt(this.enums[i].getByCode(codes[j])));
+               oVal.addCoding(this.enums[i].getByCode(codes[j].code));
             }
         }
         return oVal;

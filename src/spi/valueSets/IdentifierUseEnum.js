@@ -7,7 +7,7 @@ export const IdentifierUseEnum = Object.freeze({
     "SECONDARY":new CodingDt({code:'secondary',display:"Secondary"}),
     getByCode(code){
         for(let propName in this) {
-            if((typeof(this[propName]) != "undefined") && this[propName].value===code) {
+            if((typeof(this[propName]) != "undefined") && this[propName].code===code) {
                return this[propName];
             }
          }

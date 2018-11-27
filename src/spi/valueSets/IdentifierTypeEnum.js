@@ -7,7 +7,7 @@ export const IdentifierTypeEnum = Object.freeze({
     "PLAC":new CodingDt({code:'PLAC',display:"Secondary"}),
     "FILL":new CodingDt({code:'FILL',display:"Secondary"}),
     
-    getByValue(code){
+    getByCode(code){
         for(let propName in this) {
             if((typeof(this[propName]) != "undefined") && this[propName].value===code) {
                return this[propName];
@@ -19,4 +19,4 @@ export const IdentifierTypeEnum = Object.freeze({
 
 });
 
-export default IdentifierUseEnum;
+export default IdentifierTypeEnum;
