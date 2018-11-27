@@ -1,11 +1,12 @@
 import {isValid,isEmpty,isEmptyArray} from '../utils/ValidationRules.js';
 import FlattenAbleObject from './FlattenAbleObject.js';
+import IdDt from './dataTypes/IdDt.js';
 
 export const FHIResource= class FHIResource extends FlattenAbleObject{
  
     constructor(rootObject){
         super();
-        this.myId=new String();
+      
         this.myResourceName=new String();
         this.myExtensions=new Array();
         this.myContainedResources=new Array();
@@ -21,23 +22,33 @@ export const FHIResource= class FHIResource extends FlattenAbleObject{
     }
 
     get id(){
+        return this.getIdElement().id.valueOf();
+    }
+
+    getIdElement(){
         if(!isValid(this.myId)){
-            this.myId=new String();
+            this.myId=new IdDt();
         }
         return this.myId;
     }
 
     set id(newId){
-        if(isValid(this.myId) && isValid(newId)){
-            this.myId=newId;
+        this.getIdElement().id=newId
+        return this;
+    }
+
+    setIdElement(newValue){
+        if(newValue instanceof IdDt===false){
+            throw new TypeError("Id field expects an IdDt object");
         }
+        this.myId=newValue;
         return this;
     }
 
     isEmpty(){
         return isEmptyArray(this.contained)
         && isEmptyArray(this.extensions)
-        && isEmpty(this.id);
+        && this.getIdElement.isEmpty();
     }
 
     get resourceName(){
