@@ -1,5 +1,6 @@
 import { expect } from "chai"
 import ReferenceDt from '../src/spi/dataTypes/ReferenceDt.js';
+import StringDt from '../src/spi/dataTypes/StringDt.js';
 import IdentifierDt from '../src/spi/dataTypes/IdentifierDt.js';
 
 
@@ -34,23 +35,23 @@ describe("ReferenceDt DataType test",()=>{
         describe("Field setters ",()=>{
             it('Testing field "REFERENCE"...',()=>{
                 // DIRECT FIELD ACCESS
-                let myInstance=new IdentifierDt({system:"Testing text"});
-                expect(myInstance.getSystemElement().valueOf(),'Bad field "system"').to.equals("Testing text") ;
-                expect(myInstance.getSystemElement().valueOf(),'Bad field "system"').to.not.equals("Testin text") ;
-                myInstance.system="Hola Mundo";
-                expect(myInstance.getSystemElement().valueOf(),'Bad field "system"').to.equals("Hola Mundo") ;
-                expect(myInstance.getSystemElement().valueOf(),'Bad field "system"').to.not.equals("Hol Mundo") ;
-                myInstance.system=undefined;
-                expect(myInstance.getSystemElement().valueOf(),'Bad field "system"').to.equals(null) ;
-                expect(myInstance.getSystemElement().valueOf(),'Bad field "system"').to.not.equals("null") ;   
+                let myInstance=new ReferenceDt({reference:"Testing text"});
+                expect(myInstance.getReferenceElement().valueOf(),'Bad field "REFERENCE"').to.equals("Testing text") ;
+                expect(myInstance.getReferenceElement().valueOf(),'Bad field "REFERENCE"').to.not.equals("Testin text") ;
+                myInstance.reference="Hola Mundo";
+                expect(myInstance.getReferenceElement().valueOf(),'Bad field "REFERENCE"').to.equals("Hola Mundo") ;
+                expect(myInstance.getReferenceElement().valueOf(),'Bad field "REFERENCE"').to.not.equals("Hol Mundo") ;
+                myInstance.reference=undefined;
+                expect(myInstance.getReferenceElement().valueOf(),'Bad field "REFERENCE"').to.equals(null) ;
+                expect(myInstance.getReferenceElement().valueOf(),'Bad field "REFERENCE"').to.not.equals("null") ;   
 
                 /// SETTING ELEMENTS
-                myInstance.setSystemElement(new StringDt("Hola Mundo from StringDt"));
-                expect(myInstance.getSystemElement().valueOf(),'Bad field "system"').to.equals("Hola Mundo from StringDt") ;
-                expect(myInstance.getSystemElement().valueOf(),'Bad field "system"').to.not.equals("Hol Mundo from StringDt") ;   
-                myInstance.setSystemElement(new StringDt());
-                expect(myInstance.getSystemElement().valueOf(),'Bad field "system"').to.equals(null) ;
-                expect(myInstance.getSystemElement().valueOf(),'Bad field "system"').to.not.equals("null") ;   
+                myInstance.setReferenceElement(new StringDt("Hola Mundo from StringDt"));
+                expect(myInstance.getReferenceElement().valueOf(),'Bad field "REFERENCE"').to.equals("Hola Mundo from StringDt") ;
+                expect(myInstance.getReferenceElement().valueOf(),'Bad field "REFERENCE"').to.not.equals("Hol Mundo from StringDt") ;   
+                myInstance.setReferenceElement(new StringDt());
+                expect(myInstance.getReferenceElement().valueOf(),'Bad field "REFERENCE"').to.equals(null) ;
+                expect(myInstance.getReferenceElement().valueOf(),'Bad field "REFERENCE"').to.not.equals("null") ;   
                 
             });
 

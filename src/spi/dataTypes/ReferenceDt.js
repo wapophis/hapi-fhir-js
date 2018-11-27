@@ -37,7 +37,7 @@ export default class _ReferenceDt extends Object{
     }
 
     setReferenceElement(newValue){
-        if(newValue instanceof StringDt){
+        if(newValue instanceof StringDt===false){
             throw new TypeError("Reference field expect an StringDt object");
         }
         this.myReference=newValue;
