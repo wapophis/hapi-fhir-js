@@ -210,8 +210,33 @@ export default class _HumanNameDt extends Object{
     }
 
     set suffix(newValue){
-        this.mySuffix=newValue;
+        if(!isEmptyArray(newValue) ){
+            let oVal=new Array();
+            for(let i=0;i<newValue.length;i++){
+               
+                oVal.push(new StringDt(newValue[i].valueOf()));
+                
+            }
+            this.setSuffix(oVal);
+        }
         return this;
+    }
+
+     /**
+     * 
+     * @param {*} newValue 
+     *  
+     */
+    setSuffix(newValue){
+        if(!Array.isArray(newValue)){
+            throw new TypeError("Family field expect an Array");
+        }
+        for(let i=0;i<newValue.length;i++){
+            if(newValue[i] instanceof StringDt===false){
+                throw new TypeError("Family items in array must be StringDt objects");
+            }
+        }
+        this.mySuffix=newValue;
     }
 
     get period(){
@@ -291,10 +316,10 @@ export default class _HumanNameDt extends Object{
      */
     addSuffix(newVal){
         if(isValid(newVal)){
-            this.suffix.push(newVal);
+            this.suffix.push(new StringDt(newVal.valueOf()));
             return this;
         }else{
-            let oVal=new String();
+            let oVal=new StringDt();
             this.suffix.push(oVal);
             return oVal;
         }

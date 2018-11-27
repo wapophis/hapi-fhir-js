@@ -98,23 +98,24 @@ describe("HumanNameDt DataType test",()=>{
         });
 
         it('Testing field "suffix"...',()=>{
-            let myInstance=new HumanNameDt({family:[new StringDt("a"),new StringDt("b"),new StringDt("c")]});
-            expect(myInstance.family.length,'Testing length from field array').to.equals(3) ;
-            expect(myInstance.getFamily().valueOf(),'Testing first element').to.equals(new StringDt("a").valueOf());
-            expect(myInstance.line[1].valueOf(),'Testing second element').to.equals(new StringDt("b").valueOf());            
-            expect(myInstance.line[2].valueOf(),'Testing third element').to.equals(new StringDt("c").valueOf());
+            debugger;
+            let myInstance=new HumanNameDt({suffix:[new StringDt("a"),new StringDt("b"),new StringDt("c")]});
+            expect(myInstance.suffix.length,'Testing length from field array').to.equals(3) ;
+            expect(myInstance.getSuffixFirstRep().valueOf(),'Testing first element').to.equals(new StringDt("a").valueOf());
+            expect(myInstance.suffix[1].valueOf(),'Testing second element').to.equals(new StringDt("b").valueOf());            
+            expect(myInstance.suffix[2].valueOf(),'Testing third element').to.equals(new StringDt("c").valueOf());
             // ADDLINE  string
-            myInstance.addLine("d");
-            expect(myInstance.line.length,'Testing length from field array').to.equals(4) ;
-            expect(myInstance.line[3].valueOf(),'Testing first element').to.equals(new StringDt("d").valueOf());
+            myInstance.addSuffix("d");
+            expect(myInstance.suffix.length,'Testing length from field array').to.equals(4) ;
+            expect(myInstance.suffix[3].valueOf(),'Testing first element').to.equals(new StringDt("d").valueOf());
             // EMPTY ADDLINE
-            myInstance.addLine().value="e";
-            expect(myInstance.line.length,'Testing length from field array').to.equals(5) ;
-            expect(myInstance.line[4].valueOf(),'Testing first element').to.equals(new StringDt("e").valueOf());
+            myInstance.addSuffix().value="e";
+            expect(myInstance.suffix.length,'Testing length from field array').to.equals(5) ;
+            expect(myInstance.suffix[4].valueOf(),'Testing first element').to.equals(new StringDt("e").valueOf());
             // ADDLINE STRINGDT
-            myInstance.addLine(new StringDt("f"));
-            expect(myInstance.line.length,'Testing length from field array').to.equals(6) ;
-            expect(myInstance.line[5].valueOf(),'Testing first element').to.equals(new StringDt("f").valueOf());           
+            myInstance.addSuffix(new StringDt("f"));
+            expect(myInstance.suffix.length,'Testing length from field array').to.equals(6) ;
+            expect(myInstance.suffix[5].valueOf(),'Testing first element').to.equals(new StringDt("f").valueOf());           
         });
     });
         
@@ -150,8 +151,8 @@ describe("HumanNameDt DataType test",()=>{
         
     describe("Composite types setters ",()=>{
         it('Testing composite "period" ...',()=>{
-            let myInstance=new _AddressDt({period:{start:new Date(),end:new Date()}});
-            let myPeriod=new _PeriodDt(myInstance.period);
+            let myInstance=new HumanNameDt({period:{start:new Date(),end:new Date()}});
+            let myPeriod=new PeriodDt(myInstance.period);
             expect(myInstance.period).to.deep.equal(myPeriod.valueOf());
         });
     });
