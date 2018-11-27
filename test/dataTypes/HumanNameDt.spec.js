@@ -1,10 +1,10 @@
 import { expect } from "chai"
-import HumanNameDt from '../src/spi/dataTypes/HumanNameDt.js';
-import PeriodDt from '../src/spi/dataTypes/PeriodDt.js';
-import StringDt from '../src/spi/dataTypes/StringDt.js';
-import NameUseEnum from '../src/spi/valueSets/NameUseEnum.js';
+import HumanNameDt from '../../src/spi/dataTypes/HumanNameDt.js';
+import PeriodDt from '../../src/spi/dataTypes/PeriodDt.js';
+import StringDt from '../../src/spi/dataTypes/StringDt.js';
+import NameUseEnum from '../../src/spi/valueSets/NameUseEnum.js';
 
-import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../src/utils/ValidationRules.js';
+import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../../src/utils/ValidationRules.js';
 
 describe("HumanNameDt DataType test",()=>{
     describe("Constructor",()=>{     

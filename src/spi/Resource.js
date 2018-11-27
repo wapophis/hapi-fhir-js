@@ -1,6 +1,7 @@
 import {isValid,isEmpty,isEmptyArray} from '../utils/ValidationRules.js';
+import FlattenAbleObject from './FlattenAbleObject.js';
 
-export const FHIResource= class FHIResource extends Object{
+export const FHIResource= class FHIResource extends FlattenAbleObject{
  
     constructor(rootObject){
         super();

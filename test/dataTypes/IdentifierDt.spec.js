@@ -1,16 +1,16 @@
 import { expect } from "chai"
-import IdentifierDt from '../src/spi/dataTypes/IdentifierDt.js';
-import PeriodDt from '../src/spi/dataTypes/PeriodDt.js';
-import CodingDt from '../src/spi/dataTypes/CodingDt.js';
-import StringDt from '../src/spi/dataTypes/StringDt.js';
-import ReferenceDt from '../src/spi/dataTypes/ReferenceDt.js';
-import CodeableConceptDt from '../src/spi/dataTypes/CodeableConceptDt.js';
+import IdentifierDt from '../../src/spi/dataTypes/IdentifierDt.js';
+import PeriodDt from '../../src/spi/dataTypes/PeriodDt.js';
+import CodingDt from '../../src/spi/dataTypes/CodingDt.js';
+import StringDt from '../../src/spi/dataTypes/StringDt.js';
+import ReferenceDt from '../../src/spi/dataTypes/ReferenceDt.js';
+import CodeableConceptDt from '../../src/spi/dataTypes/CodeableConceptDt.js';
 
-import IdentifierUseEnum from '../src/spi/valueSets/IdentifierUseEnum.js';
-import IdentifierTypeEnum from '../src/spi/valueSets/IdentifierTypeEnum.js';
+import IdentifierUseEnum from '../../src/spi/valueSets/IdentifierUseEnum.js';
+import IdentifierTypeEnum from '../../src/spi/valueSets/IdentifierTypeEnum.js';
 
 
-import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../src/utils/ValidationRules.js';
+import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../../src/utils/ValidationRules.js';
 
 describe("IdentifierDt DataType test",()=>{
     describe("Constructor",()=>{     

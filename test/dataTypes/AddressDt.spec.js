@@ -1,12 +1,12 @@
 import { expect } from "chai"
-import _AddressDt from '../src/spi/dataTypes/AddressDt.js';
-import _PeriodDt from '../src/spi/dataTypes/PeriodDt.js';
-import CodingDt from '../src/spi/dataTypes/CodingDt.js';
-import StringDt from '../src/spi/dataTypes/StringDt.js';
-import {isValid,isEmpty,isEmptyArray} from '../src/utils/ValidationRules.js';
+import _AddressDt from '../../src/spi/dataTypes/AddressDt.js';
+import _PeriodDt from '../../src/spi/dataTypes/PeriodDt.js';
+import CodingDt from '../../src/spi/dataTypes/CodingDt.js';
+import StringDt from '../../src/spi/dataTypes/StringDt.js';
+import {isValid,isEmpty,isEmptyArray} from '../../src/utils/ValidationRules.js';
 
-import AddressTypeEnum from '../src/spi/valueSets/AddressTypeEnum.js';
-import AddressUseEnum from '../src/spi/valueSets/AddressUseEnum.js';
+import AddressTypeEnum from '../../src/spi/valueSets/AddressTypeEnum.js';
+import AddressUseEnum from '../../src/spi/valueSets/AddressUseEnum.js';
 
 describe("Address DataType test",()=>{
     describe("Constructor",()=>{     
