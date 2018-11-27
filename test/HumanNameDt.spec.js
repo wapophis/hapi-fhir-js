@@ -57,23 +57,23 @@ describe("HumanNameDt DataType test",()=>{
 
 
         it('Testing field "given"...',()=>{
-            let myInstance=new HumanNameDt({family:[new StringDt("a"),new StringDt("b"),new StringDt("c")]});
-            expect(myInstance.family.length,'Testing length from field array').to.equals(3) ;
-            expect(myInstance.getFamily().valueOf(),'Testing first element').to.equals(new StringDt("a").valueOf());
-            expect(myInstance.line[1].valueOf(),'Testing second element').to.equals(new StringDt("b").valueOf());            
-            expect(myInstance.line[2].valueOf(),'Testing third element').to.equals(new StringDt("c").valueOf());
+            let myInstance=new HumanNameDt({given:[new StringDt("a"),new StringDt("b"),new StringDt("c")]});
+            expect(myInstance.given.length,'Testing length from field array').to.equals(3) ;
+            expect(myInstance.getGivenFirstRep().valueOf(),'Testing first element').to.equals(new StringDt("a").valueOf());
+            expect(myInstance.given[1].valueOf(),'Testing second element').to.equals(new StringDt("b").valueOf());            
+            expect(myInstance.given[2].valueOf(),'Testing third element').to.equals(new StringDt("c").valueOf());
             // ADDLINE  string
-            myInstance.addLine("d");
-            expect(myInstance.line.length,'Testing length from field array').to.equals(4) ;
-            expect(myInstance.line[3].valueOf(),'Testing first element').to.equals(new StringDt("d").valueOf());
+            myInstance.addGiven("d");
+            expect(myInstance.given.length,'Testing length from field array').to.equals(4) ;
+            expect(myInstance.given[3].valueOf(),'Testing first element').to.equals(new StringDt("d").valueOf());
             // EMPTY ADDLINE
-            myInstance.addLine().value="e";
-            expect(myInstance.line.length,'Testing length from field array').to.equals(5) ;
-            expect(myInstance.line[4].valueOf(),'Testing first element').to.equals(new StringDt("e").valueOf());
+            myInstance.addGiven().value="e";
+            expect(myInstance.given.length,'Testing length from field array').to.equals(5) ;
+            expect(myInstance.given[4].valueOf(),'Testing first element').to.equals(new StringDt("e").valueOf());
             // ADDLINE STRINGDT
-            myInstance.addLine(new StringDt("f"));
-            expect(myInstance.line.length,'Testing length from field array').to.equals(6) ;
-            expect(myInstance.line[5].valueOf(),'Testing first element').to.equals(new StringDt("f").valueOf());           
+            myInstance.addGiven(new StringDt("f"));
+            expect(myInstance.given.length,'Testing length from field array').to.equals(6) ;
+            expect(myInstance.given[5].valueOf(),'Testing first element').to.equals(new StringDt("f").valueOf());           
         });
 
 

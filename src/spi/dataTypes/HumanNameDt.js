@@ -87,15 +87,14 @@ export default class _HumanNameDt extends Object{
     }
 
 
+    /**
+     * Setter method wich expect an string array containing all the family names.
+     */
     set family(newValue){
         if(!isEmptyArray(newValue) ){
             let oVal=new Array();
             for(let i=0;i<newValue.length;i++){
-                if(newValue[i] instanceof StringDt===true){
-                    oVal.push(newValue[i]);
-                }else{
                     oVal.push(new StringDt(newValue[i].valueOf()));
-                }
             }
             this.setFamily(oVal);
         }
@@ -128,15 +127,17 @@ export default class _HumanNameDt extends Object{
         return this.myGiven;
     }
 
+
+    /**
+     * Setter for the given parts of a name, expect an string array.
+     */
     set given(newValue){
         if(!isEmptyArray(newValue) ){
             let oVal=new Array();
             for(let i=0;i<newValue.length;i++){
-                if(newValue[i] instanceof StringDt===true){
-                    oVal.push(newValue[i]);
-                }else{
-                    oVal.push(new StringDt(newValue[i].valueOf()));
-                }
+               
+                oVal.push(new StringDt(newValue[i].valueOf()));
+                
             }
             this.setGiven(oVal);
         }
@@ -232,10 +233,10 @@ export default class _HumanNameDt extends Object{
      */
     addGiven(newVal){
         if(isValid(newVal)){
-            this.given.push(newVal);
+            this.given.push(new StringDt(newVal.valueOf()));
             return this;
         }else{
-            let oVal=new String();
+            let oVal=new StringDt();
             this.given.push(oVal);
             return oVal;
         }
