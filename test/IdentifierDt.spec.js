@@ -64,6 +64,7 @@ describe("IdentifierDt DataType test",()=>{
         
         describe("Field setters ",()=>{
             it('Testing field "system"...',()=>{
+                // DIRECT FIELD ACCESS
                 let myInstance=new IdentifierDt({system:"Testing text"});
                 expect(myInstance.getSystemElement().valueOf(),'Bad field "system"').to.equals("Testing text") ;
                 expect(myInstance.getSystemElement().valueOf(),'Bad field "system"').to.not.equals("Testin text") ;
@@ -73,19 +74,38 @@ describe("IdentifierDt DataType test",()=>{
                 myInstance.system=undefined;
                 expect(myInstance.getSystemElement().valueOf(),'Bad field "system"').to.equals(null) ;
                 expect(myInstance.getSystemElement().valueOf(),'Bad field "system"').to.not.equals("null") ;   
+
+                /// SETTING ELEMENTS
+                myInstance.setSystemElement(new StringDt("Hola Mundo from StringDt"));
+                expect(myInstance.getSystemElement().valueOf(),'Bad field "system"').to.equals("Hola Mundo from StringDt") ;
+                expect(myInstance.getSystemElement().valueOf(),'Bad field "system"').to.not.equals("Hol Mundo from StringDt") ;   
+                myInstance.setSystemElement(new StringDt());
+                expect(myInstance.getSystemElement().valueOf(),'Bad field "system"').to.equals(null) ;
+                expect(myInstance.getSystemElement().valueOf(),'Bad field "system"').to.not.equals("null") ;   
+                
             });
 
             it('Testing field "value"...',()=>{
-                let myInstance=new HumanNameDt({text:"Testing text"});
-                expect(myInstance.getTextElement().valueOf(),'Bad field "text"').to.equals("Testing text") ;
-                expect(myInstance.getTextElement().valueOf(),'Bad field "text"').to.not.equals("Testin text") ;
-                myInstance.text="Hola Mundo";
-                expect(myInstance.getTextElement().valueOf(),'Bad field "text"').to.equals("Hola Mundo") ;
-                expect(myInstance.getTextElement().valueOf(),'Bad field "text"').to.not.equals("Hol Mundo") ;
-                myInstance.text=undefined;
+                // DIRECT FIELD ACCESS
+                let myInstance=new IdentifierDt({value:"Testing text"});
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.equals("Testing text") ;
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.not.equals("Testin text") ;
+                myInstance.value="Hola Mundo";
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.equals("Hola Mundo") ;
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.not.equals("Hol Mundo") ;
+                myInstance.value=undefined;
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.equals(null) ;
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.not.equals("null") ;   
                 
-                expect(myInstance.getTextElement().valueOf(),'Bad field "text"').to.equals(null) ;
-                expect(myInstance.getTextElement().valueOf(),'Bad field "text"').to.not.equals("null") ;   
+                // SETTING ELEMENTS
+                myInstance.setValueElement(new StringDt("Hola Mundo from StringDt"));
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.equals("Hola Mundo from StringDt") ;
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.not.equals("Hol Mundo from StringDt") ;   
+                
+                myInstance.setValueElement(new StringDt());
+                expect(myInstance.getValueElement().valueOf(),'Bad field "system"').to.equals(null) ;
+                expect(myInstance.getValueElement().valueOf(),'Bad field "system"').to.not.equals("null") ;   
+         
             });
             
         });

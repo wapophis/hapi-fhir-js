@@ -33,8 +33,8 @@ export default class _IdentifierDt extends Object{
         return 
         this.getUseElement().isEmpty()
         && this.getTypeElement().isEmpty()
-        && isEmpty(this.system)
-        && isEmpty(this.value)
+        && this.getSystemElement().isEmpty()
+        && this.getValueElement().isEmpty()
         && this.period.isEmpty()
     }
 
@@ -136,14 +136,27 @@ export default class _IdentifierDt extends Object{
     }
 
     get value(){
+        return this.getValueElement().valueOf();
+    }
+
+    getValueElement(){
         if(!isValid(this.myValue)){
-            this.myValue=new String();
+            this.myValue=new StringDt();
         }
         return this.myValue;
     }
 
     set value(newVal){
-        this.myValue=newVal;
+        this.getValueElement().value=newVal;
+        return this;
+    }
+
+    setValueElement(newValue){
+        if(newValue instanceof StringDt===false){
+            throw new TypeError("Value field expect an StringDt object");
+        }
+
+        this.myValue=newValue;
         return this;
     }
 
