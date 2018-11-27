@@ -1,16 +1,18 @@
+import CodingDt from '../dataTypes/CodingDt.js';
+
 export const IdentifierUseEnum = Object.freeze({
-    "USUAL":{value:'usual',display:"Usual"},
-    "OFFICIAL":{value:'official',display:"Official"},
-    "TEMP":{value:'temp',display:"Temp"},
-    "SECONDARY":{value:'secondary',display:"Secondary"},
-    getByValue(code){
+    "USUAL":new CodingDt({code:'usual',display:"Usual"}),
+    "OFFICIAL":new CodingDt({code:'official',display:"Official"}),
+    "TEMP":new CodingDt({code:'temp',display:"Temp"}),
+    "SECONDARY":new CodingDt({code:'secondary',display:"Secondary"}),
+    getByCode(code){
         for(let propName in this) {
             if((typeof(this[propName]) != "undefined") && this[propName].value===code) {
                return this[propName];
             }
          }
 
-         return new String();
+         return new CodingDt({code:code});
     }
 
 });

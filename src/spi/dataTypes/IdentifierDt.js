@@ -33,8 +33,11 @@ export default class _IdentifierDt extends Object{
     }
 
     get use(){
+        return this.getUseElement();
+    }
+    getUseElement(){
         if(!isValid(this.myUse)){
-            this.myUse=new String();
+            this.myUse=new CodingDt();
         }
         return IdentifierUseEnum.getByValue(this.myUse);
     }
