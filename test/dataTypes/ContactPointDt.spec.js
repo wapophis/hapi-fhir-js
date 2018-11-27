@@ -68,26 +68,26 @@ describe("ContactPointDt DataType test",()=>{
         describe("Field setters  ",()=>{
             it('Testing field "value"...',()=>{
                 let myInstance=new ContactPointDt({value:"Testing text"});
-                expect(myInstance.getValueElement().valueOf(),'Bad field "country"').to.equals("Testing text") ;
-                expect(myInstance.getValueElement().valueOf(),'Bad field "country"').to.not.equals("Testin text") ;
+                expect(myInstance.getValueElement().valueOf(),'Bad field "value"').to.equals("Testing text") ;
+                expect(myInstance.getValueElement().valueOf(),'Bad field "value"').to.not.equals("Testin text") ;
                 myInstance.value="Hola Mundo";
-                expect(myInstance.getValueElement().valueOf(),'Bad field "country"').to.equals("Hola Mundo") ;
-                expect(myInstance.getValueElement().valueOf(),'Bad field "country"').to.not.equals("Hol Mundo") ;
+                expect(myInstance.getValueElement().valueOf(),'Bad field "value"').to.equals("Hola Mundo") ;
+                expect(myInstance.getValueElement().valueOf(),'Bad field "value"').to.not.equals("Hol Mundo") ;
                 myInstance.value=undefined;
-                expect(myInstance.getValueElement().valueOf(),'Bad field "country"').to.equals(null) ;
-                expect(myInstance.getValueElement().valueOf(),'Bad field "country"').to.not.equals("null") ;   
+                expect(myInstance.getValueElement().valueOf(),'Bad field "value"').to.equals(null) ;
+                expect(myInstance.getValueElement().valueOf(),'Bad field "value"').to.not.equals("null") ;   
             });
 
             it('Testing field "rank"...',()=>{
                 let myInstance=new ContactPointDt({rank:"Testing text"});
-                expect(myInstance.getRankElement().valueOf(),'Bad field "country"').to.equals("Testing text") ;
-                expect(myInstance.getRankElement().valueOf(),'Bad field "country"').to.not.equals("Testin text") ;
+                expect(myInstance.getRankElement().valueOf(),'Bad field "rank"').to.equals("Testing text") ;
+                expect(myInstance.getRankElement().valueOf(),'Bad field "rank"').to.not.equals("Testin text") ;
                 myInstance.rank="Hola Mundo";
-                expect(myInstance.getRankElement().valueOf(),'Bad field "country"').to.equals("Hola Mundo") ;
-                expect(myInstance.getRankElement().valueOf(),'Bad field "country"').to.not.equals("Hol Mundo") ;
+                expect(myInstance.getRankElement().valueOf(),'Bad field "rank"').to.equals("Hola Mundo") ;
+                expect(myInstance.getRankElement().valueOf(),'Bad field "rank"').to.not.equals("Hol Mundo") ;
                 myInstance.rank=undefined;
-                expect(myInstance.getRankElement().valueOf(),'Bad field "country"').to.equals(null) ;
-                expect(myInstance.getRankElement().valueOf(),'Bad field "country"').to.not.equals("null") ;   
+                expect(myInstance.getRankElement().valueOf(),'Bad field "rank"').to.equals(null) ;
+                expect(myInstance.getRankElement().valueOf(),'Bad field "rank"').to.not.equals("null") ;   
             });
 
         });
