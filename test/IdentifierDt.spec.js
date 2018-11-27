@@ -4,6 +4,9 @@ import PeriodDt from '../src/spi/dataTypes/PeriodDt.js';
 import CodingDt from '../src/spi/dataTypes/CodingDt.js';
 import ReferenceDt from '../src/spi/dataTypes/ReferenceDt.js';
 import CodeableConceptDt from '../src/spi/dataTypes/CodeableConceptDt.js';
+import IdentifierUseEnum from '../src/spi/valueSets/IdentifierUseEnum.js';
+import IdentifierTypeEnum from '../src/spi/valueSets/IdentifierTypeEnum.js';
+
 
 import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../src/utils/ValidationRules.js';
 
@@ -35,12 +38,12 @@ describe("IdentifierDt DataType test",()=>{
         
         describe("ValueSet setters ",()=>{
             it('Testing field "use"...',()=>{
-                let myInstance=new HumanNameDt({use:"a"});
-                expect(myInstance.getUseElement().code,'Bad field "type"').to.equals("a") ;
-                myInstance=new HumanNameDt({use:"usual"});
-                expect(myInstance.getUseElement(),"Check enum relation for use").to.deep.equal(NameUseEnum.USUAL);
-                myInstance.use=NameUseEnum.ANONYMOUS.code;
-                expect(myInstance.use,"Check enum relation for use").to.deep.equal(NameUseEnum.ANONYMOUS.valueOf());
+                let myInstance=new IdentifierDt({use:"a"});
+                expect(myInstance.getUseElement().code,'Bad field "use"').to.equals("a") ;
+                myInstance=new IdentifierDt({use:"usual"});
+                expect(myInstance.getUseElement(),"Check enum relation for use").to.deep.equal(IdentifierUseEnum.USUAL);
+                myInstance.use=IdentifierUseEnum.SECONDARY.code;
+                expect(myInstance.use,"Check enum relation for use").to.deep.equal(IdentifierUseEnum.SECONDARY.valueOf());
                 });
 
 

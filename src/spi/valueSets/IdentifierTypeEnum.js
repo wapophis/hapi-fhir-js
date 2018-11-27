@@ -1,9 +1,11 @@
+import CodingDt from '../dataTypes/CodingDt.js';
+
 export const IdentifierTypeEnum = Object.freeze({
-    "UDI":{value:'UDI',display:"Usual"},
-    "SNO":{value:'SNO',display:"Official"},
-    "SB":{value:'SB',display:"Temp"},
-    "PLAC":{value:'PLAC',display:"Secondary"},
-    "FILL":{value:'FILL',display:"Secondary"},
+    "UDI":new CodingDt({code:'UDI',display:"Usual"}),
+    "SNO":new CodingDt({code:'SNO',display:"Official"}),
+    "SB":new CodingDt({code:'SB',display:"Temp"}),
+    "PLAC":new CodingDt({code:'PLAC',display:"Secondary"}),
+    "FILL":new CodingDt({code:'FILL',display:"Secondary"}),
     
     getByValue(code){
         for(let propName in this) {
@@ -12,7 +14,7 @@ export const IdentifierTypeEnum = Object.freeze({
             }
          }
 
-         return new String();
+         return new CodingDt({code:code});
     }
 
 });
