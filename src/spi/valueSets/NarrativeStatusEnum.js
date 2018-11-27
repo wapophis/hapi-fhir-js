@@ -8,7 +8,7 @@ export const NarrativeStatusEnum = Object.freeze({
     "EMPTY":new CodingDt({code:'empty',display:"Empty"}),
   
 
-    getByValue(code){
+    getByCode(code){
         for(let propName in this) {
             if((typeof(this[propName]) != "undefined") && this[propName].code===code) {
                return this[propName];
