@@ -23,7 +23,7 @@ describe("IdentifierDt DataType test",()=>{
          * 
          */
         it("should generate an empty object",()=>{
-            let myInstance=new IdentifierDt();
+            let myInstance=new IdentifierDt();            
             expect(myInstance.isEmpty()).to.equal(true);
         });
 
@@ -119,9 +119,18 @@ describe("IdentifierDt DataType test",()=>{
         });
         
         it('Testing composite "assigner" ReferenceDt ...',()=>{
-            let myInstance=new HumanNameDt({period:{start:new Date(),end:new Date()}});
-            let myPeriod=new PeriodDt(myInstance.period);
-            expect(myInstance.period).to.deep.equal(myPeriod.valueOf());
+            debugger;
+            let myInstance=new IdentifierDt({assigner:
+                
+                    {
+                        reference:"ASSIGNER REF"
+                        ,identifier:
+                            {value:"idTest"}
+                    }
+                
+            });
+
+            console.log("Assigner needs more work because of a recursive relation with id");
         });
     
     });
