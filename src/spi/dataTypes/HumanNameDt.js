@@ -88,8 +88,16 @@ export default class _HumanNameDt extends Object{
 
 
     set family(newValue){
-        if(isValid(newValue)){
-            this._setFamilyList(newValue);
+        if(!isEmptyArray(newValue) ){
+            let oVal=new Array();
+            for(let i=0;i<newValue.length;i++){
+                if(newValue[i] instanceof StringDt===true){
+                    oVal.push(newValue[i]);
+                }else{
+                    oVal.push(new StringDt(newValue[i].valueOf()));
+                }
+            }
+            this.setFamily(oVal);
         }
         return this;
     }
@@ -100,7 +108,7 @@ export default class _HumanNameDt extends Object{
      * @private 
      * @return this object
      */
-    _setFamilyList(newValue){
+    setFamily(newValue){
         if(!Array.isArray(newValue)){
             throw new TypeError("Family field expect an Array");
         }
@@ -121,8 +129,35 @@ export default class _HumanNameDt extends Object{
     }
 
     set given(newValue){
-        this.myGiven=newValue;
+        if(!isEmptyArray(newValue) ){
+            let oVal=new Array();
+            for(let i=0;i<newValue.length;i++){
+                if(newValue[i] instanceof StringDt===true){
+                    oVal.push(newValue[i]);
+                }else{
+                    oVal.push(new StringDt(newValue[i].valueOf()));
+                }
+            }
+            this.setGiven(oVal);
+        }
         return this;
+    }
+
+    /**
+     * 
+     * @param {*} newValue 
+     * @private 
+     */
+    setGiven(newValue){
+        if(!Array.isArray(newValue)){
+            throw new TypeError("Family field expect an Array");
+        }
+        for(let i=0;i<newValue.length;i++){
+            if(newValue[i] instanceof StringDt===false){
+                throw new TypeError("Family items in array must be StringDt objects");
+            }
+        }
+        this.myGiven=newValue;
     }
 
     get prefix(){
