@@ -170,8 +170,33 @@ export default class _HumanNameDt extends Object{
 
     }
 
-    set prefix(newValue){
+    /**
+     * 
+     * @param {*} newValue 
+     *  
+     */
+    setPrefix(newValue){
+        if(!Array.isArray(newValue)){
+            throw new TypeError("Family field expect an Array");
+        }
+        for(let i=0;i<newValue.length;i++){
+            if(newValue[i] instanceof StringDt===false){
+                throw new TypeError("Family items in array must be StringDt objects");
+            }
+        }
         this.myPrefix=newValue;
+    }
+
+    set prefix(newValue){
+        if(!isEmptyArray(newValue) ){
+            let oVal=new Array();
+            for(let i=0;i<newValue.length;i++){
+               
+                oVal.push(new StringDt(newValue[i].valueOf()));
+                
+            }
+            this.setPrefix(oVal);
+        }
         return this;
     }
 
@@ -250,10 +275,10 @@ export default class _HumanNameDt extends Object{
      */
     addPrefix(newVal){
         if(isValid(newVal)){
-            this.prefix.push(newVal);
+            this.prefix.push(new StringDt(newVal.valueOf()));
             return this;
         }else{
-            let oVal=new String();
+            let oVal=new StringDt();
             this.prefix.push(oVal);
             return oVal;
         }
