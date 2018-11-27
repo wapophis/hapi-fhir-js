@@ -1,6 +1,7 @@
 import { expect } from "chai"
 import IdentifierDt from '../src/spi/dataTypes/IdentifierDt.js';
 import PeriodDt from '../src/spi/dataTypes/PeriodDt.js';
+import CodingDt from '../src/spi/dataTypes/CodingDt.js';
 import ReferenceDt from '../src/spi/dataTypes/ReferenceDt.js';
 import CodeableConceptDt from '../src/spi/dataTypes/CodeableConceptDt.js';
 
@@ -30,73 +31,72 @@ describe("IdentifierDt DataType test",()=>{
         });
 
     });
+        
+        
+        describe("ValueSet setters ",()=>{
+            it('Testing field "use"...',()=>{
+                let myInstance=new HumanNameDt({use:"a"});
+                expect(myInstance.getUseElement().code,'Bad field "type"').to.equals("a") ;
+                myInstance=new HumanNameDt({use:"usual"});
+                expect(myInstance.getUseElement(),"Check enum relation for use").to.deep.equal(NameUseEnum.USUAL);
+                myInstance.use=NameUseEnum.ANONYMOUS.code;
+                expect(myInstance.use,"Check enum relation for use").to.deep.equal(NameUseEnum.ANONYMOUS.valueOf());
+                });
 
-    describe("Getters",()=>{     
-        it("should return a safe object",()=>{
-            let myInstance=new IdentifierDt();
+
+            it('Testing field "type"...',()=>{
+                let myInstance=new HumanNameDt({use:"a"});
+                expect(myInstance.getUseElement().code,'Bad field "type"').to.equals("a") ;
+                myInstance=new HumanNameDt({use:"usual"});
+                expect(myInstance.getUseElement(),"Check enum relation for use").to.deep.equal(NameUseEnum.USUAL);
+                myInstance.use=NameUseEnum.ANONYMOUS.code;
+                expect(myInstance.use,"Check enum relation for use").to.deep.equal(NameUseEnum.ANONYMOUS.valueOf());
+                });
             
-            expect(isValid(myInstance.use)
-            &&isValid(myInstance.assigner)
-            &&isValid(myInstance.system)
-            &&isValid(myInstance.type)
-            &&isValid(myInstance.value)
-            &&isValid(myInstance.period)
-            );                    
+            });
+
+
+        
+        describe("Field setters ",()=>{
+            it('Testing field "system"...',()=>{
+                let myInstance=new HumanNameDt({text:"Testing text"});
+                expect(myInstance.getTextElement().valueOf(),'Bad field "text"').to.equals("Testing text") ;
+                expect(myInstance.getTextElement().valueOf(),'Bad field "text"').to.not.equals("Testin text") ;
+                myInstance.text="Hola Mundo";
+                expect(myInstance.getTextElement().valueOf(),'Bad field "text"').to.equals("Hola Mundo") ;
+                expect(myInstance.getTextElement().valueOf(),'Bad field "text"').to.not.equals("Hol Mundo") ;
+                myInstance.text=undefined;
+                expect(myInstance.getTextElement().valueOf(),'Bad field "text"').to.equals(null) ;
+                expect(myInstance.getTextElement().valueOf(),'Bad field "text"').to.not.equals("null") ;   
+            });
+
+            it('Testing field "value"...',()=>{
+                let myInstance=new HumanNameDt({text:"Testing text"});
+                expect(myInstance.getTextElement().valueOf(),'Bad field "text"').to.equals("Testing text") ;
+                expect(myInstance.getTextElement().valueOf(),'Bad field "text"').to.not.equals("Testin text") ;
+                myInstance.text="Hola Mundo";
+                expect(myInstance.getTextElement().valueOf(),'Bad field "text"').to.equals("Hola Mundo") ;
+                expect(myInstance.getTextElement().valueOf(),'Bad field "text"').to.not.equals("Hol Mundo") ;
+                myInstance.text=undefined;
+                expect(myInstance.getTextElement().valueOf(),'Bad field "text"').to.equals(null) ;
+                expect(myInstance.getTextElement().valueOf(),'Bad field "text"').to.not.equals("null") ;   
+            });
+            
         });
-
-        it("should return an empty object",()=>{
-            let myInstance=new IdentifierDt();
-            
-            expect(isEmpty(myInstance.use)
-            &&isEmptyArray(myInstance.assigner)
-            &&isEmpty(myInstance.system)
-            &&isEmptyArray(myInstance.type)
-            &&isEmptyArray(myInstance.value)
-            &&myInstance.period.isEmpty()
-            );                    
+        
+        
+    describe("Composite types setters ",()=>{
+        it('Testing composite "period" PeriodDt ...',()=>{
+            let myInstance=new HumanNameDt({period:{start:new Date(),end:new Date()}});
+            let myPeriod=new PeriodDt(myInstance.period);
+            expect(myInstance.period).to.deep.equal(myPeriod.valueOf());
         });
-    });
-
-
-    describe("Setters",()=>{     
-        it("should set valid values",()=>{
-            let myInstance=new IdentifierDt();
-            
-            expect(isValid(myInstance.use="usual")
-            &&isValid(myInstance.assigner=new ReferenceDt({display:"test"}))
-            &&isValid(myInstance.system="test")
-            &&isValid(myInstance.type=new CodeableConceptDt({text:"test"}))
-            &&isValid(myInstance.value="test")
-            &&isValid(myInstance.period=new PeriodDt())
-            );     
-            
-            expect(myInstance.use.value).to.equal("usual");
-            expect(myInstance.assigner.display).to.equal("test");
-            expect(myInstance.system).to.equal("test");
-            expect(myInstance.type.text).to.equal("test");
-            expect(myInstance.value).to.equal("test");
-            expect(true).to.equal(myInstance.period.equals(new PeriodDt()));
-            
+        
+        it('Testing composite "assigner" ReferenceDt ...',()=>{
+            let myInstance=new HumanNameDt({period:{start:new Date(),end:new Date()}});
+            let myPeriod=new PeriodDt(myInstance.period);
+            expect(myInstance.period).to.deep.equal(myPeriod.valueOf());
         });
-
-        it("should not fail with invalid values",()=>{
-            let myInstance=new IdentifierDt();
-
-            expect(isValid(myInstance.use=undefined)
-            &&isValid(myInstance.assigner=undefined)
-            &&isValid(myInstance.system=undefined)
-            &&isValid(myInstance.type=undefined)
-            &&isValid(myInstance.value=undefined)
-            &&isValid(myInstance.period=undefined)
-            );     
-            expect(isEmpty(myInstance.use)
-            &&isEmptyArray(myInstance.assigner)
-            &&isEmpty(myInstance.system)
-            &&isEmptyArray(myInstance.type)
-            &&isEmptyArray(myInstance.value)
-            &&myInstance.period.isEmpty()
-            );              
-        });
-    });
     
+    });
 });
