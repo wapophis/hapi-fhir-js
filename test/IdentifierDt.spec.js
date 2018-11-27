@@ -120,17 +120,18 @@ describe("IdentifierDt DataType test",()=>{
         
         it('Testing composite "assigner" ReferenceDt ...',()=>{
             debugger;
-            let myInstance=new IdentifierDt({assigner:
+            let rootObject={assigner:
                 
                     {
                         reference:"ASSIGNER REF"
                         ,identifier:
-                            {value:"idTest"}
+                            {value:"idTest",type:{coding:[{code:"SNO"}]}}
                     }
                 
-            });
+            };
 
-            console.log("Assigner needs more work because of a recursive relation with id");
+            let myInstance=new IdentifierDt(rootObject);
+           expect(myInstance.getAssignerElement().valueOf(),"Testing Assigner reference..").to.eql(rootObject.assigner);
         });
     
     });

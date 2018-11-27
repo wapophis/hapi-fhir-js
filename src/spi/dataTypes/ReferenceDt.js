@@ -44,6 +44,9 @@ export default class _ReferenceDt extends Object{
         return this;
     }
 
+    get identifier(){
+        return this.getIdentifierElement().valueOf();
+    }
     getIdentifierElement(){
         if(!isValid(this.myIdentifier)){
             this.myIdentifier=new _IdentifierDt();
@@ -88,17 +91,20 @@ export default class _ReferenceDt extends Object{
 
     valueOf(){
         let oVal=new Object();
+
         if(!this.getDisplayElement().isEmpty()){
             oVal.display=this.getDisplayElement().valueOf();
         }
 
         if(!this.getIdentifierElement().isEmpty()){
-            oVal.identifier=this.getIdentifierElement().valueOf();
+            oVal.identifier=this.getIdentifierElement()._flatten();
+            
         }
 
         if(!this.getReferenceElement().isEmpty()){
             oVal.reference=this.getReferenceElement().valueOf();
         }
+        return oVal;
     }
 
 
