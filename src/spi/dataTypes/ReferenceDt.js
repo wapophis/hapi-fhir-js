@@ -47,6 +47,7 @@ export default class _ReferenceDt extends Object{
     get identifier(){
         return this.getIdentifierElement().valueOf();
     }
+    
     getIdentifierElement(){
         if(!isValid(this.myIdentifier)){
             this.myIdentifier=new _IdentifierDt();
