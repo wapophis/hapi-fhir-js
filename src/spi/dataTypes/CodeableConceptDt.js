@@ -1,5 +1,5 @@
 import {isUndefined,isValid,isEmpty,isEmptyArray} from '../../utils/ValidationRules.js';
-import _CodingDt from './CodingDt.js';
+import CodingDt from './CodingDt.js';
 
 export default class _CodeableConceptDt extends Object{
     constructor(root){
@@ -13,6 +13,14 @@ export default class _CodeableConceptDt extends Object{
     }
 
     get coding(){
+        let oVal=new Array();
+        for(let i=0;i<this.getCodingElement().length;i++){
+            oVal.push(this.myCoding[i].valueOf());
+        }
+        return oVal;  
+    }
+
+    getCodingElement(){
         if(!isValid(this.myCoding)){
             this.myCoding=new Array();
         }
@@ -20,22 +28,42 @@ export default class _CodeableConceptDt extends Object{
     }
 
     set coding(newVal){
-        this.myCoding=newVal;
+        if(!isEmptyArray(newVal)){
+            let oVal=new Array();
+            for(let i=0;i<newVal.length;i++){
+                oVal.push(new CodingDt(newVal[i]));
+            }
+            this.setCodingElement(oVal);
+        }
+        return this;
+    }
+
+    /**
+     * 
+     * @param {*} newValue CodingDt Array expected
+     */
+    setCodingElement(newValue){
+        for(let i=0;i<newValue.length;i++){
+            if(newValue[i] instanceof CodingDt===false){
+                throw new TypeError("Expected a codingDt array at "+i);
+            }
+        }
+        this.myCoding=newValue;
         return this;
     }
 
     addCoding(newValue){
         if(!isValid(newValue)){
-            let oVal=new _CodingDt();
-            this.coding.push(oVal);
+            let oVal=new CodingDt();
+            this.getCodingElement().push(oVal);
             return oVal;
         }
 
-        if(newValue instanceof _CodingDt===false){
+        if(newValue instanceof CodingDt===false){
             throw new TypeError("AddCoding requires a CodingDt object");
         }
 
-        this.coding.push(newValue);
+        this.getCodingElement().push(newValue);
         return this;
     }
 
@@ -44,7 +72,7 @@ export default class _CodeableConceptDt extends Object{
             this.addCoding();
         }
         if(typeof this.coding[0]!=='codingdt'){
-            this.coding[0]=new _CodingDt(this.coding[0]);
+            this.coding[0]=new CodingDt(this.coding[0]);
         }
         return this.coding[0];
     }
@@ -65,5 +93,15 @@ export default class _CodeableConceptDt extends Object{
 
     isEmpty(){
         return isEmptyArray(this.coding) && isEmpty(this.text);
+    }
+
+    valueOf(){
+        let oVal=new Object();
+
+        if(!isEmptyArray(this.getCodingElement())){
+            oVal.coding=this.coding;
+        }
+
+        return oVal;
     }
 }
