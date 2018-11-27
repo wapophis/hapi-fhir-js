@@ -161,14 +161,30 @@ export default class _IdentifierDt extends Object{
     }
 
     get period(){
+        return this.getPeriodElement().valueOf();
+    }
+
+    getPeriodElement(){
         if(!isValid(this.myPeriod)){
             this.myPeriod=new PeriodDt();
         }
-        return this.myPeriod;
+        return new PeriodDt(this.myPeriod);
     }
 
-    set period(newVal){
-        this.myPeriod=newVal;
+    set period(newValue){
+        if(newValue instanceof PeriodDt===true){
+            this.setPeriodElement(newValue);
+        }else{
+            this.setPeriodElement(new PeriodDt(newValue));
+        }
+        return this;
+    }
+
+    setPeriodElement(newValue){
+        if(newValue instanceof PeriodDt===false){
+            throw new TypeError("Period field must be PeriodDt");
+        }
+        this.myPeriod=newValue;
         return this;
     }
 

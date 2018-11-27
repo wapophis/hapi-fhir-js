@@ -113,7 +113,7 @@ describe("IdentifierDt DataType test",()=>{
         
     describe("Composite types setters ",()=>{
         it('Testing composite "period" PeriodDt ...',()=>{
-            let myInstance=new HumanNameDt({period:{start:new Date(),end:new Date()}});
+            let myInstance=new IdentifierDt({period:{start:new Date(),end:new Date()}});
             let myPeriod=new PeriodDt(myInstance.period);
             expect(myInstance.period).to.deep.equal(myPeriod.valueOf());
         });
