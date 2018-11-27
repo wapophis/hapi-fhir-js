@@ -237,22 +237,39 @@ export default class _IdentifierDt extends Object{
         }
         
         // Prevent recursive loop with reference id 
-        // if(!this.getAssignerElement().isEmpty()){
-        //     let referenceOval=new Object();
+        if(!this.getAssignerElement().isEmpty()){
+            oVal.assigner=this.getAssignerElement().valueOf();
+        }
 
-        //     if(!this.getAssignerElement().getDisplayElement().isEmpty()){
-        //         referenceOval.display=this.getAssignerElement().getDisplayElement().valueOf();
-        //     }
-    
-            
-        //      if(!isValid(referenceOval.identifier) && !this.getAssignerElement().getIdentifierElement().isEmpty()){
-        //          referenceOval.identifier=this.getAssignerElement().getIdentifierElement().valueOf();
-        //      }
-    
-        //     if(!this.getAssignerElement().getReferenceElement().isEmpty()){
-        //         referenceOval.reference=this.getAssignerElement().getReferenceElement().valueOf();
-        //     }
-        //     oVal.assigner=referenceOval;
+        return oVal;
+    }
+
+    _flatten(){
+        let oVal=new Object();
+
+        if(!this.getUseElement().isEmpty()){
+            oVal.use=this.getUseElement().valueOf();
+        }
+
+        if(!this.getTypeElement().isEmpty()){
+            oVal.type=this.getTypeElement().valueOf();
+        }
+
+        if(!this.getSystemElement().isEmpty()){
+            oVal.system=this.getSystemElement().valueOf();
+        }
+
+        if(!this.getValueElement().isEmpty()){
+            oVal.value=this.getValueElement().valueOf();
+        }
+
+        if(!this.getPeriodElement().isEmpty()){
+            oVal.period=this.getPeriodElement().valueOf();
+        }
+        
+        // // Prevent recursive loop with reference id 
+        // if(!this.getAssignerElement().isEmpty()){
+        //     oVal.assigner=this.getAssignerElement().valueOf();
         // }
 
         return oVal;

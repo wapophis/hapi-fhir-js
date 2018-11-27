@@ -1,5 +1,6 @@
 import { expect } from "chai"
 import ReferenceDt from '../src/spi/dataTypes/ReferenceDt.js';
+import StringDt from '../src/spi/dataTypes/StringDt.js';
 import IdentifierDt from '../src/spi/dataTypes/IdentifierDt.js';
 
 
@@ -30,53 +31,79 @@ describe("ReferenceDt DataType test",()=>{
 
     });
 
-    describe("Getters",()=>{     
-        it("should return a safe object",()=>{
-            let myInstance=new ReferenceDt();
+        
+        describe("Field setters ",()=>{
+            it('Testing field "REFERENCE"...',()=>{
+                // DIRECT FIELD ACCESS
+                let myInstance=new ReferenceDt({reference:"Testing text"});
+                expect(myInstance.getReferenceElement().valueOf(),'Bad field "REFERENCE"').to.equals("Testing text") ;
+                expect(myInstance.getReferenceElement().valueOf(),'Bad field "REFERENCE"').to.not.equals("Testin text") ;
+                myInstance.reference="Hola Mundo";
+                expect(myInstance.getReferenceElement().valueOf(),'Bad field "REFERENCE"').to.equals("Hola Mundo") ;
+                expect(myInstance.getReferenceElement().valueOf(),'Bad field "REFERENCE"').to.not.equals("Hol Mundo") ;
+                myInstance.reference=undefined;
+                expect(myInstance.getReferenceElement().valueOf(),'Bad field "REFERENCE"').to.equals(null) ;
+                expect(myInstance.getReferenceElement().valueOf(),'Bad field "REFERENCE"').to.not.equals("null") ;   
+
+                /// SETTING ELEMENTS
+                myInstance.setReferenceElement(new StringDt("Hola Mundo from StringDt"));
+                expect(myInstance.getReferenceElement().valueOf(),'Bad field "REFERENCE"').to.equals("Hola Mundo from StringDt") ;
+                expect(myInstance.getReferenceElement().valueOf(),'Bad field "REFERENCE"').to.not.equals("Hol Mundo from StringDt") ;   
+                myInstance.setReferenceElement(new StringDt());
+                expect(myInstance.getReferenceElement().valueOf(),'Bad field "REFERENCE"').to.equals(null) ;
+                expect(myInstance.getReferenceElement().valueOf(),'Bad field "REFERENCE"').to.not.equals("null") ;   
+                
+            });
+
+            it('Testing field "IDENTIFIER"...',()=>{
+                // DIRECT FIELD ACCESS
+                let myInstance=new IdentifierDt({value:"Testing text"});
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.equals("Testing text") ;
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.not.equals("Testin text") ;
+                myInstance.value="Hola Mundo";
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.equals("Hola Mundo") ;
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.not.equals("Hol Mundo") ;
+                myInstance.value=undefined;
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.equals(null) ;
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.not.equals("null") ;   
+                
+                // SETTING ELEMENTS
+                myInstance.setValueElement(new StringDt("Hola Mundo from StringDt"));
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.equals("Hola Mundo from StringDt") ;
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.not.equals("Hol Mundo from StringDt") ;   
+                
+                myInstance.setValueElement(new StringDt());
+                expect(myInstance.getValueElement().valueOf(),'Bad field "system"').to.equals(null) ;
+                expect(myInstance.getValueElement().valueOf(),'Bad field "system"').to.not.equals("null") ;   
+         
+            });
+
+
+            it('Testing field "DISPLAY"...',()=>{
+                // DIRECT FIELD ACCESS
+                let myInstance=new IdentifierDt({value:"Testing text"});
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.equals("Testing text") ;
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.not.equals("Testin text") ;
+                myInstance.value="Hola Mundo";
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.equals("Hola Mundo") ;
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.not.equals("Hol Mundo") ;
+                myInstance.value=undefined;
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.equals(null) ;
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.not.equals("null") ;   
+                
+                // SETTING ELEMENTS
+                myInstance.setValueElement(new StringDt("Hola Mundo from StringDt"));
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.equals("Hola Mundo from StringDt") ;
+                expect(myInstance.getValueElement().valueOf(),'Bad field "text"').to.not.equals("Hol Mundo from StringDt") ;   
+                
+                myInstance.setValueElement(new StringDt());
+                expect(myInstance.getValueElement().valueOf(),'Bad field "system"').to.equals(null) ;
+                expect(myInstance.getValueElement().valueOf(),'Bad field "system"').to.not.equals("null") ;   
+         
+            });
             
-            expect(isValid(myInstance.reference)
-            &&isValid(myInstance.display)
-            &&isValid(myInstance.identifier)
-            );                    
         });
-
-        it("should return an empty object",()=>{
-            let myInstance=new ReferenceDt();
-            
-            expect(isEmpty(myInstance.reference)
-            &&isEmpty(myInstance.display)
-            &&isEmpty(myInstance.identifier)
-            );                    
-        });
-    });
-
-
-    describe("Setters",()=>{     
-        it("should set valid values",()=>{
-            let myInstance=new ReferenceDt();
-            expect(isValid(myInstance.reference="test")
-            &&isValid(myInstance.identifier=new IdentifierDt({value:"test"}))
-            &&isValid(myInstance.display="test")
-            );     
-            expect(myInstance.reference).to.equal("test");
-            expect(myInstance.display).to.equal("test");
-            expect(myInstance.identifier.value).to.equal("test");
-            
-        });
-
-        it("should not fail with invalid values",()=>{
-            let myInstance=new ReferenceDt();
-
-            expect(isValid(myInstance.reference=undefined)
-            &&isValid(myInstance.identifier=undefined)
-            &&isValid(myInstance.display=undefined)
-            );       
-            
-            expect(isEmpty(myInstance.reference)
-            &&isEmpty(myInstance.display)
-            &&isEmpty(myInstance.identifier)
-            );               
-        });
-    });
+        
+        
     
 });
