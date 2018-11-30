@@ -1,4 +1,5 @@
 import {isUndefined,isValid,isEmptyArray,isEmpty} from '../../utils/ValidationRules.js';
+import FlattenAbleObject from '../FlattenAbleObject.js';
 import _PeriodDt from './PeriodDt.js';
 import StringDt from './StringDt.js';
 import CodingDt from './CodingDt.js';
@@ -7,7 +8,7 @@ import CodingDt from './CodingDt.js';
 import AddressTypeEnum from '../valueSets/AddressTypeEnum.js';
 import AddressUseEnum from '../valueSets/AddressUseEnum.js';
 
-export default class _AddressDt extends Object{
+export default class _AddressDt extends FlattenAbleObject{
     constructor(root){
         super();
         if(isValid(root)){

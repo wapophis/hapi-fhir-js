@@ -5,7 +5,9 @@ import PeriodDt from './PeriodDt.js';
 import CodingDt from './CodingDt.js';
 import StringDt from  './StringDt.js';
 
-export default class _ContactPointDt extends Object{
+import FlattenAbleObject from '../FlattenAbleObject.js';
+
+export default class _ContactPointDt extends FlattenAbleObject{
 
     /**
      * @constructor

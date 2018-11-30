@@ -1,11 +1,12 @@
 import {isUndefined,isValid,isEmptyArray,isEmpty} from '../../utils/ValidationRules.js';
+import FlattenAbleObject from '../FlattenAbleObject.js';
 import _PeriodDt from './PeriodDt.js';
 import StringDt from './StringDt.js';
 import CodingDt from './CodingDt.js';
 import NameUseEnum from '../valueSets/NameUseEnum.js';
 
 
-export default class _HumanNameDt extends Object{
+export default class _HumanNameDt extends FlattenAbleObject{
     constructor(root){
         super();
         if(isValid(root)){
@@ -353,6 +354,5 @@ export default class _HumanNameDt extends Object{
         return this.prefix[0];
     }
 
-
-
+ 
 }
