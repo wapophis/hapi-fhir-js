@@ -54,6 +54,7 @@
     "test": "test"
   },
   "files": [
-    "dist"
+    "dist",
+    "src/*"
   ]
 }
