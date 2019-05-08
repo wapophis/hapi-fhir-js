@@ -17,7 +17,7 @@
   },
   "module": ".esm.js",
   "browser":".umd.js",
-  "main": ".cjs.js",
+  "main": "/src/fhir-dstu-3-0.js",
 
   "scripts": {
     "test": "./node_modules/.bin/mocha --require @babel/register",
