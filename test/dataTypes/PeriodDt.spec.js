@@ -1,6 +1,6 @@
 import { expect } from "chai"
-import PeriodDt from '../src/spi/dataTypes/PeriodDt.js';
-import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../src/utils/ValidationRules.js';
+import PeriodDt from '../../src/spi/dataTypes/PeriodDt.js';
+import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../../src/utils/ValidationRules.js';
 
 describe("PeriodDt DataType test",()=>{
     describe("Constructor",()=>{     

@@ -1,14 +1,14 @@
 import { expect } from "chai"
-import ContactPointDt from '../src/spi/dataTypes/ContactPointDt.js';
-import CodingDt from '../src/spi/dataTypes/CodingDt.js';
+import ContactPointDt from '../../src/spi/dataTypes/ContactPointDt.js';
+import CodingDt from '../../src/spi/dataTypes/CodingDt.js';
 
-import ContactPointSystemEnum from '../src/spi/valueSets/ContactPointSystemEnum.js';
-import ContactPointUseEnum from '../src/spi/valueSets/ContactPointUseEnum.js';
+import ContactPointSystemEnum from '../../src/spi/valueSets/ContactPointSystemEnum.js';
+import ContactPointUseEnum from '../../src/spi/valueSets/ContactPointUseEnum.js';
 
-import PeriodDt from '../src/spi/dataTypes/PeriodDt.js'; 
+import PeriodDt from '../../src/spi/dataTypes/PeriodDt.js'; 
 
 
-import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../src/utils/ValidationRules.js';
+import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../../src/utils/ValidationRules.js';
 
 describe("ContactPointDt DataType test",()=>{
     describe("Constructor",()=>{     

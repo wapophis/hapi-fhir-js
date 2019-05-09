@@ -1,7 +1,7 @@
 import { expect } from "chai"
-import BooleanDt from '../src/spi/dataTypes/BooleanDt.js';
+import BooleanDt from '../../src/spi/dataTypes/BooleanDt.js';
 
-import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../src/utils/ValidationRules.js';
+import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../../src/utils/ValidationRules.js';
 
 describe("BooleanDt DataType test",()=>{
     describe("Constructor",()=>{     

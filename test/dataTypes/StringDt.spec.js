@@ -1,7 +1,7 @@
 import { expect } from "chai"
-import StringDt from '../src/spi/dataTypes/StringDt.js';
+import StringDt from '../../src/spi/dataTypes/StringDt.js';
 
-import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../src/utils/ValidationRules.js';
+import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../../src/utils/ValidationRules.js';
 describe("StringDT spec tests ",()=>{
 describe("Constructor",()=>{     
     it("Should generate an instance object | testConstructor(void:value)",()=>{

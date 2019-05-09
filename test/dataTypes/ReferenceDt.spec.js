@@ -1,10 +1,10 @@
 import { expect } from "chai"
-import ReferenceDt from '../src/spi/dataTypes/ReferenceDt.js';
-import StringDt from '../src/spi/dataTypes/StringDt.js';
-import IdentifierDt from '../src/spi/dataTypes/IdentifierDt.js';
+import ReferenceDt from '../../src/spi/dataTypes/ReferenceDt.js';
+import StringDt from '../../src/spi/dataTypes/StringDt.js';
+import IdentifierDt from '../../src/spi/dataTypes/IdentifierDt.js';
 
 
-import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../src/utils/ValidationRules.js';
+import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../../src/utils/ValidationRules.js';
 
 describe("ReferenceDt DataType test",()=>{
     describe("Constructor",()=>{     

@@ -1,18 +1,22 @@
 import {isValid,isEmpty,isEmptyArray} from '../utils/ValidationRules.js';
+import FlattenAbleObject from './FlattenAbleObject.js';
+import IdDt from './dataTypes/IdDt.js';
+import StringDt from './dataTypes/StringDt.js';
+import ExtensionDt from './dataTypes/ExtensionDt.js';
 
-export const FHIResource= class FHIResource extends Object{
+export const FHIResource= class FHIResource extends FlattenAbleObject{
  
     constructor(rootObject){
         super();
-        this.myId=new String();
-        this.myResourceName=new String();
+      
+
         this.myExtensions=new Array();
         this.myContainedResources=new Array();
         this.myLanguaje=new String();
 
         if(isValid(rootObject)){
             this.id=rootObject.id;
-            this.resourceName=rootObject.resourceType;
+            this.resourceName=rootObject.resourceName;
             this.extensions=rootObject.extensions;
             this.contained=rootObject.contained;
             this.languaje=rootObject.languaje;
@@ -20,39 +24,61 @@ export const FHIResource= class FHIResource extends Object{
     }
 
     get id(){
+        return this.getIdElement().id.valueOf();
+    }
+
+    getIdElement(){
         if(!isValid(this.myId)){
-            this.myId=new String();
+            this.myId=new IdDt();
         }
         return this.myId;
     }
 
     set id(newId){
-        if(isValid(this.myId) && isValid(newId)){
-            this.myId=newId;
+        this.getIdElement().id=newId
+        return this;
+    }
+
+    setIdElement(newValue){
+        if(newValue instanceof IdDt===false){
+            throw new TypeError("Id field expects an IdDt object");
         }
+        this.myId=newValue;
         return this;
     }
 
     isEmpty(){
-        return isEmptyArray(this.contained)
+        return true
+        && isEmptyArray(this.contained)
         && isEmptyArray(this.extensions)
-        && isEmpty(this.id);
+        && this.getIdElement().isEmpty();
     }
 
     get resourceName(){
+        return this.getResourceNameElement().value;
+    }
+
+    getResourceNameElement(){
         if(!isValid(this.myResourceName)){
-            this.myResourceName=new String();
+            this.myResourceName=new StringDt();
         }
         return this.myResourceName;
     }
 
     set resourceName(newResourceName){
-        if(isValid(this.myResourceName) && isValid(newResourceName)){
-            this.myResourceName=newResourceName;
-        }
-
+        this.getResourceNameElement().value=newResourceName;
         return this;
     }
+
+    setResourceNameElement(newValue){
+        if(newValue instanceof StringDt===false){
+            throw new TypeError("ResourceName field expects an StringDt object");
+        }
+        this.myResourceName=newValue;
+        return this;
+    }
+
+
     get extensions(){
         if(!isValid(this.myExtensions)){
             this.myExtensions=new Array();
@@ -126,5 +152,18 @@ export const FHIResource= class FHIResource extends Object{
         }
 
         return new Object();
+    }
+
+    _flatten(){
+        let oVal=new Object();
+        if(!this.getIdElement().isEmpty()){
+            oVal.id=this.id;
+        }
+
+        if(!this.getResourceNameElement().isEmpty()){
+            oVal.resourceName=this.resourceName;
+        }
+
+        return oVal;
     }
 }

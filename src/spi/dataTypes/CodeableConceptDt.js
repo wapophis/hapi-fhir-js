@@ -1,7 +1,8 @@
 import {isUndefined,isValid,isEmpty,isEmptyArray} from '../../utils/ValidationRules.js';
 import CodingDt from './CodingDt.js';
-
-export default class _CodeableConceptDt extends Object{
+import StringDt from './StringDt.js';
+import FlattenAbleObject from '../FlattenAbleObject.js';
+export default class _CodeableConceptDt extends FlattenAbleObject{
     constructor(root){
         super();
 
@@ -77,9 +78,14 @@ export default class _CodeableConceptDt extends Object{
         return this.coding[0];
     }
 
-    get text(){ 
+
+    get text(){
+        return this.getTextElement().valueOf();
+    }
+
+    getTextElement(){ 
         if(!isValid(this.myText)){
-            this.myText=new String();
+            this.myText=new StringDt();
         }
 
         return this.myText;
@@ -87,21 +93,24 @@ export default class _CodeableConceptDt extends Object{
     }
 
     set text(newVal){
-        this.myText=newVal;
+        this.getTextElement().value=newVal;
         return this;
     }
 
     isEmpty(){
-        return isEmptyArray(this.coding) && isEmpty(this.text);
+        return isEmptyArray(this.coding) && this.getTextElement().isEmpty();
     }
 
-    valueOf(){
+    _flatten(){
         let oVal=new Object();
 
         if(!isEmptyArray(this.getCodingElement())){
             oVal.coding=this.coding;
         }
 
+        if(!this.getTextElement().isEmpty()){
+            oVal.text=this.text;
+        }
         return oVal;
     }
 }

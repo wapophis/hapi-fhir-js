@@ -1,11 +1,12 @@
 import {isUndefined,isValid,isEmptyArray,isEmpty} from '../../utils/ValidationRules.js';
+import FlattenAbleObject from '../FlattenAbleObject.js';
 import _PeriodDt from './PeriodDt.js';
 import StringDt from './StringDt.js';
 import CodingDt from './CodingDt.js';
 import NameUseEnum from '../valueSets/NameUseEnum.js';
 
 
-export default class _HumanNameDt extends Object{
+export default class _HumanNameDt extends FlattenAbleObject{
     constructor(root){
         super();
         if(isValid(root)){
@@ -18,9 +19,36 @@ export default class _HumanNameDt extends Object{
             this.period=root.period;
         }
     }
-    
+    _flatten(){
+        let oVal=new Object();
+        if(!this.getUseElement().isEmpty()){
+            oVal.use=this.use;
+        }
+        if(!this.getTextElement().isEmpty()){
+            oVal.text=this.text;
+        }
+        if(!isEmptyArray(this.family)){
+            oVal.family=this.family;
+        }
+            
+        if(!isEmptyArray(this.given)){
+            oVal.given=this.given;
+        }
+        if(!isEmptyArray(this.prefix)){
+            oVal.prefix=this.prefix;
+        }
+        if(!isEmptyArray(this.suffix)){
+            oVal.suffix=this.suffix;
+        }
+        if(!this.getPeriodElement().isEmpty()){
+            oVal.period=this.period;
+        }
+
+        return oVal;
+    }
+
     get use(){
-        return this.getUseElement().valueOf();
+        return this.getUseElement().code.valueOf();
     }
 
     getUseElement(){
@@ -30,7 +58,7 @@ export default class _HumanNameDt extends Object{
         return this.myUse;
     }
 
-    set use(newValue){
+    set use(newValue){ 
         if(isValid(newValue)){
             let code=NameUseEnum.getByCode(newValue);
             if(!code.isEmpty()){
@@ -77,9 +105,11 @@ export default class _HumanNameDt extends Object{
         return this;
     }
 
-
-
     get family(){
+        return this._flattenArray(this.getFamily());
+    }
+
+    getFamily(){
         if(!isValid(this.myFamily)){
             this.myFamily=new Array();
         }
@@ -119,8 +149,11 @@ export default class _HumanNameDt extends Object{
         this.myFamily=newValue;
     }
 
-
     get given(){
+        return this._flattenArray(this.getGiven());
+    }
+
+    getGiven(){
         if(!isValid(this.myGiven)){
             this.myGiven=new Array();
         }
@@ -162,12 +195,14 @@ export default class _HumanNameDt extends Object{
     }
 
     get prefix(){
+        return this._flattenArray(this.getPrefix());
+    }
+
+    getPrefix(){
         if(!isValid(this.myPrefix)){
             this.myPrefix=new Array();
         }
-
         return this.myPrefix;
-
     }
 
     /**
@@ -201,6 +236,10 @@ export default class _HumanNameDt extends Object{
     }
 
     get suffix(){
+        return this._flattenArray(this.getSuffix());
+    }
+
+    getSuffix(){
         if(!isValid(this.mySuffix)){
             this.mySuffix=new Array();
         }
@@ -240,6 +279,10 @@ export default class _HumanNameDt extends Object{
     }
 
     get period(){
+        return this.getPeriodElement().valueOf();
+    }
+
+    getPeriodElement(){
         if(!isValid(this.myPeriod)){
             this.myPeriod=new _PeriodDt();
         }
@@ -248,9 +291,18 @@ export default class _HumanNameDt extends Object{
     }
 
     set period(newValue){
+        return this.setPeriodElement(new _PeriodDt(newValue));
+    }
+
+    setPeriodElement(newValue){
+        if(newValue instanceof _PeriodDt===false){
+            throw new TypeError("Period expects a periodDt object");
+        }
+
         this.myPeriod=newValue;
         return this;
     }
+
 
     isEmpty(){
         return isEmptyArray(this.given) 
@@ -258,7 +310,7 @@ export default class _HumanNameDt extends Object{
                 && isEmptyArray(this.suffix)
                 && isEmptyArray(this.family)
                 && this.getTextElement().isEmpty()
-                && this.period.isEmpty();
+                && this.getPeriodElement().isEmpty();
     }
 
     /**
@@ -353,6 +405,16 @@ export default class _HumanNameDt extends Object{
         return this.prefix[0];
     }
 
+    _flattenArray(array){
+        let oVal=new Array();
+        for(let i=0;i<array.length;i++){
+            oVal.push(array[i].valueOf());
+        }
+
+        return oVal;
+    }
 
 
+
+ 
 }

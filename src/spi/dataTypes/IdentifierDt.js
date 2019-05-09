@@ -217,7 +217,7 @@ export default class _IdentifierDt extends Object{
         let oVal=new Object();
 
         if(!this.getUseElement().isEmpty()){
-            oVal.use=this.getUseElement().valueOf();
+            oVal.use=this.getUseElement().code.valueOf();
         }
 
         if(!this.getTypeElement().isEmpty()){

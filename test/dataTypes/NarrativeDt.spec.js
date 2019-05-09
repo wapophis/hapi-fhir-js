@@ -1,11 +1,11 @@
 import { expect } from "chai"
-import NarrativeDt from '../src/spi/dataTypes/NarrativeDt.js';
-import CodingDt from '../src/spi/dataTypes/CodingDt.js';
-import StringDt from '../src/spi/dataTypes/StringDt.js';
-import NarrativeStatusEnum from '../src/spi/valueSets/NarrativeStatusEnum.js';
+import NarrativeDt from '../../src/spi/dataTypes/NarrativeDt.js';
+import CodingDt from '../../src/spi/dataTypes/CodingDt.js';
+import StringDt from '../../src/spi/dataTypes/StringDt.js';
+import NarrativeStatusEnum from '../../src/spi/valueSets/NarrativeStatusEnum.js';
 
 
-import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../src/utils/ValidationRules.js';
+import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../../src/utils/ValidationRules.js';
 
 describe("NarrativeDt DataType test",()=>{
     describe("Constructor",()=>{     

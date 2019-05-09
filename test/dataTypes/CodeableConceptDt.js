@@ -1,6 +1,6 @@
 import { expect } from "chai"
-import CodeableConceptDt from '../src/spi/dataTypes/CodeableConceptDt.js';
-import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../src/utils/ValidationRules.js';
+import CodeableConceptDt from '../../src/spi/dataTypes/CodeableConceptDt.js';
+import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../../src/utils/ValidationRules.js';
 
 describe("CodeableConceptDt DataType test",()=>{
     describe("Constructor",()=>{     
