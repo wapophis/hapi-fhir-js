@@ -32,7 +32,7 @@ describe("FHIR ExtensionDt test",()=>{
         let myCompleteExtension=new ExtensionDt();
         
         it("Putting IdentifierDt",()=>{
-            debugger;
+
             let myDt=new IdentifierDt({value:"aoaidjfadf-a-dsfa-sfdhoafds",use:"Zombie Use Only"});
             let myExtension=new ExtensionDt();
             myExtension.put(myDt);
@@ -42,8 +42,14 @@ describe("FHIR ExtensionDt test",()=>{
         });
 
         it("Putting HumanNameDt",()=>{
-            debugger;
-            let myDt=new HumanNameDt();
+            let myDt=new HumanNameDt({family:["Luis"]
+            ,given:["Martínez"]
+            ,suffix:["sufijo"]
+            ,prefix:["prefijo"]
+            ,use:"use"
+            ,text:"text"
+            ,period:{start:new Date(),end:new Date()}
+            });
             let myExtension=new ExtensionDt();
             myExtension.put(myDt);
             myCompleteExtension.put(new HumanNameDt(myExtension.valueHumanName));
@@ -52,7 +58,13 @@ describe("FHIR ExtensionDt test",()=>{
 
         it("Putting ContactPointDt",()=>{
            
-            let myDt=new ContactPointDt();
+            let myDt=new ContactPointDt(new ContactPointDt({
+                system:"system",
+                value:"value",
+                use:"use",
+                rank:"rank",
+                period:{start:new Date(),end:new Date()}
+            }));
             let myExtension=new ExtensionDt();
             myExtension.put(myDt);
             myCompleteExtension.put(new ContactPointDt(myExtension.valueContactPoint));
@@ -61,9 +73,21 @@ describe("FHIR ExtensionDt test",()=>{
 
 
         it("Putting AddressDt",()=>{
-            let myDt=new AddressDt();
+            debugger;
+            let myDt=new AddressDt({use:"use"
+            ,type:"type"
+            ,text:"text"
+            ,line:["1","2","3"]
+            ,city:"city"
+            ,district:"district"
+            ,state:"state"
+            ,postalCode:"postalCode"
+            ,country:"country"
+            ,period:{start:new Date(),end:new Date()}
+            });
             let myExtension=new ExtensionDt();
             myExtension.put(myDt);
+            console.log(myExtension);
             myCompleteExtension.put(new AddressDt(myExtension.valueAddress));
             expect(myCompleteExtension.valueAddress).to.deep.equal(myExtension.valueAddress); 
         });

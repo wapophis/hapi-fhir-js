@@ -26,8 +26,55 @@ export default class _AddressDt extends FlattenAbleObject{
 
     }
 
+    _flatten(){
+        let oVal=new Object();
+
+        if(!this.getUseElement().isEmpty()){
+            oVal.use=this.use;
+        }
+
+        if(!this.getTypeElement().isEmpty()){
+            oVal.type=this.type;
+        }
+
+        if(!isEmptyArray(this.getLine())){
+            oVal.line=this._flattenArray(this.getLine());
+        }
+        if(!this.getCityElement().isEmpty()){
+            oVal.city=this.city;
+        }
+        if(!this.getDistrictElement().isEmpty()){
+            oVal.district=this.district;
+        }
+
+        if(!this.getStateElement().isEmpty()){
+            oVal.state=this.state;
+        }
+        if(!this.getPostalCodeElement().isEmpty()){
+            oVal.postalCode=this.postalCode;
+        }
+        if(!this.getCountryElement().isEmpty()){
+            oVal.country=this.country;
+        }
+
+        if(!this.getPeriodElement().isEmpty()){
+            oVal.period=this.period;
+        }
+
+        return oVal;
+        
+    }
+
+    _flattenArray(array){
+        let oVal=new Array();
+        for(let i=0;i<array.length;i++){
+            oVal.push(array[i].valueOf());
+        }
+        return oVal;
+    }
+
     get use(){
-       return this.getUseElement().code;
+       return this.getUseElement().code.valueOf();
     }
 
     set use(newValue){
@@ -65,7 +112,7 @@ export default class _AddressDt extends FlattenAbleObject{
 
 
     get type(){
-      return this.getTypeElement().code;
+      return this.getTypeElement().code.valueOf();
     }
 
     set type(newValue){
@@ -111,14 +158,16 @@ export default class _AddressDt extends FlattenAbleObject{
     }
 
     get line(){
-        return this.myLine;
+        return this._flattenArray(this.getLine());
     }
 
     set line(newValue){
-        if(isValid(newValue) && Array.isArray(newValue)){
-            this.setLine(newValue);
-        }else{
-            this.setLine(new Array());
+        if(!isEmptyArray(newValue) ){
+            let oVal=new Array();
+            for(let i=0;i<newValue.length;i++){
+                    oVal.push(new StringDt(newValue[i].valueOf()));
+            }
+            this.setLine(oVal);
         }
         return this;
     }
@@ -159,6 +208,14 @@ export default class _AddressDt extends FlattenAbleObject{
         return this.addLine();
     }
 
+    getLine(){
+        if(!isValid(this.myLine)){
+            this.myLine=new Array();
+        }
+
+        return this.myLine;
+    }
+
 
     get city(){
       this.getCityElement().valueOf();
@@ -173,10 +230,10 @@ export default class _AddressDt extends FlattenAbleObject{
 
 
     set city(newValue){
-       this.getCityElement().value=newValue; 
+        this.getCityElement().value=newValue;
     }
 
-    setCity(newValue){
+    setCityElement(newValue){
         if(newValue instanceof StringDt===false){
             throw new TypeError("City field must be StringDt");
         }
@@ -202,10 +259,10 @@ export default class _AddressDt extends FlattenAbleObject{
 
     setDistrictElement(newValue){
         if(newValue instanceof StringDt===false){
-            throw new TypeError("City field must be StringDt");
+            throw new TypeError("District field must be StringDt");
         }
 
-        this.myCity=newValue;
+        this.myDistrict=newValue;
         return this;
     }
 

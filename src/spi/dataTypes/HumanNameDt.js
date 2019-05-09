@@ -19,9 +19,36 @@ export default class _HumanNameDt extends FlattenAbleObject{
             this.period=root.period;
         }
     }
-    
+    _flatten(){
+        let oVal=new Object();
+        if(!this.getUseElement().isEmpty()){
+            oVal.use=this.use;
+        }
+        if(!this.getTextElement().isEmpty()){
+            oVal.text=this.text;
+        }
+        if(!isEmptyArray(this.family)){
+            oVal.family=this.family;
+        }
+            
+        if(!isEmptyArray(this.given)){
+            oVal.given=this.given;
+        }
+        if(!isEmptyArray(this.prefix)){
+            oVal.prefix=this.prefix;
+        }
+        if(!isEmptyArray(this.suffix)){
+            oVal.suffix=this.suffix;
+        }
+        if(!this.getPeriodElement().isEmpty()){
+            oVal.period=this.period;
+        }
+
+        return oVal;
+    }
+
     get use(){
-        return this.getUseElement().valueOf();
+        return this.getUseElement().code.valueOf();
     }
 
     getUseElement(){
@@ -31,7 +58,7 @@ export default class _HumanNameDt extends FlattenAbleObject{
         return this.myUse;
     }
 
-    set use(newValue){
+    set use(newValue){ 
         if(isValid(newValue)){
             let code=NameUseEnum.getByCode(newValue);
             if(!code.isEmpty()){
@@ -78,9 +105,11 @@ export default class _HumanNameDt extends FlattenAbleObject{
         return this;
     }
 
-
-
     get family(){
+        return this._flattenArray(this.getFamily());
+    }
+
+    getFamily(){
         if(!isValid(this.myFamily)){
             this.myFamily=new Array();
         }
@@ -120,8 +149,11 @@ export default class _HumanNameDt extends FlattenAbleObject{
         this.myFamily=newValue;
     }
 
-
     get given(){
+        return this._flattenArray(this.getGiven());
+    }
+
+    getGiven(){
         if(!isValid(this.myGiven)){
             this.myGiven=new Array();
         }
@@ -163,12 +195,14 @@ export default class _HumanNameDt extends FlattenAbleObject{
     }
 
     get prefix(){
+        return this._flattenArray(this.getPrefix());
+    }
+
+    getPrefix(){
         if(!isValid(this.myPrefix)){
             this.myPrefix=new Array();
         }
-
         return this.myPrefix;
-
     }
 
     /**
@@ -202,6 +236,10 @@ export default class _HumanNameDt extends FlattenAbleObject{
     }
 
     get suffix(){
+        return this._flattenArray(this.getSuffix());
+    }
+
+    getSuffix(){
         if(!isValid(this.mySuffix)){
             this.mySuffix=new Array();
         }
@@ -241,6 +279,10 @@ export default class _HumanNameDt extends FlattenAbleObject{
     }
 
     get period(){
+        return this.getPeriodElement().valueOf();
+    }
+
+    getPeriodElement(){
         if(!isValid(this.myPeriod)){
             this.myPeriod=new _PeriodDt();
         }
@@ -249,9 +291,18 @@ export default class _HumanNameDt extends FlattenAbleObject{
     }
 
     set period(newValue){
+        return this.setPeriodElement(new _PeriodDt(newValue));
+    }
+
+    setPeriodElement(newValue){
+        if(newValue instanceof _PeriodDt===false){
+            throw new TypeError("Period expects a periodDt object");
+        }
+
         this.myPeriod=newValue;
         return this;
     }
+
 
     isEmpty(){
         return isEmptyArray(this.given) 
@@ -259,7 +310,7 @@ export default class _HumanNameDt extends FlattenAbleObject{
                 && isEmptyArray(this.suffix)
                 && isEmptyArray(this.family)
                 && this.getTextElement().isEmpty()
-                && this.period.isEmpty();
+                && this.getPeriodElement().isEmpty();
     }
 
     /**
@@ -353,6 +404,17 @@ export default class _HumanNameDt extends FlattenAbleObject{
     getPreffixFirstRep(){
         return this.prefix[0];
     }
+
+    _flattenArray(array){
+        let oVal=new Array();
+        for(let i=0;i<array.length;i++){
+            oVal.push(array[i].valueOf());
+        }
+
+        return oVal;
+    }
+
+
 
  
 }

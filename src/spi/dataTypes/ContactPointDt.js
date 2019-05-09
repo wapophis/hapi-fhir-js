@@ -26,6 +26,29 @@ export default class _ContactPointDt extends FlattenAbleObject{
 
     }
 
+    _flatten(){
+        let oVal=new Object();
+        if(!this.getSystemElement().isEmpty()){
+            oVal.system=this.system;
+        }
+        if(!this.getValueElement().isEmpty()){
+            oVal.value=this.value;
+        }
+
+        if(!this.getUseElement().isEmpty()){
+            oVal.use=this.use;
+        }
+
+        if(!this.getRankElement().isEmpty()){
+            oVal.rank=this.rank;
+        }
+
+        if(!this.getPeriodElement().isEmpty()){
+            oVal.period=this.period;
+        }
+        return oVal;
+    }
+
     /**
      * @return Boolean indicating if the dataType is empty
      */
@@ -41,7 +64,7 @@ export default class _ContactPointDt extends FlattenAbleObject{
      * @return the value of the system
      */
     get system(){
-        return this.getSystemElement.valueOf();
+        return this.getSystemElement().code.valueOf();
     }
     /**
      * @return {StringDt} with the element of the system.
@@ -102,7 +125,7 @@ export default class _ContactPointDt extends FlattenAbleObject{
     }
 
     get use(){
-        return this.getUseElement().valueOf();
+        return this.getUseElement().code.valueOf();
     }
 
     getUseElement(){

@@ -111,8 +111,6 @@ export default class _CodeableConceptDt extends FlattenAbleObject{
         if(!this.getTextElement().isEmpty()){
             oVal.text=this.text;
         }
-
-
         return oVal;
     }
 }
