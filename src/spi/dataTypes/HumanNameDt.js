@@ -44,7 +44,7 @@ export default class _HumanNameDt extends FlattenAbleObject{
             oVal.period=this.period;
         }
 
-        return oVal;
+        return oVal;º
     }
 
     get use(){
@@ -53,7 +53,7 @@ export default class _HumanNameDt extends FlattenAbleObject{
 
     getUseElement(){
         if(!isValid(this.myUse)){
-            this.myUse=new CodingDt();
+            this.myUse=new CodeDt();
         }
         return this.myUse;
     }
@@ -62,16 +62,16 @@ export default class _HumanNameDt extends FlattenAbleObject{
         if(isValid(newValue)){
             let code=NameUseEnum.getByCode(newValue);
             if(!code.isEmpty()){
-                this.setUseElement(code);
+                this.setUseElement(new CodeDt(code.code));
             }else{
-                this.getUseElement().code=newValue;
+                this.getUseElement().value=newValue;
             }
         }
     }
 
     setUseElement(newValue){
-        if(newValue instanceof CodingDt===false){
-            throw new TypeError("Use field must be a CodingDt object");
+        if(newValue instanceof CodeDt===false){
+            throw new TypeError("Use field must be a CodeDt object");
         }
         this.myUse=newValue;
         return this;
