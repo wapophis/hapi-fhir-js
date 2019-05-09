@@ -2,7 +2,11 @@ import {isValid,isEmpty} from '../../utils/ValidationRules.js';
 
 
   
-
+/**
+ * Created by Luis Martínez Fontiveros at 09-05-2019
+ * 
+ * Code Primitive Data type with basic checkings.
+ */
 export default class Code{
 
     constructor(value){
@@ -15,8 +19,13 @@ export default class Code{
     }
 
     set value(newValue){
-        if(isValid(_sanitize(newValue))){
-            this.myCoercedValue=_sanitize(newValue);
+        
+        if( (typeof newValue==='object') || (typeof newValue==='number') ){
+            throw "CodeDt cannot be cast to other object than an String...";
+        }
+
+        if(isValid(newValue)){
+            this.myCoercedValue=this._sanitize(`${newValue}`);
         }
     }
 
@@ -29,7 +38,7 @@ export default class Code{
      *  and where there is no whitespace other than single spaces in the contents
      */
     _sanitize(codeValue){
-        codeValue.replace(/^\s+|\s+$/g, '');
+       return codeValue.replace(/^\s+|\s+$/g, '');
     }
 
     
@@ -39,15 +48,12 @@ export default class Code{
                 return this.value;
             }
 
-            case `boolean`:{
-                return this.isEmpty();
-            }
             case 'number':{
                 throw "CodeDt cannot be cast to a number format, only string supported"
             }
 
             default:
-                return this.value;
+                return this.isEmpty();
         }
     }
     

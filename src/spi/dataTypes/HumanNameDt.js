@@ -2,7 +2,7 @@ import {isUndefined,isValid,isEmptyArray,isEmpty} from '../../utils/ValidationRu
 import FlattenAbleObject from '../FlattenAbleObject.js';
 import _PeriodDt from './PeriodDt.js';
 import StringDt from './StringDt.js';
-import CodingDt from './CodingDt.js';
+import CodeDt from './CodeDt.js';
 import NameUseEnum from '../valueSets/NameUseEnum.js';
 
 
