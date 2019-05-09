@@ -1,21 +1,21 @@
 import { expect } from "chai";
-import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../src/utils/ValidationRules.js';
-import Patient from '../src/spi/resources/Patient.js';
-import IdentifierDt from '../src/spi/dataTypes/IdentifierDt.js';
-import HumanNameDt from '../src/spi/dataTypes/HumanNameDt.js';
-import ContactPointDt from '../src/spi/dataTypes/ContactPointDt.js';
-import AddressDt from '../src/spi/dataTypes/AddressDt.js';
-import CodingDt from '../src/spi/dataTypes/CodingDt.js';
-import ExtensionDt from '../src/spi/dataTypes/ExtensionDt.js'
-import StringDt from '../src/spi/dataTypes/StringDt.js';
-import CodeableConceptDt from '../src/spi/dataTypes/CodeableConceptDt.js';
-import PeriodDt from '../src/spi/dataTypes/PeriodDt.js';
-import BooleanDt from '../src/spi/dataTypes/BooleanDt.js'
+import {isValid,isEmpty,isEmptyArray,isEmptyDate} from '../../src/utils/ValidationRules.js';
+import Patient from '../../src/spi/resources/Patient.js';
+import IdentifierDt from '../../src/spi/dataTypes/IdentifierDt.js';
+import HumanNameDt from '../../src/spi/dataTypes/HumanNameDt.js';
+import ContactPointDt from '../../src/spi/dataTypes/ContactPointDt.js';
+import AddressDt from '../../src/spi/dataTypes/AddressDt.js';
+import CodingDt from '../../src/spi/dataTypes/CodingDt.js';
+import ExtensionDt from '../../src/spi/dataTypes/ExtensionDt.js'
+import StringDt from '../../src/spi/dataTypes/StringDt.js';
+import CodeableConceptDt from '../../src/spi/dataTypes/CodeableConceptDt.js';
+import PeriodDt from '../../src/spi/dataTypes/PeriodDt.js';
+import BooleanDt from '../../src/spi/dataTypes/BooleanDt.js'
 
 
 
-import AdministrativeGenderEnum from '../src/spi/valueSets/AdministrativeGenderEnum.js';
-import MaritalStatusEnum from '../src/spi/valueSets/MaritalStatusEnum.js';
+import AdministrativeGenderEnum from '../../src/spi/valueSets/AdministrativeGenderEnum.js';
+import MaritalStatusEnum from '../../src/spi/valueSets/MaritalStatusEnum.js';
 
 describe("FHIR ExtensionDt test",()=>{
 

@@ -1,5 +1,5 @@
 import { expect } from "chai"
-import CodeDt from '../src/spi/dataTypes/CodeDt.js';
+import CodeDt from '../../src/spi/dataTypes/CodeDt.js';
 
 describe("CodeDt DataType test",()=>{
     describe("Constructor",()=>{     
