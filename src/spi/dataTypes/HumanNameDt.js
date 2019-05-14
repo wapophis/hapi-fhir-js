@@ -4,9 +4,10 @@ import _PeriodDt from './PeriodDt.js';
 import StringDt from './StringDt.js';
 import CodeDt from './CodeDt.js';
 import NameUseEnum from '../valueSets/NameUseEnum.js';
+import EXTENSIBLE from '../mixins/extensible.js';
 
 
-export default class _HumanNameDt extends FlattenAbleObject{
+export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
     constructor(root){
         super();
         if(isValid(root)){
