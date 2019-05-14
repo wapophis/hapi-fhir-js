@@ -1,7 +1,9 @@
 import {isUndefined,isValid,isEmptyArray,isEmpty,isString} from '../../utils/ValidationRules.js';
 import {ExtensionDt} from '../dataTypes/ExtensionDt';
 
-export default class EXTENSIBLE extends SuperClass{
+
+
+export default EXTENSIBLE= SuperClass=> class extends SuperClass{
   constructor(){
     this.myExtensions=new Array();
   }
