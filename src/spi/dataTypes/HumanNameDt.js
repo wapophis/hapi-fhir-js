@@ -105,10 +105,16 @@ export default class _HumanNameDt extends FlattenAbleObject{
         return this;
     }
 
+    /**
+     * Return the raw value for the StringDt family Element
+     */
     get family(){
         return this.getFamilyElement().valueOf();
     }
 
+    /**
+     * Returns the underliying family StringDt, empty if not exists
+     */
     getFamilyElement(){
         if(!isValid(this.myFamily)){
             this.myFamily=new StringDt();
@@ -153,6 +159,10 @@ export default class _HumanNameDt extends FlattenAbleObject{
         }
         this.myFamily=newValue;
     }
+
+
+
+
 
     get given(){
         return this._flattenArray(this.getGiven());
