@@ -19,8 +19,8 @@ import ReferenceDt from './ReferenceDt.js';
 export default class _ExtensionDt extends FlattenAbleObject{
 
     constructor(root){
-        this.valuePropName=null;
         super(root);
+        this.valuePropName=null;
         if(isValid(root)){
             for(let propName in root){
                 if(isValid(root[propName])){
