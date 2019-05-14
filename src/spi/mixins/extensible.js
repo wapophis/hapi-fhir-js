@@ -13,7 +13,17 @@ export default SuperClass=> class extends SuperClass{
    * Return the flatten version of the array of extensions
    */
   get extension(){
+    return this._flattenArray(this.getExtension());
+  }
 
+  /**
+   * Returning the array of extesion elements.
+   */
+  getExtension(){
+    if(!isValid(this.myExtensions)){
+      this.myExtensions=new Array();
+    }
+    return this.myExtensions;
   }
 
   /**
@@ -47,6 +57,16 @@ export default SuperClass=> class extends SuperClass{
   getByUri(uriValue){
 
   }
+
+
+  _flattenArray(array){
+    let oVal=new Array();
+    for(let i=0;i<array.length;i++){
+        oVal.push(array[i].valueOf());
+    }
+
+    return oVal;
+}
 
 
 }
