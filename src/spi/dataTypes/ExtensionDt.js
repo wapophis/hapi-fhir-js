@@ -130,7 +130,7 @@ export default class _ExtensionDt extends FlattenAbleObject{
     _flatten(){
         let oVal=new Object();
         oVal["uri"]=this.uri;
-        oVal[this.myUriValue]=this[this.myUriValue];
+        oVal[this.valuePropName]=this[this.valuePropName];
         return oVal;
     }
 
