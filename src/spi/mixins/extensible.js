@@ -39,7 +39,7 @@ export default SuperClass=> class extends SuperClass{
     }else{
       this.myExtensions.push(extension);
     }
-    return this.myExtensions(this.myExtensions.length-1);
+    return this.myExtensions[this.myExtensions.length-1];
   }
 
   /**
