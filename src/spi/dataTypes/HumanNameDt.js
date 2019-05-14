@@ -48,7 +48,7 @@ export default class _HumanNameDt extends FlattenAbleObject{
     }
 
     get use(){
-        return this.getUseElement().code.value;
+        return this.getUseElement().value;
     }
 
     getUseElement(){
