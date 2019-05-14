@@ -16,7 +16,7 @@ import ReferenceDt from './ReferenceDt.js';
  * Created by lucho 15-11-2018
  * @param {*} root
  */
-export default class ExtensionDt extends FlattenAbleObject{
+export default class _ExtensionDt extends FlattenAbleObject{
 
     constructor(root){
         super(root);
