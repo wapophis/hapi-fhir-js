@@ -14,9 +14,9 @@ import ReferenceDt from './ReferenceDt.js';
 
 /**
  * Created by lucho 15-11-2018
- * @param {*} root 
+ * @param {*} root
  */
-export default class _ExtensionDt extends FlattenAbleObject{
+export default class ExtensionDt extends FlattenAbleObject{
 
     constructor(root){
         super(root);
@@ -26,12 +26,12 @@ export default class _ExtensionDt extends FlattenAbleObject{
                     this[propName]=root[propName];
                 }
             }
-            
+
         }
     }
 
     /**
-     * 
+     *
      * @param {*} newValue extesion field to add. It will perform a flatten for all
      * the known types.
      */
@@ -51,7 +51,7 @@ export default class _ExtensionDt extends FlattenAbleObject{
             this.valueCoding=newValue.valueOf();
             return this;
         }
-        
+
         if(newValue instanceof PeriodDt){
             this.valuePeriod=newValue.valueOf();
             return this;
@@ -88,7 +88,7 @@ export default class _ExtensionDt extends FlattenAbleObject{
         }
 
         if(newValue instanceof Date){
-            
+
             if(newValue.getHours()===1){
                 this.valueDate=newValue.toDateString();
                 return this;

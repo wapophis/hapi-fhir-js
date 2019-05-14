@@ -1,5 +1,5 @@
 import {isUndefined,isValid,isEmptyArray,isEmpty,isString} from '../../utils/ValidationRules.js';
-import {_ExtensionDt} from '../dataTypes/ExtensionDt';
+import {ExtensionDt} from '../dataTypes/ExtensionDt';
 
 export default class EXTENSIBLE extends SuperClass{
   constructor(){
@@ -19,9 +19,9 @@ export default class EXTENSIBLE extends SuperClass{
    */
   add(extension){
     if(!isValid(extension)){
-      this.myExtensions.push(new _ExtensionDt());
+      this.myExtensions.push(new ExtensionDt());
     }
-    if(extension instanceof _ExtensionDt===false){
+    if(extension instanceof ExtensionDt===false){
       throw TypeError("Cannot add a non ExtensionDt object");
     }else{
       this.myExtensions.push(extension);
