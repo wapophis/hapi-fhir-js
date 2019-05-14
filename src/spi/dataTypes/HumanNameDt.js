@@ -30,7 +30,7 @@ export default class _HumanNameDt extends FlattenAbleObject{
         if(!isEmptyArray(this.family)){
             oVal.family=this.family;
         }
-            
+
         if(!isEmptyArray(this.given)){
             oVal.given=this.given;
         }
@@ -48,7 +48,7 @@ export default class _HumanNameDt extends FlattenAbleObject{
     }
 
     get use(){
-        return this.getUseElement().code.valueOf();
+        return this.getUseElement().code.value;
     }
 
     getUseElement(){
@@ -58,7 +58,7 @@ export default class _HumanNameDt extends FlattenAbleObject{
         return this.myUse;
     }
 
-    set use(newValue){ 
+    set use(newValue){
         if(isValid(newValue)){
             let code=NameUseEnum.getByCode(newValue);
             if(!code.isEmpty()){
@@ -94,7 +94,7 @@ export default class _HumanNameDt extends FlattenAbleObject{
     }
 
     /**
-     * 
+     *
      * @param {*} newValue StringDt with the value for text
      */
     setTextElement(newValue){
@@ -132,9 +132,9 @@ export default class _HumanNameDt extends FlattenAbleObject{
     }
 
     /**
-     * 
+     *
      * @param {*} newValue StringDt array containing the family names
-     * @private 
+     * @private
      * @return this object
      */
     setFamily(newValue){
@@ -168,9 +168,9 @@ export default class _HumanNameDt extends FlattenAbleObject{
         if(!isEmptyArray(newValue) ){
             let oVal=new Array();
             for(let i=0;i<newValue.length;i++){
-               
+
                 oVal.push(new StringDt(newValue[i].valueOf()));
-                
+
             }
             this.setGiven(oVal);
         }
@@ -178,9 +178,9 @@ export default class _HumanNameDt extends FlattenAbleObject{
     }
 
     /**
-     * 
-     * @param {*} newValue 
-     * @private 
+     *
+     * @param {*} newValue
+     * @private
      */
     setGiven(newValue){
         if(!Array.isArray(newValue)){
@@ -206,9 +206,9 @@ export default class _HumanNameDt extends FlattenAbleObject{
     }
 
     /**
-     * 
-     * @param {*} newValue 
-     *  
+     *
+     * @param {*} newValue
+     *
      */
     setPrefix(newValue){
         if(!Array.isArray(newValue)){
@@ -226,9 +226,9 @@ export default class _HumanNameDt extends FlattenAbleObject{
         if(!isEmptyArray(newValue) ){
             let oVal=new Array();
             for(let i=0;i<newValue.length;i++){
-               
+
                 oVal.push(new StringDt(newValue[i].valueOf()));
-                
+
             }
             this.setPrefix(oVal);
         }
@@ -252,9 +252,9 @@ export default class _HumanNameDt extends FlattenAbleObject{
         if(!isEmptyArray(newValue) ){
             let oVal=new Array();
             for(let i=0;i<newValue.length;i++){
-               
+
                 oVal.push(new StringDt(newValue[i].valueOf()));
-                
+
             }
             this.setSuffix(oVal);
         }
@@ -262,9 +262,9 @@ export default class _HumanNameDt extends FlattenAbleObject{
     }
 
      /**
-     * 
-     * @param {*} newValue 
-     *  
+     *
+     * @param {*} newValue
+     *
      */
     setSuffix(newValue){
         if(!Array.isArray(newValue)){
@@ -305,8 +305,8 @@ export default class _HumanNameDt extends FlattenAbleObject{
 
 
     isEmpty(){
-        return isEmptyArray(this.given) 
-                && isEmptyArray(this.prefix) 
+        return isEmptyArray(this.given)
+                && isEmptyArray(this.prefix)
                 && isEmptyArray(this.suffix)
                 && isEmptyArray(this.family)
                 && this.getTextElement().isEmpty()
@@ -314,7 +314,7 @@ export default class _HumanNameDt extends FlattenAbleObject{
     }
 
     /**
-     * 
+     *
      * @param {*} newVal Object to store in an StringDt. Internally this method use newVal.valueOf() to flat
      * the object value.
      */
@@ -331,7 +331,7 @@ export default class _HumanNameDt extends FlattenAbleObject{
 
     /**
      * Adds a given new value for family.
-     * @param {*} newVal 
+     * @param {*} newVal
      */
     addGiven(newVal){
         if(isValid(newVal)){
@@ -347,8 +347,8 @@ export default class _HumanNameDt extends FlattenAbleObject{
 
 
     /**
-     * 
-     * @param {*} newVal 
+     *
+     * @param {*} newVal
      */
     addPrefix(newVal){
         if(isValid(newVal)){
@@ -363,8 +363,8 @@ export default class _HumanNameDt extends FlattenAbleObject{
 
 
     /**
-     * 
-     * @param {*} newVal 
+     *
+     * @param {*} newVal
      */
     addSuffix(newVal){
         if(isValid(newVal)){
@@ -416,5 +416,5 @@ export default class _HumanNameDt extends FlattenAbleObject{
 
 
 
- 
+
 }
