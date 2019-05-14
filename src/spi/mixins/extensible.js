@@ -1,5 +1,5 @@
 import {isUndefined,isValid,isEmptyArray,isEmpty,isString} from '../../utils/ValidationRules.js';
-import {ExtensionDt} from '../dataTypes/ExtensionDt';
+import {ExtensionDt} from '../dataTypes/ExtensionDt.js';
 
 
 
