@@ -8,6 +8,7 @@ import _IdentifierDt from './spi/dataTypes/IdentifierDt.js';
 import _NarrativeDt from './spi/dataTypes/NarrativeDt.js';
 import _PeriodDt from './spi/dataTypes/PeriodDt.js';
 import _ReferenceDt from './spi/dataTypes/ReferenceDt.js';
+import _ExtensionDt from './spi/dataTypes/ExtensionDt.js';
 
 
 export const AddressDt=_AddressDt;
@@ -20,6 +21,7 @@ export const IdentifierDt=_IdentifierDt;
 export const NarrativeDt=_NarrativeDt;
 export const PeriodDt=_PeriodDt;
 export const ReferenceDt=_ReferenceDt;
+export const ExtensionDt=_ExtensionDt;
 
 
 
