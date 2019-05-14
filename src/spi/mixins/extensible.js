@@ -47,7 +47,13 @@ export default SuperClass=> class extends SuperClass{
    * @param {_ExtensionDt} extension removes all the extensions registered with same uri and value
    */
   remove(extension){
-
+      for(let i=this.getExtension().length-1;i>=0;i--){
+        if(this.getExtension()[i]===extension)
+          {
+            this.getExtension(i,1);
+          }
+      }
+      return this;
   }
 
   /**
@@ -55,7 +61,14 @@ export default SuperClass=> class extends SuperClass{
    * @param {String} uriValue return all the extesions idenfiied by an uri string value as array
    */
   getByUri(uriValue){
-
+    let oVal=new Array();
+    for(let i=0;i<this.getExtension().length;i++){
+      if(this.getExtension()[i].uri===uriValue)
+        {
+          oVal.push(this.getExtension()[i]);
+        }
+    }
+    return oVal;
   }
 
 

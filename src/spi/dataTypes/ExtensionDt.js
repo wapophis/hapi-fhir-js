@@ -19,6 +19,7 @@ import ReferenceDt from './ReferenceDt.js';
 export default class _ExtensionDt extends FlattenAbleObject{
 
     constructor(root){
+        this.valuePropName=null;
         super(root);
         if(isValid(root)){
             for(let propName in root){
@@ -39,21 +40,25 @@ export default class _ExtensionDt extends FlattenAbleObject{
 
         if(newValue instanceof StringDt){
             this.valueString=newValue.value.valueOf();
+            this.valuePropName="valueString";
             return this;
         }
 
         if(newValue instanceof CodeableConceptDt){
             this.valueCodeableConcept=newValue.valueOf();
+            this.valuePropName="valueCodeableConcept";
             return this;
         }
 
         if(newValue instanceof CodingDt){
             this.valueCoding=newValue.valueOf();
+            this.valuePropName="valueCoding";
             return this;
         }
 
         if(newValue instanceof PeriodDt){
             this.valuePeriod=newValue.valueOf();
+            this.valuePropName="valuePeriod";
             return this;
         }
 
@@ -112,10 +117,16 @@ export default class _ExtensionDt extends FlattenAbleObject{
             this.valueDecimal=newValue.valueOf();
             return this;
         }
-
-
-
     }
+
+    get uri(){
+        return this.myUriValue;
+    }
+
+    set uri(newUriValue){
+        this.myUriValue=newUriValue;
+    }
+
 
 
 }
