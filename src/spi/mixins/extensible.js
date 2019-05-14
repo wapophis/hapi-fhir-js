@@ -30,7 +30,7 @@ export default SuperClass=> class extends SuperClass{
    *
    * @param {_ExtensionDt} extension  adds an ExtensionDt element to the object
    */
-  add(extension){
+  addExtension(extension){
     if(!isValid(extension)){
       this.myExtensions.push(new ExtensionDt());
     }
@@ -46,7 +46,7 @@ export default SuperClass=> class extends SuperClass{
    *
    * @param {_ExtensionDt} extension removes all the extensions registered with same uri and value
    */
-  remove(extension){
+  removeExtension(extension){
       for(let i=this.getExtension().length-1;i>=0;i--){
         if(this.getExtension()[i]===extension)
           {
@@ -60,7 +60,7 @@ export default SuperClass=> class extends SuperClass{
    *
    * @param {String} uriValue return all the extesions idenfiied by an uri string value as array
    */
-  getByUri(uriValue){
+  getExtensionByUri(uriValue){
     let oVal=new Array();
     for(let i=0;i<this.getExtension().length;i++){
       if(this.getExtension()[i].uri===uriValue)
