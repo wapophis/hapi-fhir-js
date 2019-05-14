@@ -106,12 +106,12 @@ export default class _HumanNameDt extends FlattenAbleObject{
     }
 
     get family(){
-        return this._flattenArray(this.getFamily());
+        return this.getFamilyElement().valueOf();
     }
 
-    getFamily(){
+    getFamilyElement(){
         if(!isValid(this.myFamily)){
-            this.myFamily=new Array();
+            this.myFamily=new StringDt();
         }
         return this.myFamily;
     }
@@ -121,7 +121,7 @@ export default class _HumanNameDt extends FlattenAbleObject{
      * Setter method wich expect an string aka surname
      */
     set family(newValue){
-        this.setFamilyElement(newValue);
+        this.getFamilyElement().value=newValue;
     }
 
     /**
@@ -130,11 +130,8 @@ export default class _HumanNameDt extends FlattenAbleObject{
      * @return StringDt element for the surname.
      */
     setFamilyElement(newValue){
-        this.myFamily=new StringDt();
-        if(!isUndefined(newValue)){
-            this.myFamily.value=newValue;
-        }
-        return this.myFamily;
+        this.getFamilyElement().value=newValue.valueOf();
+        return this;
     }
 
 
