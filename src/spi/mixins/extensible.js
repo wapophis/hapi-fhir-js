@@ -5,6 +5,7 @@ import ExtensionDt from '../dataTypes/ExtensionDt.js';
 
 export default SuperClass=> class extends SuperClass{
   constructor(){
+    super();
     this.myExtensions=new Array();
   }
 
