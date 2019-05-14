@@ -3,7 +3,7 @@ import ExtensionDt from '../dataTypes/ExtensionDt.js';
 
 
 
-export const EXTENSIBLE= SuperClass=> class extends SuperClass{
+export default SuperClass=> class extends SuperClass{
   constructor(){
     this.myExtensions=new Array();
   }
