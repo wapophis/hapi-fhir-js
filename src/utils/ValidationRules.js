@@ -1,5 +1,5 @@
 export function isUndefined(object){
-   
+
     return (typeof object==='undefined');
 }
 
@@ -15,6 +15,10 @@ export function isValid(object){
     return !isUndefined(object) && !isNull(object);
 }
 
+export function isString(object){
+    return typeof object ==='string';
+}
+
 export function isEmptyArray(object){
     if(Array.isArray(object) && object.length>0){
         return false;
@@ -27,7 +31,7 @@ export function isEmptyDate(object){
     if(!isValid(object)){
         return true;
     }
-    
+
     if(object instanceof Date){
         return new Date(0,0,0).getTime()===object.getTime();
     }

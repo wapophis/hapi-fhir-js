@@ -1,4 +1,4 @@
-import {isUndefined,isValid,isEmptyArray,isEmpty} from '../../utils/ValidationRules.js';
+import {isUndefined,isValid,isEmptyArray,isEmpty,isString} from '../../utils/ValidationRules.js';
 import FlattenAbleObject from '../FlattenAbleObject.js';
 import _PeriodDt from './PeriodDt.js';
 import StringDt from './StringDt.js';
@@ -118,18 +118,22 @@ export default class _HumanNameDt extends FlattenAbleObject{
 
 
     /**
-     * Setter method wich expect an string array containing all the family names.
+     * Setter method wich expect an string aka surname
      */
     set family(newValue){
-        if(!isEmptyArray(newValue) ){
-            let oVal=new Array();
-            for(let i=0;i<newValue.length;i++){
-                    oVal.push(new StringDt(newValue[i].valueOf()));
-            }
-            this.setFamily(oVal);
-        }
+        this.setFamilyElement(newValue);
+    }
+
+    /**
+     *
+     * @param {*} newValue Expect an StrinDt value or an string typeof object
+     */
+    setFamilyElement(newValue){
+        this.myFamily=new StringDt(newValue.valueOf());
         return this;
     }
+
+
 
     /**
      *
