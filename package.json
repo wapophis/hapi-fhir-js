@@ -16,9 +16,8 @@
     "url": "git+https://github.com/wapophis/hapi-fhir-js.git"
   },
   "module": ".esm.js",
-  "browser":".umd.js",
+  "browser": ".umd.js",
   "main": "/src/fhir-dstu-3-0.js",
-
   "scripts": {
     "test": "./node_modules/.bin/mocha --require @babel/register",
     "testdebug": "./node_modules/.bin/mocha --inspect-brk --require @babel/register",

@@ -22,7 +22,6 @@ describe("FHIR ExtensionDt test",()=>{
     describe("Constructor",()=>{     
         it("Constructor with arguments",()=>{
             let myExtension=new ExtensionDt({valueDecimal:10.1});
-            console.log(myExtension);
         });
     });
 
@@ -87,7 +86,7 @@ describe("FHIR ExtensionDt test",()=>{
             });
             let myExtension=new ExtensionDt();
             myExtension.put(myDt);
-            console.log(myExtension);
+            
             myCompleteExtension.put(new AddressDt(myExtension.valueAddress));
             expect(myCompleteExtension.valueAddress).to.deep.equal(myExtension.valueAddress); 
         });
@@ -171,7 +170,6 @@ describe("FHIR ExtensionDt test",()=>{
             expect(myCompleteExtension.valueTime).to.deep.equal(myExtension.valueTime); 
         });
         
-        console.log(myCompleteExtension);
 
     });
 
