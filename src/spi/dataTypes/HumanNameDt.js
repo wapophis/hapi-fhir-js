@@ -127,10 +127,14 @@ export default class _HumanNameDt extends FlattenAbleObject{
     /**
      *
      * @param {*} newValue Expect an StrinDt value or an string typeof object
+     * @return StringDt element for the surname.
      */
     setFamilyElement(newValue){
-        this.myFamily=new StringDt(newValue.valueOf());
-        return this;
+        this.myFamily=new StringDt();
+        if(!isUndefined(newValue)){
+            this.myFamily.value=newValue;
+        }
+        return this.myFamily;
     }
 
 
