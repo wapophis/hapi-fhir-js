@@ -64,31 +64,37 @@ export default class _ExtensionDt extends FlattenAbleObject{
 
         if(newValue instanceof IdentifierDt){
             this.valueIdentifier=newValue.valueOf();
+            this.valuePropName="valueIdentifier";
             return this;
         }
 
         if(newValue instanceof HumanNameDt){
             this.valueHumanName=newValue.valueOf();
+            this.valuePropName="valueHumanName";
             return this;
         }
 
         if(newValue instanceof BooleanDt){
             this.valueBoolean=newValue.valueOf();
+            this.valuePropName="valueBoolean";
             return this;
         }
 
         if(newValue instanceof AddressDt){
             this.valueAddress=newValue.valueOf();
+            this.valuePropName="valueAddress";
             return this;
         }
 
         if(newValue instanceof ContactPointDt){
             this.valueContactPoint=newValue.valueOf();
+            this.valuePropName="valueContactPoint";
             return this;
         }
 
         if(newValue instanceof ReferenceDt){
             this.valueReference=newValue.valueOf();
+            this.valuePropName="valueReference";
             return this;
         }
 
@@ -110,11 +116,13 @@ export default class _ExtensionDt extends FlattenAbleObject{
 
         if(Number.isInteger(newValue.valueOf())===true){
             this.valueInteger=newValue.valueOf();
+            this.valuePropName="valueInteger";
             return this;
         }
 
         if(!Number.isNaN(Number.parseFloat(newValue.valueOf()))){
             this.valueDecimal=newValue.valueOf();
+            this.valuePropName="valueDecimal";
             return this;
         }
     }

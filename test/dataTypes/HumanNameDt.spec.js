@@ -181,8 +181,7 @@ describe("HumanNameDt DataType test",()=>{
     describe("Constructor",()=>{     
         it("should generate an instance object",()=>{
             let myInstance=new HumanNameDt();
-            console.log(fetchResource());
-            expect(myInstance instanceof HumanNameDt,true);                    
+            expect(myInstance instanceof HumanNameDt,true);                  
         });
 
         /**
@@ -203,50 +202,116 @@ describe("HumanNameDt DataType test",()=>{
 
     });
 
+    /**
+     * Test for the Family Name
+     */
+    describe("Family Name",()=>{
+      it('Should persist value correctly',()=>{
+        let myInstance=new HumanNameDt({family:"Family Name"});
+        expect(myInstance.family).to.equals(new StringDt("Family Name").value);
+      });
+
+      it('Should mutate the field correcty',()=>{
+        let myInstance=new HumanNameDt({family:"Family Name"});
+        myInstance.getFamilyElement().value+=" Mutated Family Name";
+        expect(myInstance.family).to.equals("Family Name Mutated Family Name");
+        myInstance.family+=" mutated";
+        expect(myInstance.family).to.equals("Family Name Mutated Family Name mutated");
+        
+      });
+
+      it('Should replace the field value correcty',()=>{
+        let myInstance=new HumanNameDt({family:"Family Name"});
+        let replaced=new StringDt("New Family Name");
+        myInstance.setFamilyElement(replaced);
+        expect(myInstance.getFamilyElement().value).to.eql(replaced.value);
+        myInstance.family=replaced.value;
+        expect(myInstance.family).to.eql(replaced.value);
+      });
+
+
+      it('Should not replace the field object instance ',()=>{
+        let myInstance=new HumanNameDt({family:"Family Name"});
+        let replaced=new StringDt("New Family Name");
+        myInstance.setFamilyElement(replaced);
+        expect(myInstance.getFamilyElement()===replaced,true);
+      });
+    });
+
+
+    /**
+     * Test for the given Name
+     */
+    describe("Given Name",()=>{
+      it('Should persist value correctly',()=>{
+        let myInstance=new HumanNameDt({given:["Given", "Name"]});
+        expect(myInstance.given).to.eql(["Given","Name"]);
+      });
+
+      it('Should mutate the field correcty',()=>{
+        let myInstance=new HumanNameDt({given:["Family","Name"]});
+        myInstance.getGiven().push("NEWEL");
+        expect(myInstance.given).to.eqls(["Family","Name","NEWEL"]);
+      });
+
+      it('Should replace the field value correcty',()=>{
+        let myInstance=new HumanNameDt({given:["Family","Name"]});
+        let replaced=[new StringDt("Family"),new StringDt("Name"),new StringDt("Replaced")];
+        myInstance.setGiven(replaced);
+        expect(myInstance.getGiven()).to.eql(replaced);
+      });
+
+      describe('Should add names to the given names array...',()=>{
+
+        it("Add raw value in an initialized given array",()=>{
+          let myInstance=new HumanNameDt({given:["Family","Name"]});
+          myInstance.addGiven("newName");
+          expect(myInstance.given).to.eqls(["Family","Name","newName"]);
+        });
+
+        it("Add raw value in an empty given array",()=>{
+          let myInstance=new HumanNameDt();
+          myInstance.addGiven("newName");
+          expect(myInstance.given).to.eqls(["newName"]);
+        });
+      
+       
+        it("Add an StringDt type object in an empty given array ..",()=>{
+          let myInstance=new HumanNameDt();
+          let newName=new StringDt("newName");
+          myInstance.addGiven(newName);
+          expect(myInstance.given).to.eqls(["newName"]);
+          expect(myInstance.getGiven()).to.eqls([newName]);
+        });
+
+        it("Add an StringDt type object in an initialized array given array ..",()=>{
+          let myInstance=new HumanNameDt({given:[new StringDt("newName")]});
+          let newName=new StringDt("newName");
+          myInstance.addGiven(newName);
+          expect(myInstance.given).to.eqls(["newName","newName"]);
+          expect(myInstance.getGiven()).to.eqls([newName,newName]);
+        });
+        
+      });
+
+      it('Should get first given Name from the given Array...',()=>{
+        let myInstance=new HumanNameDt({given:["Family","Name"]});
+        expect(myInstance.getGiven()[0]).to.eqls(myInstance.getGivenFirstRep());
+      });
+
+      it('Should get first given Name from the given Array and modify it...',()=>{
+        let myInstance=new HumanNameDt({given:["Family","Name"]});
+        myInstance.getGivenFirstRep().value="YLIMAF";
+        expect(myInstance.given[0]).to.eqls("YLIMAF");
+        expect(myInstance.given[0]).not.to.eqls(undefined);
+      });
+    });
+
+
    
 
     describe("Array setters ",()=>{
-        
-        it('Testing field "family"...',()=>{
-            let myInstance=new HumanNameDt({family:[new StringDt("a"),new StringDt("b"),new StringDt("c")]});
-            expect(myInstance.family.length,'Testing length from field array').to.equals(3) ;
-            expect(myInstance.getFamilyFirstRep().valueOf(),'Testing first element').to.equals(new StringDt("a").valueOf());
-            expect(myInstance.family[1].valueOf(),'Testing second element').to.equals(new StringDt("b").valueOf());            
-            expect(myInstance.family[2].valueOf(),'Testing third element').to.equals(new StringDt("c").valueOf());
-            // ADDLINE  string
-            myInstance.addFamily("d");
-            expect(myInstance.family.length,'Testing length from field array').to.equals(4);
-            expect(myInstance.family[3].valueOf(),'Testing first element').to.equals(new StringDt("d").valueOf());
-            // EMPTY ADDLINE
-            myInstance.addFamily().value="e";
-            expect(myInstance.family.length,'Testing length from field array').to.equals(5) ;
-            expect(myInstance.family[4].valueOf(),'Testing first element').to.equals(new StringDt("e").valueOf());
-            // ADDLINE STRINGDT
-            myInstance.addFamily(new StringDt("f"));
-            expect(myInstance.family.length,'Testing length from field array').to.equals(6) ;
-            expect(myInstance.family[5].valueOf(),'Testing first element').to.equals(new StringDt("f").valueOf());           
-        });
 
-
-        it('Testing field "given"...',()=>{
-            let myInstance=new HumanNameDt({given:[new StringDt("a"),new StringDt("b"),new StringDt("c")]});
-            expect(myInstance.given.length,'Testing length from field array').to.equals(3) ;
-            expect(myInstance.getGivenFirstRep().valueOf(),'Testing first element').to.equals(new StringDt("a").valueOf());
-            expect(myInstance.given[1].valueOf(),'Testing second element').to.equals(new StringDt("b").valueOf());            
-            expect(myInstance.given[2].valueOf(),'Testing third element').to.equals(new StringDt("c").valueOf());
-            // ADDLINE  string
-            myInstance.addGiven("d");
-            expect(myInstance.given.length,'Testing length from field array').to.equals(4) ;
-            expect(myInstance.given[3].valueOf(),'Testing first element').to.equals(new StringDt("d").valueOf());
-            // EMPTY ADDLINE
-            myInstance.addGiven().value="e";
-            expect(myInstance.given.length,'Testing length from field array').to.equals(5) ;
-            expect(myInstance.given[4].valueOf(),'Testing first element').to.equals(new StringDt("e").valueOf());
-            // ADDLINE STRINGDT
-            myInstance.addGiven(new StringDt("f"));
-            expect(myInstance.given.length,'Testing length from field array').to.equals(6) ;
-            expect(myInstance.given[5].valueOf(),'Testing first element').to.equals(new StringDt("f").valueOf());           
-        });
 
 
         it('Testing field "prefix"...',()=>{

@@ -32,7 +32,7 @@ export default class StringDt extends Object{
         if(this.isEmpty()){
             this.myCoercedValue=new String();
         }
-        return this.myCoercedValue;
+        return this.valueOf();
     }
 
     isEmpty(){

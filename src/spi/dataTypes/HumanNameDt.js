@@ -150,15 +150,8 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
      * @return this object
      */
     setFamily(newValue){
-        if(!Array.isArray(newValue)){
-            throw new TypeError("Family field expect an Array");
-        }
-        for(let i=0;i<newValue.length;i++){
-            if(newValue[i] instanceof StringDt===false){
-                throw new TypeError("Family items in array must be StringDt objects");
-            }
-        }
         this.myFamily=newValue;
+        return this;
     }
 
 
@@ -334,7 +327,7 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
      * @param {*} newVal Object to store in an StringDt. Internally this method use newVal.valueOf() to flat
      * the object value.
      */
-    addFamily(newVal){
+    /*addFamily(newVal){
         if(isValid(newVal)){
             this.family.push(new StringDt(newVal.valueOf()));
             return this;
@@ -343,21 +336,16 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
             this.family.push(oVal);
             return oVal;
         }
-    }
+    }*/
 
     /**
      * Adds a given new value for family.
      * @param {*} newVal
      */
     addGiven(newVal){
-        if(isValid(newVal)){
-            this.given.push(new StringDt(newVal.valueOf()));
-            return this;
-        }else{
-            let oVal=new StringDt();
-            this.given.push(oVal);
-            return oVal;
-        }
+        let newGivenName=new StringDt(newVal);
+        this.getGiven().push(newVal);
+        return newGivenName;
     }
 
 
@@ -396,15 +384,15 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
     /**
      * Return first element for family array;
      */
-    getFamilyFirstRep(){
+   /* getFamilyFirstRep(){
         return this.family[0];
-    }
+    } */
 
     /**
      * Return first element for given array.
      */
     getGivenFirstRep(){
-        return this.given[0];
+        return this.getGiven()[0];
     }
 
     /**
