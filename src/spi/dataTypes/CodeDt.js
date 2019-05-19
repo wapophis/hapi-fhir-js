@@ -19,7 +19,7 @@ export default class Code{
     }
 
     set value(newValue){
-        
+    
         if( (typeof newValue==='object') || (typeof newValue==='number') ){
             throw "CodeDt cannot be cast to other object than an String...";
         }
@@ -27,6 +27,10 @@ export default class Code{
         if(isValid(newValue)){
             this.myCoercedValue=this._sanitize(`${newValue}`);
         }
+    }
+
+    valueOf(){
+        return this.value.toString();
     }
 
     isEmpty(){

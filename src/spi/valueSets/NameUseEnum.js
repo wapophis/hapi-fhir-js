@@ -1,5 +1,6 @@
 
 import CodingDt from '../dataTypes/CodingDt.js';
+import CodeDt from '../dataTypes/CodeDt.js';
 
 export const NameUseEnum = Object.freeze({
     "USUAL":new CodingDt({code:'usual',display:"Habitual"}),
@@ -12,11 +13,11 @@ export const NameUseEnum = Object.freeze({
 
     getByCode(code){
         for(let propName in this) {
-            if((typeof(this[propName]) != "undefined") && this[propName].code===code) {
-               return this[propName];
+            if((typeof(this[propName]) != "undefined") && this[propName].code===code.valueOf()) {
+                return new CodeDt(this[propName].code.valueOf());
             }
          }
-         return new CodingDt({code:code});
+         return new CodeDt(code.valueOf());
     }
 
 });

@@ -1,5 +1,6 @@
 import { expect } from "chai"
 import HumanNameDt from '../../src/spi/dataTypes/HumanNameDt.js';
+import CodeDt from '../../src/spi/dataTypes/CodeDt.js';
 import PeriodDt from '../../src/spi/dataTypes/PeriodDt.js';
 import StringDt from '../../src/spi/dataTypes/StringDt.js';
 import NameUseEnum from '../../src/spi/valueSets/NameUseEnum.js';
@@ -205,7 +206,7 @@ describe("HumanNameDt DataType test",()=>{
     /**
      * Test for the Family Name
      */
-    describe("Family Name",()=>{
+    describe("<Family Name>",()=>{
       it('Should persist value correctly',()=>{
         let myInstance=new HumanNameDt({family:"Family Name"});
         expect(myInstance.family).to.equals(new StringDt("Family Name").value);
@@ -242,7 +243,7 @@ describe("HumanNameDt DataType test",()=>{
     /**
      * Test for the given Name
      */
-    describe("Given Name",()=>{
+    describe("<Given Name>",()=>{
       it('Should persist value correctly',()=>{
         let myInstance=new HumanNameDt({given:["Given", "Name"]});
         expect(myInstance.given).to.eql(["Given","Name"]);
@@ -306,6 +307,123 @@ describe("HumanNameDt DataType test",()=>{
         expect(myInstance.given[0]).not.to.eqls(undefined);
       });
     });
+
+
+    describe('<Use> field',()=>{
+
+      describe("Support for CodeDt use",()=>{
+        it("Accept CodeDt in constructor..",()=>{
+          let myInstance=new HumanNameDt({use:new CodeDt("usual")});
+          expect(myInstance.use).to.eqls(new CodeDt("usual").value);
+          expect(myInstance.getUseElement()).to.eqls(new CodeDt("usual"));
+        });
+
+        it("Accept CodeDt in field..",()=>{
+          let myInstance=new HumanNameDt();
+          myInstance.use=new CodeDt("code");
+          expect(myInstance.use).to.eqls("code");
+          expect(myInstance.getUseElement()).to.eqls(new CodeDt("code"));
+        });
+
+        it("Accept CodeDt in setter..",()=>{  
+          let myInstance=new HumanNameDt();
+          myInstance.setUseElement(new CodeDt("code"));
+          expect(myInstance.use).to.eqls("code");
+          expect(myInstance.getUseElement()).to.eqls(new CodeDt("code"));
+        });
+
+        it("Is Updated by field..",()=>{
+          let myInstance=new HumanNameDt({use:new CodeDt("usual")});
+          myInstance.use=new CodeDt("official");
+          expect(myInstance.getUseElement()).to.eqls(new CodeDt("official"));
+          expect(myInstance.use).to.eqls("official");
+          expect(myInstance.getUseElement()).not.to.eqls(new CodeDt("usual"));
+          expect(myInstance.use).not.to.eqls("usual");
+        });
+
+        it("Is Updated by getter element..",()=>{
+          let myInstance=new HumanNameDt({use:new CodeDt("usual")});
+          myInstance.getUseElement().value="official";
+          expect(myInstance.use).to.eqls("official");
+        });
+
+        it("Is Updated by setter element..",()=>{
+          let myInstance=new HumanNameDt({use:new CodeDt("usual")});
+          myInstance.setUseElement(new CodeDt("official"));
+          expect(myInstance.getUseElement()).to.eqls(new CodeDt("official"));
+          expect(myInstance.use).to.eqls("official");
+          expect(myInstance.getUseElement()).not.to.eqls(new CodeDt("usual"));
+          expect(myInstance.use).not.to.eqls("usual");
+        });
+      });
+
+      describe("Support for RAW use",()=>{
+        it("Accept RAW in constructor..",()=>{
+          let myInstance=new HumanNameDt({use:"usual"});
+          expect(myInstance.use).to.eqls("usual");
+          expect(myInstance.getUseElement()).to.eqls(new CodeDt("usual"));
+        });
+
+        it("Accept RAW in field..",()=>{
+          let myInstance=new HumanNameDt();
+          myInstance.use="usual";
+          expect(myInstance.use).to.eqls("usual");
+          expect(myInstance.getUseElement()).to.eqls(new CodeDt("usual"));
+        });
+
+        it("NOT Accept RAW in setter..",()=>{
+          let myInstance=new HumanNameDt();
+          expect(()=>myInstance.setUseElement("usual")).to.throw();
+        });
+
+        it("Is Updated by RAW field..",()=>{
+          let myInstance=new HumanNameDt();
+          myInstance.use="usual";
+          expect(myInstance.use).to.eqls("usual");
+          expect(myInstance.getUseElement()).to.eqls(new CodeDt("usual"));
+          myInstance.use="official";
+          expect(myInstance.use).to.eqls("official");
+          expect(myInstance.getUseElement()).to.eqls(new CodeDt("official"));
+        });
+
+        it("Is Updated by getter element..",()=>{
+          let myInstance=new HumanNameDt();
+          myInstance.use="usual";
+          myInstance.getUseElement().value="official";
+          expect(myInstance.use).to.eqls("official");
+          expect(myInstance.getUseElement()).to.eqls(new CodeDt("official"));
+        });
+
+      });
+
+    });
+
+    describe("<Text> field",()=>{
+      describe("Support for StringDt use",()=>{
+        it("Support initilization throught consutructor",()=>{});
+        
+      });
+      describe("Support for RAW use",()=>{
+        it("Support initilization throught consutructor",()=>{});
+      });
+    });
+
+    describe("<Prefix> field",()=>{
+      describe("Support for StringDt use",()=>{});
+      describe("Support for RAW use",()=>{});
+    });
+
+    describe("<Suffix> field",()=>{
+      describe("Support for StringDt use",()=>{});
+      describe("Support for RAW use",()=>{});
+    });
+
+    describe("<Period> field",()=>{
+      describe("Support for DateTimeDt use",()=>{});
+      describe("Support for RAW use",()=>{});
+
+    })
+
 
 
    

@@ -62,11 +62,7 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
     set use(newValue){
         if(isValid(newValue)){
             let code=NameUseEnum.getByCode(newValue);
-            if(!code.isEmpty()){
-                this.setUseElement(new CodeDt(code.code));
-            }else{
-                this.getUseElement().value=newValue;
-            }
+            this.setUseElement(code);
         }
     }
 
