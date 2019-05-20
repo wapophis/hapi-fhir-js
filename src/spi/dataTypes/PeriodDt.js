@@ -21,7 +21,7 @@ export default class _PeriodDt extends Object{
         if(newValue instanceof Date===true){
             this.setStartDate(newValue);
         }else{
-            this.setStartDate(new Date(newValue));
+            this.setStartDate(isValid(newValue)?new Date(newValue.toString()):new Date(0,0,0));
         }
     }
 
@@ -42,7 +42,20 @@ export default class _PeriodDt extends Object{
     }
 
     set end(newValue){
-        this.myEnd=newValue;
+        if(newValue instanceof Date===true){
+            this.setEndDate(newValue);
+        }else{
+            this.setEndDate(isValid(newValue)?new Date(newValue.toString()):new Date(0,0,0));
+        }
+    }
+
+
+    setEndDate(newValue){
+        if(newValue instanceof Date===false){
+            throw new TypeError("StartDate must be a Date object");
+        }else{
+            this.myEnd=newValue;
+        }
         return this;
     }
 

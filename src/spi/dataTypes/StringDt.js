@@ -10,7 +10,7 @@ export default class StringDt extends Object{
         this.isUndefined=true;
         
         if(isValid(value)){
-            this.myCoercedValue=new String(value.toString());
+            this.myCoercedValue=value.toString();
             this.isUndefined=false;
         }
     }

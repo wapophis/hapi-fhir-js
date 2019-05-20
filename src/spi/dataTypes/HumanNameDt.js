@@ -199,10 +199,53 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
         this.myGiven=newValue;
     }
 
+
+//// PREFIXES
+    /**
+     * Static setter to prefix array, all the contained objects will be StringDt before being flattened using valueOf 
+     */
+    set prefix(newValue){
+        if(!isEmptyArray(newValue) ){
+            let oVal=new Array();
+            for(let i=0;i<newValue.length;i++){
+                oVal.push(new StringDt(newValue[i].valueOf()));
+            }
+            this.setPrefix(oVal);
+        }
+        return this;
+    }
+
+    /**
+     * Static setter to prefix array, returned values are flattened using valueOf
+     */
     get prefix(){
         return this._flattenArray(this.getPrefix());
     }
 
+
+    /**
+     * Return first element for prefix array.
+     */
+    getPrefixFirstRep(){
+        return this.getPrefix()[0];
+    }
+
+     /**
+     *
+     * @param {*} newVal Raw or StringDt object to set, returned the added object.
+     */
+    addPrefix(newVal){
+        let oVal=new StringDt();
+        if(isValid(newVal)){
+            oVal.value=newVal.valueOf();
+        }            
+        this.getPrefix().push(oVal);
+        return oVal;
+    }
+
+    /**
+     * Returns an StringDt array from prefixes
+     */
     getPrefix(){
         if(!isValid(this.myPrefix)){
             this.myPrefix=new Array();
@@ -212,7 +255,7 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
 
     /**
      *
-     * @param {*} newValue
+     * @param {*} newValue element from array must be StringDt object
      *
      */
     setPrefix(newValue){
@@ -227,30 +270,9 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
         this.myPrefix=newValue;
     }
 
-    set prefix(newValue){
-        if(!isEmptyArray(newValue) ){
-            let oVal=new Array();
-            for(let i=0;i<newValue.length;i++){
-
-                oVal.push(new StringDt(newValue[i].valueOf()));
-
-            }
-            this.setPrefix(oVal);
-        }
-        return this;
-    }
-
+//// SUFFIXES
     get suffix(){
         return this._flattenArray(this.getSuffix());
-    }
-
-    getSuffix(){
-        if(!isValid(this.mySuffix)){
-            this.mySuffix=new Array();
-        }
-
-        return this.mySuffix;
-
     }
 
     set suffix(newValue){
@@ -264,6 +286,32 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
             this.setSuffix(oVal);
         }
         return this;
+    }
+
+       
+    /**
+     *
+     * @param {*} newVal
+     */
+    addSuffix(newVal){
+        let oVal=new StringDt();
+        if(isValid(newVal)){
+            oVal.value=newVal.valueOf();
+        }
+        this.getSuffix().push(oVal);
+        return oVal;
+    }
+
+    /**
+     * Returns the suffixes arrays ()
+     */
+    getSuffix(){
+        if(!isValid(this.mySuffix)){
+            this.mySuffix=new Array();
+        }
+
+        return this.mySuffix;
+
     }
 
      /**
@@ -283,6 +331,16 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
         this.mySuffix=newValue;
     }
 
+
+    /**
+     * Return first element for suffix array.
+     */
+    getSuffixFirstRep(){
+        return this.getSuffix()[0];
+    }
+
+
+///// PERIOD 
     get period(){
         return this.getPeriodElement().valueOf();
     }
@@ -308,7 +366,7 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
         return this;
     }
 
-
+//// COMMONS
     isEmpty(){
         return isEmptyArray(this.given)
                 && isEmptyArray(this.prefix)
@@ -346,36 +404,7 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
 
 
 
-    /**
-     *
-     * @param {*} newVal
-     */
-    addPrefix(newVal){
-        if(isValid(newVal)){
-            this.prefix.push(new StringDt(newVal.valueOf()));
-            return this;
-        }else{
-            let oVal=new StringDt();
-            this.prefix.push(oVal);
-            return oVal;
-        }
-    }
 
-
-    /**
-     *
-     * @param {*} newVal
-     */
-    addSuffix(newVal){
-        if(isValid(newVal)){
-            this.suffix.push(new StringDt(newVal.valueOf()));
-            return this;
-        }else{
-            let oVal=new StringDt();
-            this.suffix.push(oVal);
-            return oVal;
-        }
-    }
 
     /**
      * Return first element for family array;
@@ -391,19 +420,6 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
         return this.getGiven()[0];
     }
 
-    /**
-     * Return first element for suffix array.
-     */
-    getSuffixFirstRep(){
-        return this.suffix[0];
-    }
-
-    /**
-     * Return first element for prefix array.
-     */
-    getPreffixFirstRep(){
-        return this.prefix[0];
-    }
 
     _flattenArray(array){
         let oVal=new Array();
