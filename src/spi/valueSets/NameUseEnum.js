@@ -18,6 +18,22 @@ export const NameUseEnum = Object.freeze({
             }
          }
          return new CodeDt(code.valueOf());
+    },
+
+    keySet(){
+        let oVal=new Array();
+        for(let propName in this){
+            oVal.push(propName);
+        }
+        return oVal;
+    },
+
+    valueSet(){
+        let oVal=new Array();
+        for(let propName in this){
+            oVal.push(this[propName].valueOf());
+        }
+        return oVal;
     }
 
 });
