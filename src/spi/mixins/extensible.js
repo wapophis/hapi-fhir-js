@@ -72,6 +72,21 @@ export default SuperClass=> class extends SuperClass{
   }
 
 
+    /**
+   *
+   * @param {String} uriValue return all the extesions idenfiied by an uri string value as array
+   */
+  getExtensionValuesByUri(uriValue){
+    let oVal=new Array();
+    let elements=this.getExtensionByUri(uriValue);
+    for(let i=0;i<elements.length;i++){
+      oVal.push(elements[i][elements[i].valuePropName]);
+    }
+    return oVal;
+  }
+
+
+
   _flattenArray(array){
     let oVal=new Array();
     for(let i=0;i<array.length;i++){
