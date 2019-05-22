@@ -41,7 +41,7 @@ export default class StringDt extends Object{
 
     toString(){
         if(this.isEmpty()){
-            return null;
+            return '';
         }else{
             return this.myCoercedValue.toString();
         }
