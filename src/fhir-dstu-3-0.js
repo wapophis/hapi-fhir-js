@@ -12,6 +12,9 @@ import _ExtensionDt from './spi/dataTypes/ExtensionDt.js';
 import _StringDt from './spi/dataTypes/StringDt.js';
 
 
+import _NameUseEnum from './spi/valueSets/NameUseEnum.js'
+export const NameUseEnum =_NameUseEnum;
+
 export const AddressDt=_AddressDt;
 export const BooleanDt=_BooleanDt;
 export const CodeableConceptDt=_CodeableConceptDt;

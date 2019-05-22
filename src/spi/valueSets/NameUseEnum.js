@@ -23,7 +23,9 @@ export const NameUseEnum = Object.freeze({
     keySet(){
         let oVal=new Array();
         for(let propName in this){
-            oVal.push(propName);
+            if(propName.toUpperCase()===propName){
+                oVal.push(propName);
+            }
         }
         return oVal;
     },
@@ -31,7 +33,9 @@ export const NameUseEnum = Object.freeze({
     valueSet(){
         let oVal=new Array();
         for(let propName in this){
-            oVal.push(this[propName].valueOf());
+            if(propName.toUpperCase()===propName){
+                oVal.push(this[propName].valueOf());
+            }
         }
         return oVal;
     }
