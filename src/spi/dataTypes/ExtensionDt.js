@@ -136,7 +136,7 @@ export default class _ExtensionDt extends FlattenAbleObject{
     }
 
     get value(){
-        return this[valuePropName];
+        return this[this.valuePropName];
     }
 
     set value(newValue){
