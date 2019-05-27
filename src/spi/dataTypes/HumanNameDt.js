@@ -202,15 +202,15 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
 
 //// PREFIXES
     /**
-     * Static setter to prefix array, all the contained objects will be StringDt before being flattened using valueOf 
+     * Static setter to prefix array, all the contained objects will be StringDt before being flattened using valueOf
      */
     set prefix(newValue){
         if(!isEmptyArray(newValue) ){
-            let oVal=new Array();
+            let oVal=new Set();
             for(let i=0;i<newValue.length;i++){
-                oVal.push(new StringDt(newValue[i].valueOf()));
+                oVal.add(new StringDt(newValue[i].valueOf()));
             }
-            this.setPrefix(oVal);
+            this.setPrefix(Array.from(oVal));
         }
         return this;
     }
@@ -238,19 +238,20 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
         let oVal=new StringDt();
         if(isValid(newVal)){
             oVal.value=newVal.valueOf();
-        }            
-        this.getPrefix().push(oVal);
+        }
+        this.getPrefix();           // TODO: FIX THIS, NOT OPTIMAL, ONLY CALL FOR INITIALIZATION
+        this.myPrefix.add(newVal);
         return oVal;
     }
 
     /**
-     * Returns an StringDt array from prefixes
+     * Returns an StringDt set from prefixes
      */
     getPrefix(){
         if(!isValid(this.myPrefix)){
-            this.myPrefix=new Array();
+            this.myPrefix=new Set();
         }
-        return this.myPrefix;
+        return Array.from(this.myPrefix);
     }
 
     /**
@@ -265,9 +266,12 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
         for(let i=0;i<newValue.length;i++){
             if(newValue[i] instanceof StringDt===false){
                 throw new TypeError("Family items in array must be StringDt objects");
+            }else{
+                this.getPrefix();                    // TODO: FIX THIS, NOT OPTIMAL, ONLY CALL FOR INITIALIZATION
+                this.myPrefix.add(newValue[i]);
             }
         }
-        this.myPrefix=newValue;
+        //this.myPrefix=newValue;
     }
 
 //// SUFFIXES
@@ -288,7 +292,7 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
         return this;
     }
 
-       
+
     /**
      *
      * @param {*} newVal
@@ -340,7 +344,7 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
     }
 
 
-///// PERIOD 
+///// PERIOD
     get period(){
         return this.getPeriodElement().valueOf();
     }
@@ -422,7 +426,7 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
 
 
     _flattenArray(array){
-        let oVal=new Array();
+        let oVal=[];
         for(let i=0;i<array.length;i++){
             oVal.push(array[i].valueOf());
         }

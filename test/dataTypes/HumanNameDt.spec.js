@@ -179,14 +179,14 @@ let dstu_4_0_string=JSON.stringify(dstu_4_0_payload);
 
 
 describe("HumanNameDt DataType test",()=>{
-    describe("Constructor",()=>{     
+    describe("Constructor",()=>{
         it("should generate an instance object",()=>{
             let myInstance=new HumanNameDt();
-            expect(myInstance instanceof HumanNameDt,true);                  
+            expect(myInstance instanceof HumanNameDt,true);
         });
 
         /**
-         * 
+         *
          */
         it("should generate an empty object",()=>{
             let myInstance=new HumanNameDt();
@@ -194,7 +194,7 @@ describe("HumanNameDt DataType test",()=>{
         });
 
         /**
-         * 
+         *
          */
         it("should generate a non empty object",()=>{
             let myInstance=new HumanNameDt({text:"text"});
@@ -218,7 +218,7 @@ describe("HumanNameDt DataType test",()=>{
         expect(myInstance.family).to.equals("Family Name Mutated Family Name");
         myInstance.family+=" mutated";
         expect(myInstance.family).to.equals("Family Name Mutated Family Name mutated");
-        
+
       });
 
       it('Should replace the field value correcty',()=>{
@@ -275,8 +275,8 @@ describe("HumanNameDt DataType test",()=>{
           myInstance.addGiven("newName");
           expect(myInstance.given).to.eqls(["newName"]);
         });
-      
-       
+
+
         it("Add an StringDt type object in an empty given array ..",()=>{
           let myInstance=new HumanNameDt();
           let newName=new StringDt("newName");
@@ -292,7 +292,7 @@ describe("HumanNameDt DataType test",()=>{
           expect(myInstance.given).to.eqls(["newName","newName"]);
           expect(myInstance.getGiven()).to.eqls([newName,newName]);
         });
-        
+
       });
 
       it('Should get first given Name from the given Array...',()=>{
@@ -325,7 +325,7 @@ describe("HumanNameDt DataType test",()=>{
           expect(myInstance.getUseElement()).to.eqls(new CodeDt("code"));
         });
 
-        it("Accept CodeDt in setter..",()=>{  
+        it("Accept CodeDt in setter..",()=>{
           let myInstance=new HumanNameDt();
           myInstance.setUseElement(new CodeDt("code"));
           expect(myInstance.use).to.eqls("code");
@@ -428,7 +428,7 @@ describe("HumanNameDt DataType test",()=>{
           expect(myInstance.text).to.eqls("TEXTO");
           expect(myInstance.getTextElement()).to.eqls(new StringDt("TEXTO"));
         });
-        
+
       });
       describe("Support for RAW use",()=>{
 
@@ -472,7 +472,7 @@ describe("HumanNameDt DataType test",()=>{
           let myInstance=new HumanNameDt();
           myInstance.addPrefix(new StringDt("PREFIX_ONE"));
           expect(myInstance.prefix).to.eqls(["PREFIX_ONE"]);
-          expect(myInstance.getPrefix()).to.eqls([new StringDt("PREFIX_ONE")]);    
+          expect(myInstance.getPrefix()).to.eqls([new StringDt("PREFIX_ONE")]);
         });
 
         it("Support mutate array pushing into array from getter of the array element",()=>{
@@ -481,7 +481,7 @@ describe("HumanNameDt DataType test",()=>{
           let myPrefixs=myInstance.getPrefix();
           myPrefixs.push(new StringDt("PREFIX_TWO"));
           expect(myInstance.prefix).to.eqls(["PREFIX_ONE","PREFIX_TWO"]);
-          expect(myInstance.getPrefix()).to.eqls([new StringDt("PREFIX_ONE"),new StringDt("PREFIX_TWO")]);   
+          expect(myInstance.getPrefix()).to.eqls([new StringDt("PREFIX_ONE"),new StringDt("PREFIX_TWO")]);
         });
 
         it("Support getting firstElement of prefix Array",()=>{
@@ -489,7 +489,7 @@ describe("HumanNameDt DataType test",()=>{
           myInstance.addPrefix(new StringDt("PREFIX_ONE"));
           myInstance.addPrefix(new StringDt("PREFIX_TWO"));
           expect(myInstance.getPrefixFirstRep().valueOf()).to.eqls("PREFIX_ONE");
-          expect(myInstance.getPrefixFirstRep()).to.eqls(new StringDt("PREFIX_ONE"));    
+          expect(myInstance.getPrefixFirstRep()).to.eqls(new StringDt("PREFIX_ONE"));
         });
 
         it("Support MUTATE firstElement of prefix Array",()=>{
@@ -498,22 +498,22 @@ describe("HumanNameDt DataType test",()=>{
           myInstance.addPrefix(new StringDt("PREFIX_TWO"));
           myInstance.getPrefixFirstRep().value="PREFIX_THREE";
           expect(myInstance.getPrefixFirstRep().valueOf()).to.eqls("PREFIX_THREE");
-          expect(myInstance.getPrefixFirstRep()).to.eqls(new StringDt("PREFIX_THREE"));    
+          expect(myInstance.getPrefixFirstRep()).to.eqls(new StringDt("PREFIX_THREE"));
         });
-        
+
       });
        describe("Support for RAW use",()=>{
         it("Support initilialization from constructor",()=>{
           let myInstance=new HumanNameDt({prefix:["PREFIX_ONE","PREFIX_TWO"]});
-          expect(myInstance.prefix).to.eqls(["PREFIX_ONE","PREFIX_TWO"]);
+          expect(myInstance.prefix).to.eqls(["PREFIX_ONE","PREFIX_TWO"])&&
           expect(myInstance.getPrefix()).to.eqls([new StringDt("PREFIX_ONE"),new StringDt("PREFIX_TWO")]);
         });
-        
+
         it("Support add RAW prefix to array",()=>{
           let myInstance=new HumanNameDt();
           myInstance.addPrefix("PREFIX_ONE");
           expect(myInstance.prefix).to.eqls(["PREFIX_ONE"]);
-          expect(myInstance.getPrefix()).to.eqls([new StringDt("PREFIX_ONE")]);    
+          expect(myInstance.getPrefix()).to.eqls([new StringDt("PREFIX_ONE")]);
         });
 
         it("NOT Support mutate array pushing into array from getter of the array element",()=>{
@@ -522,7 +522,7 @@ describe("HumanNameDt DataType test",()=>{
           let myPrefixs=myInstance.getPrefix();
           myPrefixs.push("PREFIX_TWO");
           expect(myInstance.prefix).to.eqls(["PREFIX_ONE","PREFIX_TWO"]);
-          expect(myInstance.getPrefix()).not.to.eqls([new StringDt("PREFIX_ONE"),new StringDt("PREFIX_TWO")]);   
+          expect(myInstance.getPrefix()).not.to.eqls([new StringDt("PREFIX_ONE"),new StringDt("PREFIX_TWO")]);
         });
 
         it("Support getting firstElement of prefix Array",()=>{
@@ -530,7 +530,7 @@ describe("HumanNameDt DataType test",()=>{
           myInstance.addPrefix("PREFIX_ONE");
           myInstance.addPrefix("PREFIX_TWO");
           expect(myInstance.getPrefixFirstRep().valueOf()).to.eqls("PREFIX_ONE");
-          expect(myInstance.getPrefixFirstRep()).to.eqls(new StringDt("PREFIX_ONE"));    
+          expect(myInstance.getPrefixFirstRep()).to.eqls(new StringDt("PREFIX_ONE"));
         });
 
         it("Support MUTATE firstElement of prefix Array",()=>{
@@ -539,9 +539,9 @@ describe("HumanNameDt DataType test",()=>{
           myInstance.addPrefix("PREFIX_TWO");
           myInstance.getPrefixFirstRep().value="PREFIX_THREE";
           expect(myInstance.getPrefixFirstRep().valueOf()).to.eqls("PREFIX_THREE");
-          expect(myInstance.getPrefixFirstRep()).to.eqls(new StringDt("PREFIX_THREE"));    
+          expect(myInstance.getPrefixFirstRep()).to.eqls(new StringDt("PREFIX_THREE"));
         });
-        
+
       });
     });
 
@@ -557,7 +557,7 @@ describe("HumanNameDt DataType test",()=>{
           let myInstance=new HumanNameDt();
           myInstance.addSuffix(new StringDt("SUFFIX_ONE"));
           expect(myInstance.suffix).to.eqls(["SUFFIX_ONE"]);
-          expect(myInstance.getSuffix()).to.eqls([new StringDt("SUFFIX_ONE")]);    
+          expect(myInstance.getSuffix()).to.eqls([new StringDt("SUFFIX_ONE")]);
         });
 
         it("Support mutate array pushing into array from getter of the array element",()=>{
@@ -566,7 +566,7 @@ describe("HumanNameDt DataType test",()=>{
           let mySuffixes=myInstance.getSuffix();
           mySuffixes.push(new StringDt("SUFFIX_TWO"));
           expect(myInstance.suffix).to.eqls(["SUFFIX_ONE","SUFFIX_TWO"]);
-          expect(myInstance.getSuffix()).to.eqls([new StringDt("SUFFIX_ONE"),new StringDt("SUFFIX_TWO")]);   
+          expect(myInstance.getSuffix()).to.eqls([new StringDt("SUFFIX_ONE"),new StringDt("SUFFIX_TWO")]);
         });
 
         it("Support getting firstElement of suffix Array",()=>{
@@ -574,7 +574,7 @@ describe("HumanNameDt DataType test",()=>{
           myInstance.addSuffix(new StringDt("SUFFIX_ONE"));
           myInstance.addSuffix(new StringDt("SUFFIX_TWO"));
           expect(myInstance.getSuffixFirstRep().valueOf()).to.eqls("SUFFIX_ONE");
-          expect(myInstance.getSuffixFirstRep()).to.eqls(new StringDt("SUFFIX_ONE"));    
+          expect(myInstance.getSuffixFirstRep()).to.eqls(new StringDt("SUFFIX_ONE"));
         });
 
         it("Support MUTATE firstElement of suffix Array",()=>{
@@ -583,9 +583,9 @@ describe("HumanNameDt DataType test",()=>{
           myInstance.addSuffix(new StringDt("SUFFIX_TWO"));
           myInstance.getSuffixFirstRep().value="SUFFIX_THREE";
           expect(myInstance.getSuffixFirstRep().valueOf()).to.eqls("SUFFIX_THREE");
-          expect(myInstance.getSuffixFirstRep()).to.eqls(new StringDt("SUFFIX_THREE"));    
+          expect(myInstance.getSuffixFirstRep()).to.eqls(new StringDt("SUFFIX_THREE"));
         });
-        
+
       });
        describe("Support for RAW use",()=>{
         it("Support initilialization from constructor",()=>{
@@ -593,12 +593,12 @@ describe("HumanNameDt DataType test",()=>{
           expect(myInstance.prefix).to.eqls(["SUFFIX_ONE","SUFFIX_TWO"]);
           expect(myInstance.getPrefix()).to.eqls([new StringDt("SUFFIX_ONE"),new StringDt("SUFFIX_TWO")]);
         });
-        
+
         it("Support add RAW suffix to array",()=>{
           let myInstance=new HumanNameDt();
           myInstance.addSuffix("SUFFIX_ONE");
           expect(myInstance.suffix).to.eqls(["SUFFIX_ONE"]);
-          expect(myInstance.getSuffix()).to.eqls([new StringDt("SUFFIX_ONE")]);    
+          expect(myInstance.getSuffix()).to.eqls([new StringDt("SUFFIX_ONE")]);
         });
 
         it("NOT Support mutate array pushing into array from getter of the array element",()=>{
@@ -607,7 +607,7 @@ describe("HumanNameDt DataType test",()=>{
           let mySufixes=myInstance.getSuffix();
           mySufixes.push("SUFFIX_TWO");
           expect(myInstance.suffix).to.eqls(["SUFFIX_ONE","SUFFIX_TWO"]);
-          expect(myInstance.getSuffix()).not.to.eqls([new StringDt("SUFFIX_ONE"),new StringDt("SUFFIX_TWO")]);   
+          expect(myInstance.getSuffix()).not.to.eqls([new StringDt("SUFFIX_ONE"),new StringDt("SUFFIX_TWO")]);
         });
 
         it("Support getting firstElement of suffix Array",()=>{
@@ -615,7 +615,7 @@ describe("HumanNameDt DataType test",()=>{
           myInstance.addSuffix("SUFFIX_ONE");
           myInstance.addSuffix("SUFFIX_TWO");
           expect(myInstance.getSuffixFirstRep().valueOf()).to.eqls("SUFFIX_ONE");
-          expect(myInstance.getSuffixFirstRep()).to.eqls(new StringDt("SUFFIX_ONE"));    
+          expect(myInstance.getSuffixFirstRep()).to.eqls(new StringDt("SUFFIX_ONE"));
         });
 
         it("Support MUTATE firstElement of suffix Array",()=>{
@@ -624,9 +624,9 @@ describe("HumanNameDt DataType test",()=>{
           myInstance.addSuffix("SUFFIX_TWO");
           myInstance.getSuffixFirstRep().value="SUFFIX_THREE";
           expect(myInstance.getSuffixFirstRep().valueOf()).to.eqls("SUFFIX_THREE");
-          expect(myInstance.getSuffixFirstRep()).to.eqls(new StringDt("SUFFIX_THREE"));    
+          expect(myInstance.getSuffixFirstRep()).to.eqls(new StringDt("SUFFIX_THREE"));
         });
-        
+
       });
     });
 
@@ -643,7 +643,7 @@ describe("HumanNameDt DataType test",()=>{
           myInstance=new HumanNameDt({period:{end:"01-01-2010"}});
           expect(myInstance.getPeriodElement()).to.eqls(new PeriodDt({end:"01-01-2010"}));
         });
-        
+
         it("Support setting PeriodDt throught setter element",()=>{
             let myInstance=new HumanNameDt();
             myInstance.setPeriodElement(new PeriodDt({start:"02-12-1978"}));
@@ -682,7 +682,7 @@ describe("HumanNameDt DataType test",()=>{
         expect(myInstance.getPeriodElement()).to.eqls(new PeriodDt({start:"01-01-1981",end:"01-01-1981"}));
     });
 
-        
+
       });
       describe("Support for RAW use",()=>{
 
@@ -692,5 +692,4 @@ describe("HumanNameDt DataType test",()=>{
 
 
 });
-        
-    
+
