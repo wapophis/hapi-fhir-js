@@ -240,7 +240,7 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
             oVal.value=newVal.valueOf();
         }
         this.getPrefix();           // TODO: FIX THIS, NOT OPTIMAL, ONLY CALL FOR INITIALIZATION
-        this.myPrefix.add(newVal);
+        this.myPrefix.add(oVal);
         return oVal;
     }
 
@@ -251,7 +251,7 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
         if(!isValid(this.myPrefix)){
             this.myPrefix=new Set();
         }
-        return Array.from(this.myPrefix);
+        return this._transformSetToArrayCompat(this.myPrefix);
     }
 
     /**
@@ -267,7 +267,7 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
             if(newValue[i] instanceof StringDt===false){
                 throw new TypeError("Family items in array must be StringDt objects");
             }else{
-                this.getPrefix();                    // TODO: FIX THIS, NOT OPTIMAL, ONLY CALL FOR INITIALIZATION
+                this.getPrefix();
                 this.myPrefix.add(newValue[i]);
             }
         }
@@ -433,6 +433,13 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
 
         return oVal;
     }
+
+    _transformSetToArrayCompat(set){
+        let oVal=[];
+        set.forEach((value)=>oVal.push(value));
+        return oVal;
+    }
+
 
 
 

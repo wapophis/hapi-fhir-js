@@ -475,13 +475,13 @@ describe("HumanNameDt DataType test",()=>{
           expect(myInstance.getPrefix()).to.eqls([new StringDt("PREFIX_ONE")]);
         });
 
-        it("Support mutate array pushing into array from getter of the array element",()=>{
+        it("NOT Support mutate array pushing into array from getter of the array element",()=>{
           let myInstance=new HumanNameDt();
           myInstance.addPrefix(new StringDt("PREFIX_ONE"));
           let myPrefixs=myInstance.getPrefix();
           myPrefixs.push(new StringDt("PREFIX_TWO"));
-          expect(myInstance.prefix).to.eqls(["PREFIX_ONE","PREFIX_TWO"]);
-          expect(myInstance.getPrefix()).to.eqls([new StringDt("PREFIX_ONE"),new StringDt("PREFIX_TWO")]);
+          expect(myInstance.prefix).not.to.eqls(["PREFIX_ONE","PREFIX_TWO"]);
+          expect(myInstance.getPrefix()).not.to.eqls([new StringDt("PREFIX_ONE"),new StringDt("PREFIX_TWO")]);
         });
 
         it("Support getting firstElement of prefix Array",()=>{
@@ -521,7 +521,7 @@ describe("HumanNameDt DataType test",()=>{
           myInstance.addPrefix("PREFIX_ONE");
           let myPrefixs=myInstance.getPrefix();
           myPrefixs.push("PREFIX_TWO");
-          expect(myInstance.prefix).to.eqls(["PREFIX_ONE","PREFIX_TWO"]);
+          expect(myInstance.prefix).not.to.eqls(["PREFIX_ONE","PREFIX_TWO"]);
           expect(myInstance.getPrefix()).not.to.eqls([new StringDt("PREFIX_ONE"),new StringDt("PREFIX_TWO")]);
         });
 
