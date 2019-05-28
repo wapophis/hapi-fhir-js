@@ -240,12 +240,7 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
             oVal.value=newVal.valueOf();
         }
         this.getPrefix();           // TODO: FIX THIS, NOT OPTIMAL, ONLY CALL FOR INITIALIZATION
-        this.myPrefix.forEach((item)=>          // JAVASCRIPT SET NOT WORK WELL WITH OBJECTS
-        {
-            !item.equals(oVal)?this.myPrefix.add(oVal);
-        }
-        );
-
+        this._addSetUniqueElement(this.myPrefix,oVal);
         return oVal;
     }
 
@@ -443,6 +438,21 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
         let oVal=[];
         set.forEach((value)=>oVal.push(value));
         return oVal;
+    }
+
+    _addSetUniqueElement(toSet,element){
+        let insert=true;
+        if(toSet.size>0){
+            toSet.forEach((item)=>{
+                if(item.valueOf()===element.valueOf()){
+                    insert=false;
+                }
+            });
+        }
+        if(insert===true){
+            toSet.add(element);
+
+      }
     }
 
 
