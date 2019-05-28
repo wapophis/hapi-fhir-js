@@ -276,8 +276,9 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
 
     removePrefix(value){
         this.myPrefix.forEach((item)=>{
+            console.log(item.valueOf());
             if(item.valueOf()===value.valueOf()){
-                this.myPrefix.remove(item);
+                this.myPrefix.delete(item);
             }
         });
     }
@@ -349,6 +350,15 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
      */
     getSuffixFirstRep(){
         return this.getSuffix()[0];
+    }
+
+    removeSuffix(value){
+        this.mySuffix.forEach((item)=>{
+            console.log(item.valueOf());
+            if(item.valueOf()===value.valueOf()){
+                this.mySuffix.delete(item);
+            }
+        });
     }
 
 
