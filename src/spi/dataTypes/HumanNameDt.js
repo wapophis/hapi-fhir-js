@@ -240,7 +240,12 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
             oVal.value=newVal.valueOf();
         }
         this.getPrefix();           // TODO: FIX THIS, NOT OPTIMAL, ONLY CALL FOR INITIALIZATION
-        this.myPrefix.add(oVal);
+        this.myPrefix.forEach((item)=>          // JAVASCRIPT SET NOT WORK WELL WITH OBJECTS
+        {
+            !item.equals(oVal)?this.myPrefix.add(oVal);
+        }
+        );
+
         return oVal;
     }
 
