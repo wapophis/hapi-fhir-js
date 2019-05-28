@@ -268,7 +268,7 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
                 throw new TypeError("Family items in array must be StringDt objects");
             }else{
                 this.getPrefix();
-                this.myPrefix.add(newValue[i]);
+                this._addSetUniqueElement(this.myPrefix,newValue[i]);
             }
         }
         //this.myPrefix=newValue;
