@@ -275,12 +275,14 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
     }
 
     removePrefix(value){
+        let toRemove=new String(value);     /// TODO: FIX IT, WHEN THE EXTERNAL VALUE PROVIDED DISSAPEAR THE FUNCTION WORKS BUT IN CHROME LAUNCH A UNDEFINED ACCESS ERROR.
         this.myPrefix.forEach((item)=>{
-            console.log(item.valueOf()+" vs "+value.valueOf);
-            if(item.valueOf()===value.valueOf()){
+            if(item.valueOf()===toRemove.valueOf()){
                 this.myPrefix.delete(item);
             }
+
         });
+
     }
 
 //// SUFFIXES
