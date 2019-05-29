@@ -276,7 +276,7 @@ export default class _HumanNameDt extends EXTENSIBLE (FlattenAbleObject){
 
     removePrefix(value){
         this.myPrefix.forEach((item)=>{
-            console.log(item.valueOf());
+            console.log(item.valueOf()+" vs "+value.valueOf);
             if(item.valueOf()===value.valueOf()){
                 this.myPrefix.delete(item);
             }
