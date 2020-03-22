@@ -39,3 +39,8 @@ export const PatientResource_AnimalElement=_AnimalElement;
 export const PatientResource_LinkElement=_LinkElement;
 export const PatientResource_ComunicationElement=_ComunicationElement;
 
+
+// SPEC 4.0.1
+import QuestionnarieResult from './spi/resources/QuestionnaireResult.js'
+export const QuestionnarieResultResource=QuestionnarieResult;
+

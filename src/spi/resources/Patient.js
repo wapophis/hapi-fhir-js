@@ -14,7 +14,7 @@ import BoundCodeableConcept from '../dataTypes/BoundCodeableConceptDt.js';
 import {AdministrativeGenderEnum} from '../valueSets/AdministrativeGenderEnum.js';
 
 
-   
+
 export default class Patient extends DomainResource{
     constructor(root){
         super(root);
@@ -39,6 +39,10 @@ export default class Patient extends DomainResource{
             this.managingOrganization=root.managingOrganization;
             this.link=root.link;
         }
+    }
+
+    _flatten(){
+        return this;
     }
 
     static get modifiers(){
@@ -73,13 +77,13 @@ export default class Patient extends DomainResource{
         if(!isValid(this.myIdentifier)){
             this.myIdentifier=new Array();
         }else{
-         
+
             for(let i=0;i<this.myIdentifier.length;i++){
                 if(!this.myIdentifier[i] instanceof IdentifierDt){
                     this.myIdentifier[i]=new IdentifierDt(this.myIdentifier[i]);
                 }
             }
-        
+
         }
         return this.myIdentifier;
     }
@@ -116,7 +120,7 @@ export default class Patient extends DomainResource{
 
     hasIdentifier(){
         for(let i=0;i<this.identifier.length;i++){
-            
+
             if(!this.identifier[i].isEmpty()){
                 return true;
             }
@@ -153,14 +157,14 @@ export default class Patient extends DomainResource{
         if(!isValid(this.myName)){
             this.myName=new Array();
         }else{
-            
+
             for(let i=0;i<this.myName.length;i++){
                 if(!this.myName[i] instanceof IdentifierDt){
                     //oVal.push(new IdentifierDt(this.myIdentifier[i]));
                     this.myName[i]=new HumanNameDt(this.myName[i]);
                 }
             }
-        
+
         }
         return this.myName;
     }
@@ -175,14 +179,14 @@ export default class Patient extends DomainResource{
     }
 
     hasName(){
-        
+
         for(let i=0;i<this.name.length;i++){
             if(!this.name[i].isEmpty()){
                 return true;
             }
         }
         return false;
-        
+
     }
 
     addName(newValue){
@@ -205,7 +209,7 @@ export default class Patient extends DomainResource{
         else{
             return this.addName();
         }
-   
+
     }
 
 
@@ -215,13 +219,13 @@ export default class Patient extends DomainResource{
     }
 
     get telecom(){
-        
+
         if(!isValid(this.myTelecom))
         {
             this.myTelecom=new Array();
         }
 
-        
+
         for(let i=0;i<this.myTelecom.length;i++){
             if(!this.myTelecom[i] instanceof ContactPointDt){
                 this.myTelecom[i]=new ContactPointDt(this.myTelecom[i]);
@@ -245,8 +249,8 @@ export default class Patient extends DomainResource{
     }
 
     /**
-     * 
-     * @param {*} newValue 
+     *
+     * @param {*} newValue
      * @return {ContactPointDt,Patient} return new ContactPointAdded if no argument. Return this for chaining if argument is not empty.
      */
     addTelecom(newValue){
@@ -300,7 +304,7 @@ export default class Patient extends DomainResource{
             if(newValue instanceof Date){
                 this.myBirthDate=newValue;
             }else{
-                this.myBirthDate=new Date(newValue);    
+                this.myBirthDate=new Date(newValue);
             }
         }else{
             this.myBirthDate=newValue;
@@ -355,11 +359,11 @@ export default class Patient extends DomainResource{
         if(!isValid(this.myDeceasedBoolean)){
             this.myDeceasedBoolean=new BooleanDt();
         }
-        
+
         if((this.myDeceasedBoolean instanceof BooleanDt)===false){
             this.myDeceasedBoolean=new BooleanDt(this.myDeceasedBoolean);
         }
-        
+
         return this.myDeceasedBoolean;
     }
 
@@ -444,7 +448,7 @@ export default class Patient extends DomainResource{
     }
 
 
-    
+
 
     set maritalStatus(newValue){
         if( (newValue instanceof CodeableConceptDt)===false && isValid(newValue)){
@@ -472,7 +476,7 @@ export default class Patient extends DomainResource{
     }
 
     hasMaritalStatus(){
-        
+
         return !this.maritalStatus.isEmpty();
     }
 
@@ -518,7 +522,7 @@ export default class Patient extends DomainResource{
         this.myContact=newValue;
         return this;
     }
-    
+
     get contact(){
         if(!isValid(this.myContact)){
             this.myContact=new Object();

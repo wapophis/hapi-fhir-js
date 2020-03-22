@@ -5,10 +5,10 @@ import StringDt from './dataTypes/StringDt.js';
 import ExtensionDt from './dataTypes/ExtensionDt.js';
 
 export const FHIResource= class FHIResource extends FlattenAbleObject{
- 
+
     constructor(rootObject){
         super();
-      
+
 
         this.myExtensions=new Array();
         this.myContainedResources=new Array();
@@ -17,6 +17,7 @@ export const FHIResource= class FHIResource extends FlattenAbleObject{
         if(isValid(rootObject)){
             this.id=rootObject.id;
             this.resourceName=rootObject.resourceName;
+            this.resourceType=rootObject.resourceType;
             this.extensions=rootObject.extensions;
             this.contained=rootObject.contained;
             this.languaje=rootObject.languaje;
@@ -78,6 +79,18 @@ export const FHIResource= class FHIResource extends FlattenAbleObject{
         return this;
     }
 
+    get resourceType(){
+        return this.getResourceTypeElement().value;
+    }
+    getResourceTypeElement(){
+        if(!isValid(this.myResourceType)){
+            this.myResourceType=new StringDt();
+        }
+        return this.myResourceType;
+    }
+    set resourceType(newValue){
+        this.getResourceTypeElement().value=newValue;
+    }
 
     get extensions(){
         if(!isValid(this.myExtensions)){
@@ -96,7 +109,7 @@ export const FHIResource= class FHIResource extends FlattenAbleObject{
 
     getNamedExtension(extensionUri){
         if(isValid(extensionUri) && isValid(this.myExtensions)){
-            return this._searchExtensionByName(extensionUri);    
+            return this._searchExtensionByName(extensionUri);
         }
     }
 
