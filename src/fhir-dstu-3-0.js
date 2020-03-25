@@ -10,6 +10,7 @@ import _PeriodDt from './spi/dataTypes/PeriodDt.js';
 import _ReferenceDt from './spi/dataTypes/ReferenceDt.js';
 import _ExtensionDt from './spi/dataTypes/ExtensionDt.js';
 import _StringDt from './spi/dataTypes/StringDt.js';
+import _DateTimeDt from './spi/dataTypes/DateTimeDt.js';
 
 
 import _NameUseEnum from './spi/valueSets/NameUseEnum.js'
@@ -27,6 +28,7 @@ export const PeriodDt=_PeriodDt;
 export const ReferenceDt=_ReferenceDt;
 export const ExtensionDt=_ExtensionDt;
 export const StringDt=_StringDt;
+export const DateTimeDt=_DateTimeDt;
 
 
 

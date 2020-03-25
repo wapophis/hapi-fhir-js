@@ -6,8 +6,10 @@ import _ReferenceDt from '../dataTypes/ReferenceDt.js';
 import IdentificableResource from './IdentificableResource.js';
 import StringDt from '../dataTypes/StringDt.js';
 import _BackBoneElement from './BackBoneElement.js';
+import _DateTimeDt from '../dataTypes/DateTimeDt.js'
 import FlattenAbleObject from '../FlattenAbleObject.js';
 import ContainedMixin from '../mixins/ContainedMixin.js';
+import Patient from './Patient.js';
 
 /** R 4.0.1 */
 export default class QuestionnaireResult extends ContainedMixin( IdentificableResource){
@@ -90,7 +92,7 @@ setSourceElement(newValue){
 
 
 get author(){
-  return this.getEncounterElement().valueOf();
+  return this.getAuthorElement().valueOf();
 }
 
 set author(newValue){
@@ -98,8 +100,8 @@ set author(newValue){
   return this;
 }
 
-getEncounterElement(){
-    if(!isValid(this.mySubject)){
+getAuthorElement(){
+    if(!isValid(this.myAuthor)){
       this.myAuthor=new _ReferenceDt();
     }
     return this.myAuthor;
@@ -118,6 +120,7 @@ get encounter(){
 }
 
 set encounter(newValue){
+  console.log(newValue);
   this.setEncounterElement(new _ReferenceDt(newValue));
   return this;
 }
@@ -151,6 +154,14 @@ getSubjectElement(){
       this.mySubject=new _ReferenceDt();
     }
     return this.mySubject;
+}
+getSubjectPatientResource(){
+  let oVal=new Patient();
+  let patientResource=this.getContainedResourceByReference(this.getSubjectElement());
+  if(!patientResource===null){
+      oVal=patientResource;
+  }
+  return oVal;
 }
 
 setSubjectElement(newValue){
@@ -187,33 +198,29 @@ setQuestionnaireElement(newValue){
 
 
 get partOf(){
-  return this.addPartOfElement();
+  let oVal=new Array();
+  this.addPartOfElement().forEach(element=>oVal.push(element.valueOf()));
+  return oVal;
 }
 
 set partOf(newValue){
-  newValue.forEach(value=>{
-    if(value instanceof _ReferenceDt===false){
-      this.addPartOfElement(new _ReferenceDt(value));
-    }else{
-      this.addPartOfElement(value);
-    }
-
-  });
-  return this.getPartOfElement();
+  if(isValid(newValue)){
+    this.getPartOfElement().forEach(element=>this.addPartOfElement(new _ReferenceDt(newValue)));
+  }
+  return this;
 }
 
 getPartOfElement(){
     if(!isValid(this.myPartOf)){
       this.myPartOf=new Array();
+      this.myPartOf.isEmpty=function(){
+        return this.length<=0;
+      }
     }
     return this.myPartOf;
 }
 
 addPartOfElement(newValue){
-
-  if(!isValid(newValue)){
-    newValue=new _ReferenceDt();
-  }
   if(newValue instanceof _ReferenceDt===false){
    throw new TypeError("Expected a ReferenceDt value")
   }
@@ -223,33 +230,30 @@ addPartOfElement(newValue){
 
 
 get basedOn(){
-  return this.getBasedOnElement();
+  let oVal=new Array();
+   this.getBasedOnElement().forEach(element=>oVal.push(element.valueof()));
+  return oVal;
 }
 
 set basedOn(newValue){
-  newValue.forEach(value=>{
-    if(value instanceof _ReferenceDt===false){
-      this.addBasedOnElement(new _ReferenceDt(value));
-    }else{
-      this.addBasedOnElement(value);
-    }
-
-  });
-  return this.getBasedOnElement();
+  if(isValid(newValue)){
+    this.getBasedOnElement().forEach(element=>this.addBasedOnElement(new _ReferenceDt(element)));
+  }
+  return this;
 }
 
 getBasedOnElement(){
     if(!isValid(this.myBasedOn)){
       this.myBasedOn=new Array();
+      this.myBasedOn.isEmpty=function(){
+        return this.length<=0;
+      }
     }
+
     return this.myBasedOn;
 }
 
 addBasedOnElement(newValue){
-
-  if(!isValid(newValue)){
-    newValue=new _ReferenceDt();
-  }
   if(newValue instanceof _ReferenceDt===false){
    throw new TypeError("Expected a ReferenceDt value")
   }
@@ -286,25 +290,25 @@ setStatusElement(newValue){
 }
 
 get authored(){
-  return new Intl.DateTimeFormat('en-GB').format(this.getAuthoredElement());
+  return this.getAuthoredElement().valueOf();
 }
 getAuthoredElement(){
-  if(this.myAuthored instanceof Date===false){
-    throw new TypeError("Date object expected");
+  if(!isValid(this.myAuthored)){
+    this.myAuthored=new _DateTimeDt();
   }
   return this.myAuthored;
 }
 
 set authored(newValue){
   if(isValid(newValue)){
-    this.setAuthoredElement(new Date(newValue));
+    this.setAuthoredElement(new _DateTimeDt(newValue));
   }
  return this;
 }
 
 setAuthoredElement(newValue){
-  if(newValue instanceof Date===false){
-    throw new TypeError("Date object expected");
+  if(newValue instanceof _DateTimeDt===false){
+    throw new TypeError("_DateTimeDt object expected");
   }
   this.myAuthored=newValue;
 }
@@ -338,6 +342,9 @@ export class Item extends FlattenAbleObject{
       getItemElement(){
         if(!isValid(this.myItem)){
             this.myItem=new Array();
+            this.myItem.isEmpty=function(){
+              return this.length<=0;
+            }
         }
         return this.myItem;
       }
@@ -370,6 +377,9 @@ export class Item extends FlattenAbleObject{
       getAnswerElement(){
         if(!isValid(this.myAnswer)){
           this.myAnswer=new Array();
+          this.myAnswer.isEmpty=function(){
+            return this.length<=0;
+          }
         }
         return this.myAnswer;
       }
@@ -478,6 +488,9 @@ export class Answer extends _BackBoneElement{
     getItemElement(){
       if(!isValid(this.myItem)){
         this.myItem=new Array();
+        this.myItem.isEmpty=function(){
+          return this.length<=0;
+        }
       }
       return this.myItem;
     }

@@ -42,116 +42,111 @@ export default class _BackBoneElement extends FlattenAbleObject{
      * the known types.
      */
     put(newValue){
-        if(newValue instanceof URL){
+        if(this.valuePropName==="valueUrl"){
             this.myValueUrl=newValue;
             this.valuePropVar="myValueUrl";
-            this.valuePropName="valueUrl";
+
             return this;
         }
 
-        if(newValue instanceof StringDt){
+        if(this.valuePropName==="valueString"){
             this.myValueString=newValue;
             this.valuePropVar="myValueString";
-            this.valuePropName="valueString";
             return this;
         }
 
-        if(newValue instanceof CodeableConceptDt){
+        if(this.valuePropName==="valueCodeableConcept"){
             this.myValueCodeableConcept=newValue;
             this.valuePropVar="myValueCodeableConcept";
-            this.valuePropName="valueCodeableConcept";
             return this;
         }
 
-        if(newValue instanceof CodingDt){
+        if(this.valuePropName==="valueCoding"){
             this.myValueCoding=newValue;
             this.valuePropVar="myValueCoding";
-            this.valuePropName="valueCoding";
+
             return this;
         }
 
-        if(newValue instanceof PeriodDt){
+        if(this.valuePropName==="valuePeriod"){
             this.myValuePeriod=newValue;
             this.valuePropVar="myValuePeriod";
-            this.valuePropName="valuePeriod";
+
             return this;
         }
 
-        if(newValue instanceof IdentifierDt){
+        if( this.valuePropName==="valueIdentifier"){
             this.myValueIdentifier=newValue;
             this.valuePropVar="myValueIdentifier";
-            this.valuePropName="valueIdentifier";
+
             return this;
         }
 
-        if(newValue instanceof HumanNameDt){
+        if(this.valuePropName==="valueHumanName"){
             this.myValueHumanName=newValue;
             this.valuePropVar="myValueHumanName";
-            this.valuePropName="valueHumanName";
+
             return this;
         }
 
-        if(newValue instanceof BooleanDt){
+        if(this.valuePropName==="valueBoolean"){
             this.myValueBoolean=newValue;
             this.valuePropVar="myValueBoolean";
-            this.valuePropName="valueBoolean";
             return this;
         }
 
-        if(newValue instanceof AddressDt){
+        if(this.valuePropName==="valueAddress"){
             this.myValueAddress=newValue;
             this.valuePropVar="myValueAddress";
-            this.valuePropName="valueAddress";
+
             return this;
         }
 
-        if(newValue instanceof ContactPointDt){
+        if(this.valuePropName==="valueContactPoint"){
             this.myValueContactPoint=newValue;
             this.valuePropVar="myValueContactPoint";
-            this.valuePropName="valueContactPoint";
+
             return this;
         }
 
-        if(newValue instanceof ReferenceDt){
+        if( this.valuePropName==="valueReference"){
             this.myValueReference=newValue;
             this.valuePropVar="myValueReference";
-            this.valuePropName="valueReference";
+
             return this;
         }
 
-        if(newValue instanceof Date){
+        if( this.valuePropName==="valueDate"){
+            this.myValueDate=new StringDt(newValue);
+            this.valuePropVar="myValueDate";
+            return this;
+        }
 
-            if(newValue.getHours()===1){
-                this.myValueDate=newValue.toDateString();
-                this.valuePropVar="myValueDate";
-                this.valuePropName="valueDate";
-                return this;
-            }
+        if( this.valuePropName==="valueTime"){
+            this.myValueTime=new StringDt(newValue);
+            this.valuePropVar="myValueTime";
 
-            if(newValue.getTime()<86400000){
-                this.myValueTime=newValue.toTimeString();
-                this.valuePropVar="myValueTime";
-                this.valuePropName="valueTime";
-                return this;
-            }
+            return this;
+        }
 
-            this.myValueDateTime=newValue.toUTCString();
+        if( this.valuePropName==="valueDateTime"){
+            this.myValueDateTime=new StringDt(newValue);
             this.valuePropVar="myValueDateTime";
-            this.valuePropName="valueDateTime";
+
             return this;
         }
 
-        if(Number.isInteger(newValue.valueOf())===true){
+        if(this.valuePropName==="valueInteger"){
             this.myValueInteger=newValue;
             this.valuePropVar="myValueInteger";
-            this.valuePropName="valueInteger";
+
             return this;
         }
 
-        if(!Number.isNaN(Number.parseFloat(newValue.valueOf()))){
+        if(this.valuePropName==="valueDecimal"){
             this.myValueDecimal=newValue;
             this.valuePropVar="myValueDecimal";
-            this.valuePropName="valueDecimal";
+
             return this;
         }
     }
@@ -169,10 +164,12 @@ export default class _BackBoneElement extends FlattenAbleObject{
     }
 
     set value(newValue){
+        this.valuePropName=null;
         this.put(newValue);
     }
 
     set valueBoolean(newValue){
+        this.valuePropName="valueBoolean";
         this.put(new _BooleanDt(newValue));
         return this;
     }
@@ -180,6 +177,7 @@ export default class _BackBoneElement extends FlattenAbleObject{
         return this.myValueBoolean.valueOf();
     }
     set valueDecimal(newValue){
+        this.valuePropName="valueDecimal";
         this.put(newValue);
         return this;
     }get valueDecimal(){
@@ -187,6 +185,7 @@ export default class _BackBoneElement extends FlattenAbleObject{
     }
 
     set valueInteger(newValue){
+        this.valuePropName="valueInteger";
         this.put(newValue);
         return this;
     }
@@ -194,6 +193,7 @@ export default class _BackBoneElement extends FlattenAbleObject{
         return this.myValueInteger.valueOf();
     }
     set valueDate(newValue){
+        this.valuePropName="valueDate";
         this.put(newValue);
         return this;
     }
@@ -201,25 +201,29 @@ export default class _BackBoneElement extends FlattenAbleObject{
         return this.myValueDate.valueOf();
     }
     set valueDateTime(newValue){
-        this.put(newValue);
+        this.valuePropName="valueDateTime";
+        this.put(new DateTime(newValue));
         return this;
     }
     get valueDateTime(){
         return this.myValueDateTime.valueOf();
     }
     set valueTime(newValue){
+        this.valuePropName="valueTime";
         this.put(newValue);
         return this;
     }get valueTime(){
         return this.myValueTime.valueOf();
     }
     set valueString(newValue){
+        this.valuePropName="valueString";
         this.put(new StringDt(newValue));
         return this;
     } get valueString(){
         return this.myValueString.valueOf();
     }
     set valueUri(newValue){
+        this.valuePropName="valueUri";
         this.put(newValue);
         return this;
     }
@@ -227,6 +231,7 @@ export default class _BackBoneElement extends FlattenAbleObject{
         return this.myValueUrl.valueOf();
     }
     set valueAttachment(newValue){
+        this.valuePropName="valueAttachment";
         throw TypeError("NOT IMPLEMENTED YET");
         this.put(newValue);
         return this;
@@ -237,6 +242,7 @@ export default class _BackBoneElement extends FlattenAbleObject{
         return this[this.valuePropName].valueOf();
     }
     set valueCoding(newValue){
+        this.valuePropName="valueCoding";
         this.put(new _CodingDt(newValue));
         return this;
     }
@@ -244,6 +250,7 @@ export default class _BackBoneElement extends FlattenAbleObject{
         return this.myValueCoding.valueOf();
     }
     set valueQuantity(newValue){
+        this.valuePropName="valueQuantity";
         throw TypeError("NOT IMPLEMENTED YET");
         this.put(newValue);
         return this;
@@ -254,6 +261,7 @@ export default class _BackBoneElement extends FlattenAbleObject{
     }
 
     set valueReference(newValue){
+        this.valuePropName="valueReference";
         this.put(new _ReferenceDt(newValue));
         return this;
     }

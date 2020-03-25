@@ -18,10 +18,10 @@ const ContainedMixin =  SuperClass=> class extends SuperClass{
     return oVal;
   }
 
-  getContainedResource(id){
+  getContainedResourceByReference(reference){
     let oVal=null;
     this.getContainedElement().forEach(contained=>{
-      if(contained.getId()===id){
+      if(reference.reference==="#"+contained.id){
         oVal=contained;
       }
     });

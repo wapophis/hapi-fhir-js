@@ -203,7 +203,7 @@ export default class Patient extends DomainResource{
      * @return: The first repetition of repeating field name, creating it if it does not already exist
      */
     getNameFirstRep(){
-        if(isValid(this.myName[0])){
+        if(isValid(this.myName) && !isEmptyArray(this.myName)){
             return this.name[0];
         }
         else{
@@ -549,7 +549,7 @@ export default class Patient extends DomainResource{
 
     get communication(){
         if(!isValid(this.myCommunication)){
-            this.myCommunication=new ComunicationElement();
+            this.myCommunication=new _ComunicationElement();
         }
         return this.myCommunication;
     }
@@ -580,7 +580,7 @@ export default class Patient extends DomainResource{
 
     get link(){
         if(!isValid(this.myLink)){
-            this.myLink=new LinkElement();
+            this.myLink=new _LinkElement();
         }
         return this.myLink;
     }
