@@ -69,3 +69,21 @@ export default class Questionnaire extends ContainedMixin( IdentificableResource
         return this;
       }
     }
+
+  /**
+   * ENABLE WHEN
+   */
+  export class EnableWhen extends FlattenAbleObject{
+    constructor(root){
+      super(root);
+      if(isValid(root)){
+        this.question=root.question;
+        this.operator=root.operator;
+        this.answer=root.answer;
+      }
+    }
+
+    _flatten(){
+      return this;
+    }
+  }
