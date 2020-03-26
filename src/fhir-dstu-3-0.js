@@ -45,4 +45,5 @@ export const PatientResource_ComunicationElement=_ComunicationElement;
 // SPEC 4.0.1
 import QuestionnarieResult from './spi/resources/QuestionnaireResult.js'
 export const QuestionnarieResultResource=QuestionnarieResult;
-
+import Questionnaire from './spi/resources/Questionnaire.js';
+export const QuestionnaireResource=Questionnaire;

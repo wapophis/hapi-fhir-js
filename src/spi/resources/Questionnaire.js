@@ -1,16 +1,20 @@
+import {isValid} from '../../utils/ValidationRules.js';
 import FlattenAbleObject from '../FlattenAbleObject.js';
 import ContainedMixin from '../mixins/ContainedMixin.js';
+import ResourceMixin from '../mixins/ResourceMixin.js';
 import IdentificableResource from './IdentificableResource.js';
 import _BackBoneElement from './BackBoneElement.js';
+import _ReferenceDt from '../dataTypes/ReferenceDt.js';
+import StringDt from '../dataTypes/StringDt.js';
 
 /** R 4.0.1 */
-export default class Questionnaire extends ContainedMixin( IdentificableResource){
+export default class Questionnaire extends ResourceMixin( ContainedMixin( IdentificableResource)){
       constructor(root){
         super(root);
 
         if(isValid(root)){
             this.url=root.url;
-            this.identifier=root.identifier;
+           // this.identifier=root.identifier;
             this.version=root.version;
             this.name=root.name;
             this.title=root.title;
@@ -32,6 +36,24 @@ export default class Questionnaire extends ContainedMixin( IdentificableResource
             this.code=root.code;
             this.item=root.item;
         }
+    }
+
+    get url(){
+        return this.getterDataTypeElement("myUrl",_ReferenceDt).valueOf();
+    }
+
+    set url(newValue){
+      this.setterDataTypeElement("myUrl",_ReferenceDt,newValue);
+      return this;
+    }
+
+    get version(){
+      return this.getterDataTypeElement("myVersion",StringDt).valueOf();
+    }
+
+    set version(newValue){
+    this.setterDataTypeElement("myVesion",StringDt,newValue);
+    return this;
     }
 
     _flatten(){
