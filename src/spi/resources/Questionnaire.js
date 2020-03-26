@@ -2,7 +2,9 @@ import {isValid} from '../../utils/ValidationRules.js';
 import FlattenAbleObject from '../FlattenAbleObject.js';
 import ContainedMixin from '../mixins/ContainedMixin.js';
 import ResourceMixin from '../mixins/ResourceMixin.js';
+import QuestionnaireItemRulesMixin from '../mixins/QuestionnaireItemRulesMixin.js'
 import IdentificableResource from './IdentificableResource.js';
+
 import _BackBoneElement from './BackBoneElement.js';
 import _ReferenceDt from '../dataTypes/ReferenceDt.js';
 import StringDt from '../dataTypes/StringDt.js';
@@ -18,9 +20,13 @@ import _DateDt from '../dataTypes/DateDt.js';
 import _PeriodDt from '../dataTypes/PeriodDt.js';
 
 /** R 4.0.1 */
-export default class Questionnaire extends ResourceMixin( ContainedMixin( IdentificableResource)){
+export default class Questionnaire extends QuestionnaireItemRulesMixin (ResourceMixin( ContainedMixin( IdentificableResource))){
       constructor(root){
         super(root);
+
+        // SET TO CHECK ITEMSID UNIQUE. Use set.has(idValue) to check in unique id.
+        this.itemsIdManager=new Set();
+
 
         if(isValid(root)){
             this.url=root.url;
@@ -282,6 +288,7 @@ export default class Questionnaire extends ResourceMixin( ContainedMixin( Identi
     export class Item extends ResourceMixin (FlattenAbleObject){
       constructor(root){
         super(root);
+
         if(isValid(root)){
         this.linkId=root.linkId;
         this.definition=root.definition;
