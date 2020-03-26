@@ -10,6 +10,7 @@ import _DateTimeDt from '../dataTypes/DateTimeDt.js'
 import FlattenAbleObject from '../FlattenAbleObject.js';
 import ContainedMixin from '../mixins/ContainedMixin.js';
 import Patient from './Patient.js';
+import DomainResource from '../DomainResource.js';
 
 /** R 4.0.1 */
 export default class QuestionnaireResult extends ContainedMixin( IdentificableResource){
@@ -82,6 +83,23 @@ getSourceElement(){
     return this.mySource;
 }
 
+// TODO: CHECK RESOURCE TYPE
+getSourceResource(){
+  let oVal=new DomainResource();
+  let q=this.getContainedResourceByReference(this.getSourceElement());
+  if(!this.__checkResourceType(q,"Device")
+  && !this.__checkResourceType(q,"Practitioner")
+  && !this.__checkResourceType(q,"PractitionerRole")
+  && !this.__checkResourceType(q,"RelatedPerson")
+  ){
+    throw new TypeError("ResourceType retrieved in contained is invalid");
+  }
+  if(!q===null){
+      oVal=q;
+  }
+  return oVal;
+}
+
 setSourceElement(newValue){
   if(newValue instanceof _ReferenceDt===false){
     throw TypeError("ReferenceDt expected");
@@ -106,6 +124,24 @@ getAuthorElement(){
     }
     return this.myAuthor;
 }
+
+// TODO: CHECK RESOURCE TYPE
+getAuthorResource(){
+  let oVal=new DomainResource();
+  let q=this.getContainedResourceByReference(this.getAuthorElement());
+  if(!this.__checkResourceType(q,"Device")
+  && !this.__checkResourceType(q,"Practitioner")
+  && !this.__checkResourceType(q,"PractitionerRole")
+  && !this.__checkResourceType(q,"RelatedPerson")
+  && !this.__checkResourceType(q,"Organization")){
+    throw new TypeError("ResourceType retrieved in contained is invalid");
+  }
+  if(!q===null){
+      oVal=q;
+  }
+  return oVal;
+}
+
 
 setAuthorElement(newValue){
   if(newValue instanceof _ReferenceDt===false){
@@ -132,6 +168,20 @@ getEncounterElement(){
     return this.myEncounter;
 }
 
+// TODO: CHECK RESOURCE TYPE
+getEncounterResource(){
+  let oVal=new DomainResource();
+  let q=this.getContainedResourceByReference(this.getEncounterElement());
+  if(!this.__checkResourceType(q,"Encounter")){
+    throw new TypeError("ResourceType retrieved in contained is invalid");
+  }
+  if(!q===null){
+      oVal=q;
+  }
+  return oVal;
+}
+
+
 setEncounterElement(newValue){
   if(newValue instanceof _ReferenceDt===false){
     throw TypeError("ReferenceDt expected");
@@ -157,9 +207,12 @@ getSubjectElement(){
 }
 getSubjectPatientResource(){
   let oVal=new Patient();
-  let patientResource=this.getContainedResourceByReference(this.getSubjectElement());
-  if(!patientResource===null){
-      oVal=patientResource;
+  let q=this.getContainedResourceByReference(this.getPartOfElement());
+  if(!this.__checkResourceType(q,"Patient")){
+    throw new TypeError("ResourceType retrieved in contained is invalid");
+  }
+  if(!q===null){
+      oVal=q;
   }
   return oVal;
 }
@@ -187,6 +240,21 @@ getQuestionnaireElement(){
     }
     return this.myQuestionnaire;
 }
+
+// TODO: UPDATES WITH PROPER RESOURCES
+getQuestionnaireResource(){
+  let oVal=new DomainResource();
+  let q=this.getContainedResourceByReference(this.getQuestionnaireElement());
+  if(!this.__checkResourceType(q,"Questionnaire")){
+    throw new TypeError("ResourceType retrieved in contained is invalid");
+  }
+  if(!q===null){
+      oVal=q;
+  }
+  return oVal;
+}
+
+
 
 setQuestionnaireElement(newValue){
   if(newValue instanceof _ReferenceDt===false){
@@ -228,6 +296,18 @@ addPartOfElement(newValue){
   return newValue;
 }
 
+getPartOfResource(){
+  let oVal=new DomainResource();
+  let q=this.getContainedResourceByReference(this.getPartOfElement());
+  if(!this.__checkResourceType(q,"Observation") &&  !this.__checkResourceType(q,"Observation")){
+    throw new TypeError("ResourceType retrieved in contained is invalid");
+  }
+  if(!q===null){
+      oVal=q;
+  }
+  return oVal;
+}
+
 
 get basedOn(){
   let oVal=new Array();
@@ -251,6 +331,18 @@ getBasedOnElement(){
     }
 
     return this.myBasedOn;
+}
+
+getBasedOnResource(){
+  let oVal=new DomainResource();
+  let q=this.getContainedResourceByReference(this.getBasedOnElement());
+  if(!this.__checkResourceType(q,"CarePlan") &&  !this.__checkResourceType(q,"ServiceRequest")){
+    throw new TypeError("ResourceType retrieved in contained is invalid");
+  }
+  if(!q===null){
+      oVal=q;
+  }
+  return oVal;
 }
 
 addBasedOnElement(newValue){
@@ -313,7 +405,16 @@ setAuthoredElement(newValue){
   this.myAuthored=newValue;
 }
 
+__checkResourceType(resource,type){
+  if(isValid(resource) && !isUndefined(resource.resourceType)){
+    return resource.resourceType===type;
+  }
+  return false;
 }
+
+}
+
+
 
 export class Item extends FlattenAbleObject{
         constructor(root){
