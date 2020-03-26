@@ -18,9 +18,12 @@ import _UsageContextMdT from '../dataTypes/UsageContextMdT.js';
 import _CodeableConceptDt from '../dataTypes/CodeableConceptDt.js';
 import _DateDt from '../dataTypes/DateDt.js';
 import _PeriodDt from '../dataTypes/PeriodDt.js';
+import _CodingDt from '../dataTypes/CodingDt.js';
+import QuestionnaireItemTypeEnum from '../valueSets/QuesttionnaireItemType.js';
+import EnableWhenBehaviourEnum from '../valueSets/EnableWhenBehaviourEnum.js';
 
 /** R 4.0.1 */
-export default class Questionnaire extends QuestionnaireItemRulesMixin (ResourceMixin( ContainedMixin( IdentificableResource))){
+export default class Questionnaire extends  ResourceMixin( ContainedMixin( IdentificableResource)){
       constructor(root){
         super(root);
 
@@ -100,7 +103,7 @@ export default class Questionnaire extends QuestionnaireItemRulesMixin (Resource
     return this;
     }
 
-    addDerivedFrom(newValue){
+    addDerivedFromElement(newValue){
       return this.appendDataTypeArrayElement("myDerivedFrom",_ReferenceDt,newValue);
     }
 
@@ -139,7 +142,7 @@ export default class Questionnaire extends QuestionnaireItemRulesMixin (Resource
       return this;
     }
 
-    addSubjectType(newValue){
+    addSubjectTypeElement(newValue){
       return this.appendDataTypeArrayElement("mySubjectType",Code,newValue);
     }
 
@@ -166,7 +169,7 @@ export default class Questionnaire extends QuestionnaireItemRulesMixin (Resource
       return this;
       }
 
-    addContact(newValue){
+    addContactElement(newValue){
         return this.appendDataTypeArrayElement("myContact",_ContactDetailMdT,newValue);
       }
 
@@ -188,7 +191,7 @@ export default class Questionnaire extends QuestionnaireItemRulesMixin (Resource
       return this;
       }
 
-    addUseContext(newValue){
+    addUseContextElement(newValue){
         return this.appendDataTypeArrayElement("myUseContext",_UsageContextMdT,newValue);
       }
 
@@ -202,7 +205,7 @@ export default class Questionnaire extends QuestionnaireItemRulesMixin (Resource
       return this;
       }
 
-    addJurisdiction(newValue){
+    addJurisdictionElement(newValue){
         return this.appendDataTypeArrayElement("myJurisdiction",_CodeableConceptDt,newValue);
       }
 
@@ -259,7 +262,7 @@ export default class Questionnaire extends QuestionnaireItemRulesMixin (Resource
       return this;
       }
 
-    addCode(newValue){
+    addCodeElement(newValue){
         return this.appendDataTypeArrayElement("myCode",Code,newValue);
     }
 
@@ -272,7 +275,7 @@ export default class Questionnaire extends QuestionnaireItemRulesMixin (Resource
       return this;
       }
 
-    addItem(newValue){
+    addItemElement(newValue){
         return this.appendDataTypeArrayElement("myItem",Item,newValue);
       }
 
@@ -285,7 +288,7 @@ export default class Questionnaire extends QuestionnaireItemRulesMixin (Resource
   /**
    * ITEM ELEMENT
    */
-    export class Item extends ResourceMixin (FlattenAbleObject){
+    export class Item extends QuestionnaireItemRulesMixin( ResourceMixin (FlattenAbleObject)){
       constructor(root){
         super(root);
 
@@ -309,15 +312,116 @@ export default class Questionnaire extends QuestionnaireItemRulesMixin (Resource
         }
       }
 
-      _flatten(){
+      get linkId(){
+          return this.getterDataTypeElement("myLinkId",StringDt).valueOf();
+      }
+
+      set linkId(newValue){
+        this.setterDataTypeElement("myLinkId",StringDt,newValue);
         return this;
       }
+
+      get definition(){
+        return this.getterDataTypeElement("myDefinition",StringDt).valueOf();
+      }
+
+      set definition(newValue){
+        this.setterDataTypeElement("myDefinition",StringDt,newValue);
+        return this;
+      }
+
+      get code(){
+        return this.getterDataTypeArrayElement("myCode",_CodingDt);
+      }
+
+      set code(newValue){
+        this.checkRuleDisplayItemsNotHaveCodeAsserted();
+        this.setterDataTypeArrayElement("myCode",_CodingDt,newValue);
+        return this;
+      }
+
+      addCodeElement(newValue){
+        return this.appendDataTypeArrayElement("myCode",_CodingDt,newValue);
+      }
+
+      get prefix(){
+        return this.getterDataTypeElement("myPrefix",StringDt).valueOf();
+      }
+
+    set prefix(newValue){
+      this.setterDataTypeElement("myPrefix",StringDt,newValue);
+      return this;
+      }
+
+      get text(){
+        return this.getterDataTypeElement("myText",StringDt).valueOf();
+      }
+
+    set text(newValue){
+      this.setterDataTypeElement("myText",StringDt,newValue);
+      return this;
+      }
+
+      get type(){
+        return this.getterDataTypeElement("myType",StringDt).valueOf();
+      }
+
+    set type(newValue){
+      if(!QuestionnaireItemTypeEnum.checkCode(newValue)){
+        throw new TypeError("QuesttionarieType specified not supported");
+      }
+      this.setterDataTypeElement("myType",StringDt,newValue);
+      return this;
+      }
+
+      get enableWhen(){
+        return this.getterDataTypeArrayElement("myEnableWhen",EnableWhen);
+      }
+
+      set EnableWhen(newValue){
+        this.checkRuleEnableBehaviourWhenEnableWhen();
+        this.setterDataTypeArrayElement("myEnableWhen",EnableWhen,newValue);
+        return this;
+      }
+
+      addEnableWhenElement(newValue){
+        this.checkRuleEnableBehaviourWhenEnableWhen();
+        return this.appendDataTypeArrayElement("myEnableWhen",EnableWhen,newValue);
+      }
+
+      get enableBehaviour(){
+        return this.getterDataTypeElement("myEnableBehaviour",Code).valueOf();
+      }
+
+      set enableBehaviour(newValue){
+        this.checkRuleEnableBehaviourWhenEnableWhen();
+        if(!EnableWhenBehaviourEnum.checkCode(newValue)){
+          throw new TypeError("QuesttionarieType specified not supported");
+        }
+        this.setterDataTypeElement("myEnableBehaviour",Code,newValue);
+        return this;
+      }
+
+      get required(){
+        return this.getterDataTypeElement("myRequired",_BooleanDt).valueOf();
+      }
+
+      set required(newValue){
+        this.checkRuleDisplayItemsCantHaveRequiredAndRepeat();
+        this.setterDataTypeElement("myRequired",_BooleanDt,newValue);
+        return this;
+      }
+
+
+        _flatten(){
+          return this;
+        }
     }
 
   /**
    * ENABLE WHEN
    */
-  export class EnableWhen extends FlattenAbleObject{
+  export class EnableWhen extends EnableWhenRulesMixin(ResourceMixin( FlattenAbleObject)){
     constructor(root){
       super(root);
       if(isValid(root)){
