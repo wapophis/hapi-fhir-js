@@ -105,3 +105,17 @@ export default class Questionnaire extends ContainedMixin( IdentificableResource
       return this;
     }
   }
+
+
+  /**
+   * Initial
+   */
+  export class Initial extends _BackBoneElement{
+    constructor(root){
+      super(root);
+    }
+
+    _flatten(){
+      return this;
+    }
+  }
