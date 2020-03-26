@@ -129,7 +129,7 @@ getAuthorElement(){
 getAuthorResource(){
   let oVal=new DomainResource();
   let q=this.getContainedResourceByReference(this.getAuthorElement());
-  if(!this.__checkResourceType(q,"Device")
+  if( q!==null && !this.__checkResourceType(q,"Device")
   && !this.__checkResourceType(q,"Practitioner")
   && !this.__checkResourceType(q,"PractitionerRole")
   && !this.__checkResourceType(q,"RelatedPerson")
@@ -172,7 +172,7 @@ getEncounterElement(){
 getEncounterResource(){
   let oVal=new DomainResource();
   let q=this.getContainedResourceByReference(this.getEncounterElement());
-  if(!this.__checkResourceType(q,"Encounter")){
+  if(q!==null && !this.__checkResourceType(q,"Encounter")){
     throw new TypeError("ResourceType retrieved in contained is invalid");
   }
   if(!q===null){
@@ -208,7 +208,8 @@ getSubjectElement(){
 getSubjectPatientResource(){
   let oVal=new Patient();
   let q=this.getContainedResourceByReference(this.getPartOfElement());
-  if(!this.__checkResourceType(q,"Patient")){
+
+  if(q!==null && !this.__checkResourceType(q,"Patient")){
     throw new TypeError("ResourceType retrieved in contained is invalid");
   }
   if(!q===null){
@@ -245,7 +246,7 @@ getQuestionnaireElement(){
 getQuestionnaireResource(){
   let oVal=new DomainResource();
   let q=this.getContainedResourceByReference(this.getQuestionnaireElement());
-  if(!this.__checkResourceType(q,"Questionnaire")){
+  if(q!==null && !this.__checkResourceType(q,"Questionnaire")){
     throw new TypeError("ResourceType retrieved in contained is invalid");
   }
   if(!q===null){
@@ -299,7 +300,7 @@ addPartOfElement(newValue){
 getPartOfResource(){
   let oVal=new DomainResource();
   let q=this.getContainedResourceByReference(this.getPartOfElement());
-  if(!this.__checkResourceType(q,"Observation") &&  !this.__checkResourceType(q,"Observation")){
+  if(q!==null && !this.__checkResourceType(q,"Observation") &&  !this.__checkResourceType(q,"Observation")){
     throw new TypeError("ResourceType retrieved in contained is invalid");
   }
   if(!q===null){
@@ -336,7 +337,7 @@ getBasedOnElement(){
 getBasedOnResource(){
   let oVal=new DomainResource();
   let q=this.getContainedResourceByReference(this.getBasedOnElement());
-  if(!this.__checkResourceType(q,"CarePlan") &&  !this.__checkResourceType(q,"ServiceRequest")){
+  if(q!==null && !this.__checkResourceType(q,"CarePlan") &&  !this.__checkResourceType(q,"ServiceRequest")){
     throw new TypeError("ResourceType retrieved in contained is invalid");
   }
   if(!q===null){
@@ -415,6 +416,9 @@ __checkResourceType(resource,type){
 }
 
 
+/**
+ * ITEM CLASS WICH REPRESENTS A QUESTIONARIE ITEM WICH HAVE O..N RESPONES AN 0..N SUBITEMS.
+ */
 
 export class Item extends FlattenAbleObject{
         constructor(root){
@@ -568,6 +572,9 @@ export class Item extends FlattenAbleObject{
 
 }
 
+/**
+ * ANSWER CLASS WICH REPRESENTS A RESPONSE TO AN ITEM WICH HAVE AN 0..N SUBITEMS WICH QUALIFIES THIS ANSWER
+ */
 export class Answer extends _BackBoneElement{
     constructor(root){
       super(root);
