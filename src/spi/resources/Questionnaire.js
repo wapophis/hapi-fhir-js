@@ -1,6 +1,7 @@
 import FlattenAbleObject from '../FlattenAbleObject.js';
 import ContainedMixin from '../mixins/ContainedMixin.js';
 import IdentificableResource from './IdentificableResource.js';
+import _BackBoneElement from './BackBoneElement.js';
 
 /** R 4.0.1 */
 export default class Questionnaire extends ContainedMixin( IdentificableResource){
@@ -80,6 +81,23 @@ export default class Questionnaire extends ContainedMixin( IdentificableResource
         this.question=root.question;
         this.operator=root.operator;
         this.answer=root.answer;
+      }
+    }
+
+    _flatten(){
+      return this;
+    }
+  }
+
+
+   /**
+   * ANSWER OPTIONS
+   */
+  export class AnswerOption extends _BackBoneElement{
+    constructor(root){
+      super(root);
+      if(isValid(root)){
+        this.initialSelected=root.initialSelected;
       }
     }
 
