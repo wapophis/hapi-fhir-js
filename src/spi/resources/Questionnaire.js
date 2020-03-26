@@ -56,6 +56,24 @@ export default class Questionnaire extends ResourceMixin( ContainedMixin( Identi
     return this;
     }
 
+    get version(){
+      return this.getterDataTypeElement("myName",StringDt).valueOf();
+    }
+
+    set version(newValue){
+    this.setterDataTypeElement("myName",StringDt,newValue);
+    return this;
+    }
+
+    get version(){
+      return this.getterDataTypeElement("myTitle",StringDt).valueOf();
+    }
+
+    set version(newValue){
+    this.setterDataTypeElement("myTitle",StringDt,newValue);
+    return this;
+    }
+
     _flatten(){
       return this;
     }
