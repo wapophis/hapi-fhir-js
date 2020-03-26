@@ -304,7 +304,7 @@ export default class Questionnaire extends  ResourceMixin( ContainedMixin( Ident
         this.required=root.required;
         this.repeats=root.repeats;
         this.readOnly=root.readOnly;
-        this.maxLenght=root.maxLenght;
+        this.maxLength=root.maxLength;
         this.answerValueSet=root.answerValueSet;
         this.answerOption=root.answerOption;
         this.initial=root.initial;
@@ -412,6 +412,90 @@ export default class Questionnaire extends  ResourceMixin( ContainedMixin( Ident
         return this;
       }
 
+      get repeats(){
+        return this.getterDataTypeElement("myRepeats",_BooleanDt).valueOf();
+      }
+
+      set repeats(newValue){
+        this.checkRuleDisplayItemsCantHaveRequiredAndRepeat();
+        this.setterDataTypeElement("myRepeats",_BooleanDt,newValue);
+        return this;
+      }
+
+      get readOnly(){
+        return this.getterDataTypeElement("myReadOnly",_BooleanDt).valueOf();
+      }
+
+      set readOnly(newValue){
+        this.checkRuleDisplayItemsCantBeReadOnly();
+        this.setterDataTypeElement("myReadOnly",_BooleanDt,newValue);
+        return this;
+      }
+
+      get maxLength(){
+        return this.getterDataTypeElement("myMaxLength",Number).valueOf();
+      }
+
+      set maxLength(newValue){
+        this.checkRuleDisplayItemsCantBeReadOnly();
+        this.setterDataTypeElement("myMaxLength",Number,newValue);
+        return this;
+      }
+
+      get answerValueSet(){
+        return this.getterDataTypeElement("myAnswerValueSet",_ReferenceDt).valueOf();
+      }
+
+      set answerValueSet(newValue){
+        this.checkRuleDisplayItemsCantBeReadOnly();
+        this.setterDataTypeElement("myAnswerValueSet",_ReferenceDt,newValue);
+        return this;
+      }
+
+      get answerOption(){
+        return this.getterDataTypeElement("myAnswerOptions",AnswerOption).valueOf();
+      }
+
+      set answerOption(newValue){
+        this.checkRuleDisplayItemsCantBeReadOnly();
+        this.setterDataTypeElement("myAnswerOptions",AnswerOption,newValue);
+        return this;
+      }
+
+      get initial(){
+        return this.getterDataTypeArrayElement("myInitial",Initial);
+      }
+
+      set initial(newValue){
+        this.checkRuleEnableBehaviourWhenEnableWhen();
+        this.setterDataTypeArrayElement("myInitial",Initial,newValue);
+        return this;
+      }
+
+      addInitialWhenElement(newValue){
+        this.checkRuleMissingInitialWhenAnswerIsPresent();
+        this.checkRuleMultipleInitialsOnlyForRepeatingItems();
+        this.checkRuleGroupItemsCantHaveInitials();
+        this.checkRuleDisplayItemsCantHaveInitials();
+        return this.appendDataTypeArrayElement("myInitial",Initial,newValue);
+      }
+
+      get item(){
+        return this.getterDataTypeArrayElement("myInitial",Initial);
+      }
+
+      set item(newValue){
+        this.checkRuleDisplayItemsNotHaveNestedItems();
+        this.checkRuleGroupItemsMustHaveNestedItems();
+        this.setterDataTypeArrayElement("myInitial",Initial,newValue);
+        return this;
+      }
+
+      addItemElement(newValue){
+        this.checkRuleDisplayItemsNotHaveNestedItems();
+        this.checkRuleGroupItemsMustHaveNestedItems();
+        return this.appendDataTypeArrayElement("myInitial",Initial,newValue);
+      }
 
         _flatten(){
           return this;
