@@ -1,3 +1,6 @@
+import FlattenAbleObject from '../FlattenAbleObject.js';
+import ContainedMixin from '../mixins/ContainedMixin.js';
+import IdentificableResource from './IdentificableResource.js';
 
 /** R 4.0.1 */
 export default class Questionnaire extends ContainedMixin( IdentificableResource){
@@ -30,8 +33,39 @@ export default class Questionnaire extends ContainedMixin( IdentificableResource
         }
     }
 
-
     _flatten(){
       return this;
     }
-}
+
+  }
+
+  /**
+   * ITEM ELEMENT
+   */
+    export class Item extends FlattenAbleObject{
+      constructor(root){
+        super(root);
+        if(isValid(root)){
+        this.linkId=root.linkId;
+        this.definition=root.definition;
+        this.code=root.code;
+        this.prefix=root.prefix;
+        this.text=root.text;
+        this.type=root.type;
+        this.enableWhen=root.enableWhen;
+        this.enableBehaviour=root.enableBehaviour;
+        this.required=root.required;
+        this.repeats=root.repeats;
+        this.readOnly=root.readOnly;
+        this.maxLenght=root.maxLenght;
+        this.answerValueSet=root.answerValueSet;
+        this.answerOption=root.answerOption;
+        this.initial=root.initial;
+        this.item=root.item;
+        }
+      }
+
+      _flatten(){
+        return this;
+      }
+    }
