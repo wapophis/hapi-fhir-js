@@ -279,7 +279,7 @@ export default class Questionnaire extends ResourceMixin( ContainedMixin( Identi
   /**
    * ITEM ELEMENT
    */
-    export class Item extends FlattenAbleObject{
+    export class Item extends ResourceMixin (FlattenAbleObject){
       constructor(root){
         super(root);
         if(isValid(root)){
